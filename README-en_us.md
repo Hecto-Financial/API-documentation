@@ -321,65 +321,414 @@ Easy Cash Payment process is as follows:
 - A: Alphabetic Characters
 - AN: Both alphabetic and numeric
 
-### Request parameter validation
-If there is an error with parameter verification such as missing required values, inconsistency of hash data to determine forgery, and requested variable length check, the following response code is returned:
+Sure, I will continue writing the README file from where I stopped. If the content length reaches the limit, I will indicate where to continue in a new README file.
 
-```json
-{
-  "outStatCd": "0031",
-  "outRsltCd": "ST09",
-  "outRsltMsg": "invalid request parameter"
-}
+```markdown
+- The fields for encryption are specified in the descriptions of the request field specification of each API.
+- If it is possible to type in Korean in the field, refer to the descriptions for the byte size of Korean.
 
-###API Invoke
-API Connection Information
-The following is API server connection information:
-
-Environment	URL
-Testbed	https://tbnpay.settlebank.co.kr
-Production	https://npay.settlebank.co.kr
-Request and Response Headers
-API request and response header format are as below:
-
-Request Header	Value
-Content-type	application/json;charset=UTF-8
-Response Header	Value
-Content-type	application/json;charset=UTF-8
-Timeout
-The timeout process of API’s response is 30 seconds.
-
-Others
-The following describes the general requirement for HTTP specification:
-
-Provided API is REST-oriented but does not meet the entire specification of REST (Most transaction requests use POST method only).
-For ‘Request’ use POST method only.
-Commonly variable values &, ?, new line, <, > are not allowed.
-Security of Important Information
-Encryption & Decryption of Personal Information and Important Information
-When sending and receiving data, the following encryption & decryption should be performed for the personal/important information fields:
-
-Section	Entry	Application	Encoding
-Personal information	Algorithm	AES-256/ECB/PKCS5Padding	Base64 Encoding
-Field	The name of the person in charge, phone number, mobile phone number, e-mail, account holder’s name, account number, etc.		
-The fields for encryption are specified in the descriptions of the request field specification of each API.
-If it is possible to type in Korean in the field, refer to the descriptions for the byte size of Korean.
-Encryption Key for Personal Information
+### Encryption Key for Personal Information
 For encryption and decryption of personal information and important information, key information differs depending on the operation environment and is as follows:
 
-Section	Encryption Key
-Testbed key	SETTLEBANKISGOODSETTLEBANKISGOOD (32 byte)
-Production key	Will be provided by separate notice when the service is carried out
-Anti-forgery Algorithm
+| Section           | Encryption Key                  |
+|-------------------|---------------------------------|
+| Testbed key       | SETTLEBANKISGOODSETTLEBANKISGOOD (32 byte) |
+| Production key    | Will be provided by separate notice when the service is carried out |
+
+### Anti-forgery Algorithm
 To verify whether the request data is forged or falsified, a hash algorithm is used. The hash value generation algorithm is as follows:
 
-Section	Entry	Application	Encoding
-Forgery	Algorithm	SHA-256	Hex Encoding
-Hash Generation Authentication Key
-Section	Authentication key
-Testbed key	ST190808090913247723 (20 byte)
-Production key	Will be provided by separate notice when the service is carried out
-Mobile Phone Verification Request
-API Summary
+| Section   | Entry                     | Application   | Encoding     |
+|-----------|---------------------------|---------------|--------------|
+| Forgery   | Algorithm                 | SHA-256       | Hex Encoding |
+
+### Hash Generation Authentication Key
+
+| Section   | Authentication key        |
+|-----------|---------------------------|
+| Testbed key | ST190808090913247723 (20 byte) |
+| Production key | Will be provided by separate notice when the service is carried out |
+
+## Mobile Phone Verification Request
+
+### API Summary
 Request a mobile phone verification from the merchant’s server to Hecto Financial’s server. To get the name of the customer (account holder) needed for the account holder verification and one’s mobile phone number which is needed for ARS authentication, mobile phone verification is used. The APP and SMS methods are supported. When there is an APP verification request, the customer’s mobile app is invoked, and when there is an SMS verification request, a 6-digit verification number will be sent to the customer’s device through SMS.
 
 *Mobile phone verification service can only be used for Hecto Financial Easy Payment registration.
+
+### API URL
+
+| Section   | URL                                                  |
+|-----------|------------------------------------------------------|
+| Testbed   | `https://tbnpay.settlebank.co.kr/v1/api/auth/mobile/req` |
+| Production| `http://npay.settlebank.co.kr/v1/api/auth/mobile/req` |
+
+### Request (Merchant -> Hecto Financial)
+The columns requested by Merchant server from Hecto Financial are defined as follows:
+
+| Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
+|--------------|--------------------------|------------------------------------------------------------------|---------------|----------|-------------------------|
+| hdInfo       | Information              | Parameter Information code                                       | AN(50)        | ●        | “SPAY_M100_1.0“         |
+| mchtId       | Merchant ID              | Unique Merchant ID provided by Hecto Financial                   | AN(8)         | ●        | “midtest”               |
+| mchtCustId   | Customer ID              | Unique Customer ID provided by Merchant or Unique Key AES Encryption | AN(100)    | ●        | “honggildong”           |
+| reqDt        | Request date             | yyyyMMdd                                                         | AN(8)         | ●        | “20191231”              |
+| reqTm        | Request time             | HH24MISS                                                         | AN(6)         | ●        | “120000”                |
+| Uii          | Date of birth/Business registration number | yymmdd+ gender identification, Business registration number (hyphen excluded) AES Encryption | AN(10) | ● | “8001012”               |
+| telecomCd    | Operator                 | SKT: 1 KT: 2 LGT: 3 SKT MVNO :4 KT MVNO:5 LGT MVNO:6             | N(1)          | ●        | “1”                     |
+| cphoneNo     | Mobile phone number      | 010xxxxyyyy (exclude hyphen) AES Encryption                      | AN(11)        | ●        | “01000001234”           |
+| mchtCustNm   | Customer name            | Customer name (Korean 3 byte) AES Encryption                     | AN(60)        | ●        | “Hong Gildong” (in Korean) |
+| authMthdCd   | Certification Classification | SMS : 1 APP : 2                                                 | N(1)          | ●        | “1”                     |
+| custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+| pktHash      | Hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
+
+### Request Hash Code
+
+| Section   | Combination Field                                        |
+|-----------|----------------------------------------------------------|
+| pktHash value | Merchant ID + Customer ID (plain text) + Request date + Request time + Date of birth (plain text) + Mobile phone (plain text) + Certification Classification + Authentication key |
+
+### Response (Hecto Financial -> Merchant)
+The columns that respond from Hecto Financial server to the Merchant are as follows:
+
+| Parameter    | Parameter         | Description                                                      | Type (Length) | Required | Example                    |
+|--------------|-------------------|------------------------------------------------------------------|---------------|----------|----------------------------|
+| outStatCd    | Transaction status| Transaction status code (Success/Fail)                           | AN(4)         | ●        | Success: 0021, Fail: 0031  |
+| outRsltCd    | Reject code       | Refer to reject code table                                       | AN(4)         | ●        |                            |
+| outRsltMsg   | Result message    | When an error occurs, a message on error is sent                 | AN(300)       | ●        | “Success”                  |
+| Tid          | Authentication key| Authentication key that matches the verification number sent as message | AN(50)     | ●        |                            |
+| trdNo        | Transaction number| Hecto Financial transaction number for mobile phone verification | AN(40)        | ●        | “SFP_FIRM12345678901234567890” |
+
+## Mobile Phone Verification Confirmation
+
+### API Summary
+API that checks the status for the request on mobile phone verification is provided. Through ‘Mobile Phone Verification Request’ API, SMS is sent or APP verification request is made through the customer’s device. The customer runs this and through the API checks the completion status of the verification. In the case of SMS verification method, the request to check is done with the verification number sent. In the case of APP verification, the request to check the completion status is done in the APP.
+
+*Mobile phone verification service can only be used for Hecto Financial Easy Payment registration.
+
+### API URL
+
+| Section   | URL                                                  |
+|-----------|------------------------------------------------------|
+| Testbed   | `https://tbnpay.settlebank.co.kr/v1/api/auth/mobile/check` |
+| Production| `https://npay.settlebank.co.kr/v1/api/auth/mobile/check`   |
+
+### Request (Merchant -> Hecto Financial)
+The columns requested by Merchant server from Hecto Financial are defined as follows:
+
+| Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
+|--------------|--------------------------|------------------------------------------------------------------|---------------|----------|-------------------------|
+| hdInfo       | Information              | Parameter Information code                                       | AN(50)        | ●        | “SPAY_M200_1.0“         |
+| mchtId       | Merchant ID              | Unique Merchant ID provided by Hecto Financial                   | AN(8)         | ●        | “midtest”               |
+| reqDt        | Request date             | yyyyMMdd                                                         | AN(8)         | ●        | “20191231”              |
+| reqTm        | Request time             | HH24MISS                                                         | AN(6)         | ●        | “120000”                |
+| authNo       | Authentication number    | Authentication number sent by SMS (Required if the authentication classification of the mobile phone verification request is SMS) | N(6) | ○ | “123456” |
+| Tid          | Authentication key       | Authentication key value that is sent as the response value when requested | AN(50)       | ●        | “settlebank20190430034655251226” |
+| trdNo        | Transaction number       | Hecto Financial transaction number                               | AN(50)        | ●        | “SFP_FIRM12345678901234567890” |
+| custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+| pktHash      | hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
+
+### Request Hash Code
+
+| Section   | Combination Field                                        |
+|-----------|----------------------------------------------------------|
+| pktHash value | Merchant ID + Request date + Request time + Self Authentication key + Authentication key |
+
+### Response (Hecto Financial -> Merchant)
+The columns that respond from Hecto Financial server to the Merchant are as follows:
+
+| Parameter    | Name                | Description                                                      | Type (Length) | Required | Example                    |
+|--------------|---------------------|------------------------------------------------------------------|---------------|----------|----------------------------|
+| outStatCd    | Status              | Result code (Success /Fail)                                      | AN(4)         | ●        | Success: 0021, Fail: 0031  |
+| outRsltCd    | Reject code         | Refer to reject code table                                       | AN(
+
+4)         | ●        |                            |
+| outRsltMsg   | Result message      | When an error occurs, a message on error is sent                 | AN(300)       | ●        | “Success”                  |
+| mchtCustId   | Customer ID         | Customer ID                                                      | AN(100)       | ●        |                            |
+| mchtCustNm   | Customer name       | Customer name AES Decryption                                     | AN(60)        | ●        |                            |
+| cphoneNo     | Mobile phone number | Customer’s mobile phone number AES Decryption                    | AN(11)        | ●        |                            |
+| custGndrCd   | Customer gender code| 1: Male, 2: Female                                               | N(1)          | ●        | “1”                        |
+| tid          | Authentication key  | Authentication key value that is sent as the response value when requested | AN(50)       | ●        | “settlebank20190430034655251226” |
+| trdNo        | Transaction number  | Hecto Financial transaction number                               | AN(50)        | ●        | “SFP_FIRM12345678901234567890” |
+| custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+
+## Account Holder Name Inquiry (Date of Birth Excluded)
+
+### API Summary
+Request for inquiry of the account holder’s name using the account number, excluding the date of birth.
+
+### API URL
+
+| Section   | URL                                                  |
+|-----------|------------------------------------------------------|
+| Testbed   | `https://tbnpay.settlebank.co.kr/v1/api/auth/acnt/ownercheck1` |
+| Production| `https://npay.settlebank.co.kr/v1/api/auth/acnt/ownercheck1`   |
+
+### Request (Merchant -> Hecto Financial)
+The columns requested by Merchant server from Hecto Financial are defined as follows:
+
+| Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
+|--------------|--------------------------|------------------------------------------------------------------|---------------|----------|-------------------------|
+| hdInfo       | Information              | Parameter Information code                                       | AN(50)        | ●        | “SPAY_M100_1.0“         |
+| mchtId       | Merchant ID              | Unique Merchant ID provided by Hecto Financial                   | AN(8)         | ●        | “midtest”               |
+| reqDt        | Request date             | yyyyMMdd                                                         | AN(8)         | ●        | “20191231”              |
+| reqTm        | Request time             | HH24MISS                                                         | AN(6)         | ●        | “120000”                |
+| custAcntNo   | Account number           | Customer account number AES Encryption                           | AN(20)        | ●        | “11012341234”           |
+| custAcntBank | Bank code                | Financial institution identifier                                 | AN(3)         | ●        | “004”                   |
+| custNm       | Customer name            | Customer name (Korean 3 byte) AES Encryption                     | AN(60)        | ●        | “Hong Gildong”          |
+| custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+| pktHash      | hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
+
+### Request Hash Code
+
+| Section   | Combination Field                                        |
+|-----------|----------------------------------------------------------|
+| pktHash value | Merchant ID + Account number (plain text) + Bank code + Customer name (plain text) + Authentication key |
+
+### Response (Hecto Financial -> Merchant)
+The columns that respond from Hecto Financial server to the Merchant are as follows:
+
+| Parameter    | Name                | Description                                                      | Type (Length) | Required | Example                    |
+|--------------|---------------------|------------------------------------------------------------------|---------------|----------|----------------------------|
+| outStatCd    | Status              | Result code (Success /Fail)                                      | AN(4)         | ●        | Success: 0021, Fail: 0031  |
+| outRsltCd    | Reject code         | Refer to reject code table                                       | AN(4)         | ●        |                            |
+| outRsltMsg   | Result message      | When an error occurs, a message on error is sent                 | AN(300)       | ●        | “Success”                  |
+| custAcntNo   | Account number      | Customer account number AES Decryption                           | AN(20)        | ●        |                            |
+| custNm       | Customer name       | Customer name AES Decryption                                     | AN(60)        | ●        |                            |
+| custGndrCd   | Customer gender code| 1: Male, 2: Female                                               | N(1)          | ●        | “1”                        |
+| custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+
+## Account Holder Name Confirmation (Date of Birth Included)
+
+### API Summary
+Request for confirmation of the account holder’s name using the account number, including the date of birth.
+
+### API URL
+
+| Section   | URL                                                  |
+|-----------|------------------------------------------------------|
+| Testbed   | `https://tbnpay.settlebank.co.kr/v1/api/auth/acnt/ownercheck2` |
+| Production| `https://npay.settlebank.co.kr/v1/api/auth/acnt/ownercheck2`   |
+
+### Request (Merchant -> Hecto Financial)
+The columns requested by Merchant server from Hecto Financial are defined as follows:
+
+| Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
+|--------------|--------------------------|------------------------------------------------------------------|---------------|----------|-------------------------|
+| hdInfo       | Information              | Parameter Information code                                       | AN(50)        | ●        | “SPAY_M100_1.0“         |
+| mchtId       | Merchant ID              | Unique Merchant ID provided by Hecto Financial                   | AN(8)         | ●        | “midtest”               |
+| reqDt        | Request date             | yyyyMMdd                                                         | AN(8)         | ●        | “20191231”              |
+| reqTm        | Request time             | HH24MISS                                                         | AN(6)         | ●        | “120000”                |
+| custAcntNo   | Account number           | Customer account number AES Encryption                           | AN(20)        | ●        | “11012341234”           |
+| custAcntBank | Bank code                | Financial institution identifier                                 | AN(3)         | ●        | “004”                   |
+| custNm       | Customer name            | Customer name (Korean 3 byte) AES Encryption                     | AN(60)        | ●        | “Hong Gildong”          |
+| Uii          | Date of birth/Business registration number | yymmdd+ gender identification, Business registration number (hyphen excluded) AES Encryption | AN(10) | ● | “8001012”               |
+| custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+| pktHash      | hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
+
+### Request Hash Code
+
+| Section   | Combination Field                                        |
+|-----------|----------------------------------------------------------|
+| pktHash value | Merchant ID + Account number (plain text) + Bank code + Customer name (plain text) + Date of birth (plain text) + Authentication key |
+
+### Response (Hecto Financial -> Merchant)
+The columns that respond from Hecto Financial server to the Merchant are as follows:
+
+| Parameter    | Name                | Description                                                      | Type (Length) | Required | Example                    |
+|--------------|---------------------|------------------------------------------------------------------|---------------|----------|----------------------------|
+| outStatCd    | Status              | Result code (Success /Fail)                                      | AN(4)         | ●        | Success: 0021, Fail: 0031  |
+| outRsltCd    | Reject code         | Refer to reject code table                                       | AN(4)         | ●        |                            |
+| outRsltMsg   | Result message      | When an error occurs, a message on error is sent                 | AN(300)       | ●        | “Success”                  |
+| custAcntNo   | Account number      | Customer account number AES Decryption                           | AN(20)        | ●        |                            |
+| custNm       | Customer name       | Customer name AES Decryption                                     | AN(60)        | ●        |                            |
+| custGndrCd   | Customer gender code| 1: Male, 2: Female                                               | N(1)          | ●        | “1”                        |
+| custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+
+## Account Holder Name Inquiry (Including Amount)
+
+### API Summary
+Request for inquiry of the account holder’s name using the account number, including the amount.
+
+### API URL
+
+| Section   | URL                                                  |
+|-----------|------------------------------------------------------|
+| Testbed  
+
+ | `https://tbnpay.settlebank.co.kr/v1/api/auth/acnt/ownercheckWithAmount` |
+| Production| `https://npay.settlebank.co.kr/v1/api/auth/acnt/ownercheckWithAmount`   |
+
+### Request (Merchant -> Hecto Financial)
+The columns requested by Merchant server from Hecto Financial are defined as follows:
+
+| Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
+|--------------|--------------------------|------------------------------------------------------------------|---------------|----------|-------------------------|
+| hdInfo       | Information              | Parameter Information code                                       | AN(50)        | ●        | “SPAY_M100_1.0“         |
+| mchtId       | Merchant ID              | Unique Merchant ID provided by Hecto Financial                   | AN(8)         | ●        | “midtest”               |
+| reqDt        | Request date             | yyyyMMdd                                                         | AN(8)         | ●        | “20191231”              |
+| reqTm        | Request time             | HH24MISS                                                         | AN(6)         | ●        | “120000”                |
+| custAcntNo   | Account number           | Customer account number AES Encryption                           | AN(20)        | ●        | “11012341234”           |
+| custAcntBank | Bank code                | Financial institution identifier                                 | AN(3)         | ●        | “004”                   |
+| custNm       | Customer name            | Customer name (Korean 3 byte) AES Encryption                     | AN(60)        | ●        | “Hong Gildong”          |
+| trnsAmnt     | Transaction amount       | Amount for transaction (Excludes comma)                          | N(13)         | ●        | “5000”                  |
+| custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+| pktHash      | hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
+
+### Request Hash Code
+
+| Section   | Combination Field                                        |
+|-----------|----------------------------------------------------------|
+| pktHash value | Merchant ID + Account number (plain text) + Bank code + Customer name (plain text) + Amount + Authentication key |
+
+### Response (Hecto Financial -> Merchant)
+The columns that respond from Hecto Financial server to the Merchant are as follows:
+
+| Parameter    | Name                | Description                                                      | Type (Length) | Required | Example                    |
+|--------------|---------------------|------------------------------------------------------------------|---------------|----------|----------------------------|
+| outStatCd    | Status              | Result code (Success /Fail)                                      | AN(4)         | ●        | Success: 0021, Fail: 0031  |
+| outRsltCd    | Reject code         | Refer to reject code table                                       | AN(4)         | ●        |                            |
+| outRsltMsg   | Result message      | When an error occurs, a message on error is sent                 | AN(300)       | ●        | “Success”                  |
+| custAcntNo   | Account number      | Customer account number AES Decryption                           | AN(20)        | ●        |                            |
+| custNm       | Customer name       | Customer name AES Decryption                                     | AN(60)        | ●        |                            |
+| custGndrCd   | Customer gender code| 1: Male, 2: Female                                               | N(1)          | ●        | “1”                        |
+| custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+
+## Account Ownership Verification
+
+### API Summary
+Request for verification of the account ownership.
+
+### API URL
+
+| Section   | URL                                                  |
+|-----------|------------------------------------------------------|
+| Testbed   | `https://tbnpay.settlebank.co.kr/v1/api/auth/acnt/ownership` |
+| Production| `https://npay.settlebank.co.kr/v1/api/auth/acnt/ownership`   |
+
+### Request (Merchant -> Hecto Financial)
+The columns requested by Merchant server from Hecto Financial are defined as follows:
+
+| Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
+|--------------|--------------------------|------------------------------------------------------------------|---------------|----------|-------------------------|
+| hdInfo       | Information              | Parameter Information code                                       | AN(50)        | ●        | “SPAY_M100_1.0“         |
+| mchtId       | Merchant ID              | Unique Merchant ID provided by Hecto Financial                   | AN(8)         | ●        | “midtest”               |
+| reqDt        | Request date             | yyyyMMdd                                                         | AN(8)         | ●        | “20191231”              |
+| reqTm        | Request time             | HH24MISS                                                         | AN(6)         | ●        | “120000”                |
+| custAcntNo   | Account number           | Customer account number AES Encryption                           | AN(20)        | ●        | “11012341234”           |
+| custAcntBank | Bank code                | Financial institution identifier                                 | AN(3)         | ●        | “004”                   |
+| custNm       | Customer name            | Customer name (Korean 3 byte) AES Encryption                     | AN(60)        | ●        | “Hong Gildong”          |
+| Uii          | Date of birth/Business registration number | yymmdd+ gender identification, Business registration number (hyphen excluded) AES Encryption | AN(10) | ● | “8001012”               |
+| custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+| pktHash      | hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
+
+### Request Hash Code
+
+| Section   | Combination Field                                        |
+|-----------|----------------------------------------------------------|
+| pktHash value | Merchant ID + Account number (plain text) + Bank code + Customer name (plain text) + Date of birth (plain text) + Authentication key |
+
+### Response (Hecto Financial -> Merchant)
+The columns that respond from Hecto Financial server to the Merchant are as follows:
+
+| Parameter    | Name                | Description                                                      | Type (Length) | Required | Example                    |
+|--------------|---------------------|------------------------------------------------------------------|---------------|----------|----------------------------|
+| outStatCd    | Status              | Result code (Success /Fail)                                      | AN(4)         | ●        | Success: 0021, Fail: 0031  |
+| outRsltCd    | Reject code         | Refer to reject code table                                       | AN(4)         | ●        |                            |
+| outRsltMsg   | Result message      | When an error occurs, a message on error is sent                 | AN(300)       | ●        | “Success”                  |
+| custAcntNo   | Account number      | Customer account number AES Decryption                           | AN(20)        | ●        |                            |
+| custNm       | Customer name       | Customer name AES Decryption                                     | AN(60)        | ●        |                            |
+| custGndrCd   | Customer gender code| 1: Male, 2: Female                                               | N(1)          | ●        | “1”                        |
+| custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+
+## Request for Account Ownership Verification
+
+### API Summary
+Request for account ownership verification.
+
+### API URL
+
+| Section   | URL                                                  |
+|-----------|------------------------------------------------------|
+| Testbed   | `https://tbnpay.settlebank.co.kr/v1/api/auth/ownership/req` |
+| Production| `https://npay.settlebank.co.kr/v1/api/auth/ownership/req`   |
+
+### Request (Merchant -> Hecto Financial)
+The columns requested by Merchant server from Hecto Financial are defined as follows:
+
+| Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
+|--------------|--------------------------|------------------------------------------------------------------|---------------|----------|-------------------------|
+| hdInfo       | Information              | Parameter Information code                                       | AN(50)        | ●        | “SPAY_M100_1.0“         |
+| mchtId       | Merchant ID              | Unique Merchant ID provided by Hecto Financial                   | AN(8)         | ●        | “midtest”               |
+| reqDt        | Request date             | yyyyMMdd                                                         | AN(8)         | ●        | “20191231”              |
+| reqTm        | Request time             | HH24MISS                                                         | AN(6)         | ●        | “120000”                |
+| custAcntNo   | Account number           | Customer account number AES Encryption                           | AN(20)        | ●        | “11012341234”           |
+| custAcntBank | Bank code                | Financial institution identifier                                 | AN(3)         | ●        | “004”                   |
+| custNm       | Customer name            | Customer name (Korean 3 byte) AES Encryption                     | AN(60)        | ●        | “Hong Gildong”          |
+| Uii          | Date of birth/Business registration number
+
+ | yymmdd+ gender identification, Business registration number (hyphen excluded) AES Encryption | AN(10) | ● | “8001012”               |
+| custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+| pktHash      | hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
+
+### Request Hash Code
+
+| Section   | Combination Field                                        |
+|-----------|----------------------------------------------------------|
+| pktHash value | Merchant ID + Account number (plain text) + Bank code + Customer name (plain text) + Date of birth (plain text) + Authentication key |
+
+### Response (Hecto Financial -> Merchant)
+The columns that respond from Hecto Financial server to the Merchant are as follows:
+
+| Parameter    | Name                | Description                                                      | Type (Length) | Required | Example                    |
+|--------------|---------------------|------------------------------------------------------------------|---------------|----------|----------------------------|
+| outStatCd    | Status              | Result code (Success /Fail)                                      | AN(4)         | ●        | Success: 0021, Fail: 0031  |
+| outRsltCd    | Reject code         | Refer to reject code table                                       | AN(4)         | ●        |                            |
+| outRsltMsg   | Result message      | When an error occurs, a message on error is sent                 | AN(300)       | ●        | “Success”                  |
+| custAcntNo   | Account number      | Customer account number AES Decryption                           | AN(20)        | ●        |                            |
+| custNm       | Customer name       | Customer name AES Decryption                                     | AN(60)        | ●        |                            |
+| custGndrCd   | Customer gender code| 1: Male, 2: Female                                               | N(1)          | ●        | “1”                        |
+| custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+
+## Confirmation of Account Ownership Verification
+
+### API Summary
+Confirmation of account ownership verification.
+
+### API URL
+
+| Section   | URL                                                  |
+|-----------|------------------------------------------------------|
+| Testbed   | `https://tbnpay.settlebank.co.kr/v1/api/auth/ownership/check` |
+| Production| `https://npay.settlebank.co.kr/v1/api/auth/ownership/check`   |
+
+### Request (Merchant -> Hecto Financial)
+The columns requested by Merchant server from Hecto Financial are defined as follows:
+
+| Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
+|--------------|--------------------------|------------------------------------------------------------------|---------------|----------|-------------------------|
+| hdInfo       | Information              | Parameter Information code                                       | AN(50)        | ●        | “SPAY_M100_1.0“         |
+| mchtId       | Merchant ID              | Unique Merchant ID provided by Hecto Financial                   | AN(8)         | ●        | “midtest”               |
+| reqDt        | Request date             | yyyyMMdd                                                         | AN(8)         | ●        | “20191231”              |
+| reqTm        | Request time             | HH24MISS                                                         | AN(6)         | ●        | “120000”                |
+| Tid          | Authentication key       | Authentication key value that is sent as the response value when requested | AN(50)       | ●        | “settlebank20190430034655251226” |
+| custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+| pktHash      | hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
+
+### Request Hash Code
+
+| Section   | Combination Field                                        |
+|-----------|----------------------------------------------------------|
+| pktHash value | Merchant ID + Request date + Request time + Authentication key + Authentication key |
+
+### Response (Hecto Financial -> Merchant)
+The columns that respond from Hecto Financial server to the Merchant are as follows:
+
+| Parameter    | Name                | Description                                                      | Type (Length) | Required | Example                    |
+|--------------|---------------------|------------------------------------------------------------------|---------------|----------|----------------------------|
+| outStatCd    | Status              | Result code (Success /Fail)                                      | AN(4)         | ●        | Success: 0021, Fail: 0031  |
+| outRsltCd    | Reject code         | Refer to reject code table                                       | AN(4)         | ●        |                            |
+| outRsltMsg   | Result message      | When an error occurs, a message on error is sent                 | AN(300)       | ●        | “Success”                  |
+| tid          | Authentication key  | Authentication key value that is sent as the response value when requested | AN(50)       | ●        | “settlebank20190430034655251226” |
+| trdNo        | Transaction number  | Hecto Financial transaction number                               | AN(50)        | ●        | “SFP_FIRM12345678901234567890” |
+| custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
+```
