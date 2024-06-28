@@ -330,3 +330,56 @@ If there is an error with parameter verification such as missing required values
   "outRsltCd": "ST09",
   "outRsltMsg": "invalid request parameter"
 }
+
+API Invoke
+API Connection Information
+The following is API server connection information:
+
+Environment	URL
+Testbed	https://tbnpay.settlebank.co.kr
+Production	https://npay.settlebank.co.kr
+Request and Response Headers
+API request and response header format are as below:
+
+Request Header	Value
+Content-type	application/json;charset=UTF-8
+Response Header	Value
+Content-type	application/json;charset=UTF-8
+Timeout
+The timeout process of API’s response is 30 seconds.
+
+Others
+The following describes the general requirement for HTTP specification:
+
+Provided API is REST-oriented but does not meet the entire specification of REST (Most transaction requests use POST method only).
+For ‘Request’ use POST method only.
+Commonly variable values &, ?, new line, <, > are not allowed.
+Security of Important Information
+Encryption & Decryption of Personal Information and Important Information
+When sending and receiving data, the following encryption & decryption should be performed for the personal/important information fields:
+
+Section	Entry	Application	Encoding
+Personal information	Algorithm	AES-256/ECB/PKCS5Padding	Base64 Encoding
+Field	The name of the person in charge, phone number, mobile phone number, e-mail, account holder’s name, account number, etc.		
+The fields for encryption are specified in the descriptions of the request field specification of each API.
+If it is possible to type in Korean in the field, refer to the descriptions for the byte size of Korean.
+Encryption Key for Personal Information
+For encryption and decryption of personal information and important information, key information differs depending on the operation environment and is as follows:
+
+Section	Encryption Key
+Testbed key	SETTLEBANKISGOODSETTLEBANKISGOOD (32 byte)
+Production key	Will be provided by separate notice when the service is carried out
+Anti-forgery Algorithm
+To verify whether the request data is forged or falsified, a hash algorithm is used. The hash value generation algorithm is as follows:
+
+Section	Entry	Application	Encoding
+Forgery	Algorithm	SHA-256	Hex Encoding
+Hash Generation Authentication Key
+Section	Authentication key
+Testbed key	ST190808090913247723 (20 byte)
+Production key	Will be provided by separate notice when the service is carried out
+Mobile Phone Verification Request
+API Summary
+Request a mobile phone verification from the merchant’s server to Hecto Financial’s server. To get the name of the customer (account holder) needed for the account holder verification and one’s mobile phone number which is needed for ARS authentication, mobile phone verification is used. The APP and SMS methods are supported. When there is an APP verification request, the customer’s mobile app is invoked, and when there is an SMS verification request, a 6-digit verification number will be sent to the customer’s device through SMS.
+
+*Mobile phone verification service can only be used for Hecto Financial Easy Payment registration.
