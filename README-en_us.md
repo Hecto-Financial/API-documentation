@@ -321,9 +321,7 @@ Easy Cash Payment process is as follows:
 - A: Alphabetic Characters
 - AN: Both alphabetic and numeric
 
-Sure, I will continue writing the README file from where I stopped. If the content length reaches the limit, I will indicate where to continue in a new README file.
-
-```markdown
+- 
 - The fields for encryption are specified in the descriptions of the request field specification of each API.
 - If it is possible to type in Korean in the field, refer to the descriptions for the byte size of Korean.
 
@@ -731,4 +729,4 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 | tid          | Authentication key  | Authentication key value that is sent as the response value when requested | AN(50)       | ●        | “settlebank20190430034655251226” |
 | trdNo        | Transaction number  | Hecto Financial transaction number                               | AN(50)        | ●        | “SFP_FIRM12345678901234567890” |
 | custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
-```
+
