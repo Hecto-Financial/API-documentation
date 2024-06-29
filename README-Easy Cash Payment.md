@@ -335,6 +335,7 @@ If there is an error with parameter verification such as missing required values
   "outRsltMsg": "invalid request parameter"
 }
 
+```
 ## API Invoke
 
 ### API Connection Information
