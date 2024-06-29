@@ -730,9 +730,6 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 | trdNo        | Transaction number  | Hecto Financial transaction number                               | AN(50)        | ●        | “SFP_FIRM12345678901234567890” |
 | custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
 
-Sure, here is the continuation of the document in a new README file.
-
-```markdown
 # Easy Cash Payment Standard WEB API - Part 2
 
 ## ARS Authentication Request
