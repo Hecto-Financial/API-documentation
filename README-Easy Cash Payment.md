@@ -1327,21 +1327,20 @@ The columns requested by Merchant server from Hecto Financial are defined as fol
 
 The columns that respond from Hecto Financial server to the Merchant are as follows.
 
-| Parameter   | Name                       | Description                                                                 | Type (Length) | Required | Example                     |
-|-------------|----------------------------|-----------------------------------------------------------------------------|---------------|----------|-----------------------------|
-| outStatCd   | Transaction status         | Transaction status code (success/fail)                                      | AN(4)         | ●        | Success
+| Parameter            | Name                              | Description                                                     | Type (Length) | Required | Example                                                      |
+|----------------------|-----------------------------------|-----------------------------------------------------------------|---------------|----------|--------------------------------------------------------------|
+| outStatCd            | Transaction status                | Transaction status code (success/fail)                          | AN(4)         | ●        | Success: 0021                                                |
+|                      |                                   |                                                                 |               |          | Fail: 0031                                                   |
+| outRsltCd            | Reject code                       | Refer to reject code table                                      | AN(4)         | ●        | ST08 : If it is an account that is already registered, send the information of the registered account |
+| outRsltMsg           | Result message                    | When an error occurs, a message on error is sent                | AN(300)       | ●        | “Processed normally.”                                        |
+| mchtTrdNo            | Order number                      | Merchant Order Number                                           | AN(100)       | ●        | "OID201902210001"                                            |
+|                      |                                   | * Exclude Korean letters                                        |               |          |                                                              |
+| trdNo                | Transaction number                | Hecto Financial’s transaction number                            | AN(40)        | ○        | “SFP_FIRM12345678901234567890”                               |
+| rglPmtProcStatCd     | Recurring payment processing status | Response of recurring payment processing status                 | A(1)          | ○        | R : Recurring payment reprocessing is required               |
+|                      |                                   |                                                                 |               |          | C : Recurring payment cancellation is required               |
+| trdAmt               | Transaction amount                | Withdrawn amount (transaction amount)                           | N(13)         | ○        | “1000”                                                       |
+| svcDivCd             | Services Used at Payment          | Service paid (withdraw transfer)                                | N(4)          | ○        | 1 : Firm banking                                             |
 
-: 0021               |
-|             |                            |                                                                             |               |          | Fail: 0031                  |
-| outRsltCd   | Reject code                | Refer to reject code table                                                  | AN(4)         | ●        | ST08 : If it is an account that is already registered, send the information of the registered account |
-| outRsltMsg  | Result message             | When an error occurs, a message on error is sent                            | AN(300)       | ●        | “Processed normally.”       |
-| mchtTrdNo   |                            | Order number                                                                | AN(100)       | ●        | "OID201902210001"           |
-|             | Merchant Order Number      | * Exclude Korean letters                                                    |               |          |                             |
-| trdNo       | Transaction number         | Hecto Financial’s transaction number                                        | AN(40)        | ○        | “SFP_FIRM12345678901234567890” |
-| rglPmtProcStatCd | Recurring payment processing status | Response of recurring payment processing status                           | A(1)          | ○        | R : Recurring payment reprocessing is required |
-|             |                            |                                                                             |               |          | C : Recurring payment cancellation is required |
-| trdAmt      | Transaction amount         | Withdrawn amount (transaction amount)                                       | N(13)         | ○        | “1000”                      |
-| svcDivCd    | Services Used at Payment   | Service paid (withdraw transfer)                                            | N(4)          | ○        | 1 : Firm banking            |
 
 ## 21. Cancellation of Recurring Payment
 
