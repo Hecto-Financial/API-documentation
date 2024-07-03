@@ -1233,10 +1233,8 @@ The columns requested by Merchant server from Hecto Financial are defined as fol
 | hdInfo      | Information                | Parameter Information code                                                  | AN(50)        | ●        | “SPAY_RT0W_1.0“             |
 |             |                            | ※ fixed value                                                               |               |          |                             |
 | mchtId      | Merchant ID                | Unique Merchant ID provided by Hecto Financial                              | AN(8)         | ●        | “midtest"                   |
-| mchtTrdNo   |                            | Order number                                                                | AN(100)       | ●        | “OID201902210002”           |
-|             | Merchant Cancellation Order Number | * Exclude Korean Order number of cancellation request, not the number of original transaction |
-
- | | |
+| mchtTrdNo   |     Order number                          |       Merchant Cancellation Order Number  
+ * Exclude Korean Order number of cancellation request, not the number of original transaction                                                      | AN(100)       | ●        | “OID201902210002”           |
 | mchtCustId  | Customer ID                | Unique Customer ID or Unique Key from merchant (AES encryption)             | AN(100)       | ●        | “honggildong”               |
 | mchtTrdDt   | Date of cancellation of order | yyyymmdd                                                                   | AN(8)         | ●        | “20191231”                  |
 | mchtTrdTm   | Time of cancellation of order | HH24MISS                                                                   | AN(6)         | ●        | “120000”                    |
