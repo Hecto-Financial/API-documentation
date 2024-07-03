@@ -390,4 +390,26 @@ FAIL
 <HTML><BODY>OK : Normal Processing </BODY></HTML>
 ※ If there is OK in the response, processed as success.
 
+# Result Code
+
+# Result Codes
+
+| Result Code | Message                                      | Revision Date |
+|-------------|----------------------------------------------|---------------|
+| 0000        | Normal processing                            | 2023.09.18    |
+| PY11        | Bank maintenance time                        | 2023.09.18    |
+| PY12        | Insufficient balance                         | 2023.09.18    |
+| PY21        | No receiving account                         | 2023.09.18    |
+| PY31        | Exchange rate information error              | 2023.09.18    |
+| PY41        | Service capacity exceeded                    | 2023.09.18    |
+| PY42        | Transaction cannot be done with this bank    | 2023.09.18    |
+| PY43        | Blocked by WLF                               | 2023.09.18    |
+| PY44        | Target for WLF. Need to be approved separately| 2023.09.18   |
+| PY50        | Duplicate parameter request                  | 2023.09.18    |
+| PY51        | Already Canceled Transaction                 | 2023.09.18    |
+| PY97        | Unregistered merchant (check message)        | 2023.09.18    |
+| PY98        | Invalid request parameter (check message)    | 2023.09.18    |
+| PY99        | Internal System Error                        | 2023.09.18    |
+| VTIM        | Provider Timeout                             | 2023.09.18    |
+
 
