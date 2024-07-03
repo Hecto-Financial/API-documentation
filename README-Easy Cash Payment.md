@@ -1831,17 +1831,16 @@ The columns requested by Merchant server from Hecto Financial are defined as fol
 
 The columns that respond from Hecto Financial server to the Merchant are as follows.
 
-| Parameter   | Name
+| Parameter   | Name                      | Description                                                 | Type (Length) | Required | Example                       |
+|-------------|---------------------------|-------------------------------------------------------------|---------------|----------|-------------------------------|
+| outStatCd   | Transaction status        | Transaction status code (success/fail)                       | AN(4)         | ●        | Success: 0021                 |
+|             |                           |                                                             |               |          | Fail: 0031                    |
+| outRsltCd   | Reject code               | Refer to reject code table                                   | AN(4)         | ●        | ST01 : If the payment password does not exist, this response code is returned |
+| outRsltMsg  | Result message            | When an error occurs, a message on error is sent             | AN(300)       | ●        | “Processed normally.”         |
+| mchtCustld  | Customer ID               | Unique Customer ID provided by Merchant or Unique Key (AES Encryption) | AN(100)   | ●        | "honggildong"                 |
+| mchtTrdNo   | Order number              | Merchant order number (Exclude Korean)                       | AN(100)       | ○        | "OLD20190221001"              |
+| trdNo       | Transaction number        | Hecto Financial transaction number                           | AN(40)        | ●        | “SFP_FIRM12345678901234567890” |
 
-                      | Description                               | Type (Length) | Description                | Example                       |
-|-------------|---------------------------|-------------------------------------------|---------------|----------------------------|-------------------------------|
-| outStatCd   | Transaction status        | Transaction status code (success/fail)    | AN(4)         | ●                          | Success: 0021                 |
-|             |                           |                                           |               |                            | Fail: 0031                    |
-| outRsltCd   | Reject code               | Refer to reject code table                | AN(4)         | ●                          | ST01 : If the payment password does not exist, this response code is returned |
-| outRsltMsg  | Result message            | When an error occurs, a message on error is sent | AN(300)  | ●                          | “Processed normally.”         |
-| mchtCustld  | Customer ID               | Unique Customer ID provided by Merchant or Unique Key (AES Encryption) | AN(100) | ● | "honggildong"       |
-| mchtTrdNo   | Order number              | Merchant order number (Exclude Korean)    | AN(100)       | ○                          | "OLD20190221001"              |
-| trdNo       | Transaction number        | Hecto Financial transaction number        | AN(40)        | ●                          | “SFP_FIRM12345678901234567890” |
 
 ### Others
 #### Table of Reject Codes
@@ -1917,46 +1916,48 @@ Financial institution unique identification codes provided by Hecto Financial ar
 | 050                        | Korea Federation of Savings Banks (KFSB)         | 099                        | KFTC                                           |
 | 064                        | National Forestry Cooperative Federation (NFCF)  |                            |                                                |
 
-#### Bank Regular Maintenance Time
+### Bank Regular Maintenance Time
+
 Due to the specifics of bank operating hours, Hecto Financial recommends transactions between 01:00 and 23:30. Maintenance time could be extended by bank.
 
-| Code | Name                                     | Bank Maintenance Time | Hecto Financial Maintenance Time | Regular Maintenance                             |
-|------|------------------------------------------|-----------------------|----------------------------------|------------------------------------------------|
-| 002  | KDB                                      | 23:30~00:30           | 23:50~00:15                      | Every 2nd Sunday of the month 00:00~04:00       |
-| 003  | IBK                                      | 24:00~00:30           | 23:50~00:12                      | Every Sunday 00:00~00:30                       |
-| 004  | Kookmin Bank                             | 24:00:~00:30          | 23:50~00:12                      | Every 3rd Sunday of the month 00:00~00:30, 05:00~05:30. External work 01:00~06:00 (Intermittent transaction error) |
-| 007  | Suhyup Bank                              | 23:50~00:30           | 23:30~00:30                      | None                                           |
-| 011  | Nonghyup Bank                            | 24:00~00:30           | 23:50~00:12                      | Every 3rd Monday of the month 00:00 to 04:00 (Next business day if the date is a public holiday) |
-| 020  | Woori Bank                               | 23:50~00:30           | 23:50~00:10                      | Every 2nd Sunday of the month 02:00 to 06:00 (Work date is notified by bank in advance) |
-| 023  | SC Bank                                  | 23:30~00:30           | 23:50~00:12                      | None                                           |
-| 027  | Citi Bank                                | 23:40~00:30           | 23:50~00:30                      | Every day 00:30~04:30                          |
-| 031  | Daegu Bank                               | 23:40~00:30           | 23:50~00:05                      | None                                           |
-| 032  | Busan Bank                               | 23:30~00:30           | 23:50~00:05                      | None                                           |
-| 034  | Kwangju Bank                             | 23:40~00:30           | 23:50~00:05                      | Every 2nd Sunday of the month 02:00~06:00       |
-| 035  | Jeju Bank                                | 23:40~00:30           | 23:50~00:12                      | Every Sunday 04:30~05:00                       |
-| 037  | Jeonbuk Bank                             | 24:00~00:30           | 23:50~00:05                      | Every 2nd Saturday of the month 00:00~04:00     |
-| 039  | Kyongnam Bank
-
-                            | 23:40~00:30           | 23:50~00:05                      | Every 2nd Sunday of the month 00:00~07:00       |
-| 045  | KFCC                                     | 23:50~00:30           | 23:30~00:30                      | None                                           |
-| 048  | NACUFOK                                  | 23:40~00:30           | 23:50~00:05                      | None                                           |
-| 050  | KFSB                                     | 23:50~00:10           | 23:50~00:35                      | None                                           |
-| 064  | NFCF                                     | 23:30~00:30           | 23:30~01:00                      | None                                           |
-| 071  | Korea Post                               | 23:40~00:30           | 23:50~00:05                      | Daily 04:00~05:00                              |
-| 081  | Hana Bank                                | 23:40~00:30           | 23:50~00:15                      | Every 2nd Sunday of the month 00:00~08:00       |
-| 088  | Shinhan Bank                             | 23:40~00:30           | 23:50~00:05                      | None                                           |
-| 089  | Kbank                                    | 23:40~00:30           | 23:35~00:35                      | None                                           |
-| 090  | Kakao Bank                               | 23:50~00:10           | 23:50~00:05                      | None                                           |
-| 092  | Toss Bank                                | 23:55~00:05           | 23:55~00:05                      | None                                           |
-| 103  | SBI Savings Bank                         | 23:55~00:10           | 23:50~00:05                      | None                                           |
-| 209  | Yuanta Securities                        | 23:50~00:10           | 23:50~00:10                      | None                                           |
-| 238  | Mirae Asset Securities                   | 23:30~00:20           | 23:30~00:20                      | None                                           |
-| 240  | Samsung Securities                       | 23:30~00:20           | 23:50~00:10                      | None                                           |
-| 243  | Korea Investment & Securities            | 23:40~00:10           | 23:40~00:10                      | None                                           |
-| 247  | NH Investment & Securities               | 23:50~00:15           | 23:50~00:05                      | None                                           |
-| 266  | SK Securities                            | 23:50~00:30           | 23:30~00:30                      | None                                           |
-| 267  | Daishin Securities                       | 23:55~00:25           | 23:55~00:25                      | None                                           |
-| 278  | Shinhan Financial Investment             | 23:25~00:15           | 23:30~00:15                      | Every day 23:30~00:10, 03:00~03:10              |
-| 280  | Eugene Investment & Securities           | 23:30~00:30           | 23:50~00:35                      | None                                           |
-| 287  | Meritz Securities                        | 23:50~00:20           | 23:50~00:20                      | None                                           |
-
+| Code | Name                          | Bank Maintenance Time | Hecto Financial Maintenance Time | Regular Maintenance                                      |
+|------|-------------------------------|-----------------------|----------------------------------|----------------------------------------------------------|
+| 002  | KDB                           | 23:30~00:30           | 23:50~00:15                      | Every 2nd Sunday of the month 00:00~04:00                |
+| 003  | IBK                           | 24:00~00:30           | 23:50~00:12                      | Every Sunday 00:00~00:30                                 |
+| 004  | Kookmin Bank                  | 24:00:~00:30          | 23:50~00:12                      | Every 3rd Sunday of the month 00:00~00:30, 05:00~05:30   |
+|      |                               |                       |                                  | External work 01:00~06:00 (Intermittent transaction error) |
+| 007  | Suhyup Bank                   | 23:50~00:30           | 23:30~00:30                      | None                                                     |
+| 011  | Nonghyup Bank                 | 24:00~00:30           | 23:50~00:12                      | Every 3rd Monday of the month 00:00 to 04:00             |
+|      |                               |                       |                                  | (Next business day if the date is a public holiday)      |
+| 020  | Woori Bank                    | 23:50~00:30           | 23:50~00:10                      | Every 2nd Sunday of the month 02:00 to 06:00             |
+|      |                               |                       |                                  | (Work date is notified by bank in advance)               |
+| 023  | SC Bank                       | 23:30~00:30           | 23:50~00:12                      | None                                                     |
+| 027  | Citi Bank                     | 23:40~00:30           | 23:50~00:30                      | Every day 00:30~04:30                                    |
+| 031  | Daegu Bank                    | 23:40~00:30           | 23:50~00:05                      | None                                                     |
+| 032  | Busan Bank                    | 23:30~00:30           | 23:50~00:05                      | None                                                     |
+| 034  | Kwangju Bank                  | 23:40~00:30           | 23:50~00:05                      | Every 2nd Sunday of the month 02:00~06:00                |
+| 035  | Jeju Bank                     | 23:40~00:30           | 23:50~00:12                      | Every Sunday 04:30~05:00                                 |
+| 037  | Jeonbuk Bank                  | 24:00~00:30           | 23:50~00:05                      | Every 2nd Saturday of the month 00:00~04:00              |
+| 039  | Kyongnam Bank                 | 23:40~00:30           | 23:50~00:05                      | Every 2nd Sunday of the month 00:00~07:00                |
+| 045  | KFCC                          | 23:50~00:30           | 23:30~00:30                      | None                                                     |
+| 048  | NACUFOK                       | 23:40~00:30           | 23:50~00:05                      | None                                                     |
+| 050  | KFSB                          | 23:50~00:10           | 23:50~00:35                      | None                                                     |
+| 064  | NFCF                          | 23:30~00:30           | 23:30~01:00                      | None                                                     |
+| 071  | Korea Post                    | 23:40~00:30           | 23:50~00:05                      | Daily 04:00~05:00                                        |
+| 081  | Hana Bank                     | 23:40~00:30           | 23:50~00:15                      | Every 2nd Sunday of the month 00:00~08:00                |
+| 088  | Shinhan Bank                  | 23:40~00:30           | 23:50~00:05                      | None                                                     |
+| 089  | Kbank                         | 23:40~00:30           | 23:35~00:35                      | None                                                     |
+| 090  | Kakao Bank                    | 23:50~00:10           | 23:50~00:05                      | None                                                     |
+| 092  | Toss Bank                     | 23:55~00:05           | 23:55~00:05                      | None                                                     |
+| 103  | SBI Savings Bank              | 23:55~00:10           | 23:50~00:05                      | None                                                     |
+| 209  | Yuanta Securities             | 23:50~00:10           | 23:50~00:10                      | None                                                     |
+| 238  | Mirae Asset Securities        | 23:30~00:20           | 23:30~00:20                      | None                                                     |
+| 240  | Samsung Securities            | 23:30~00:20           | 23:50~00:10                      | None                                                     |
+| 243  | Korea Investment & Securities | 23:40~00:10           | 23:40~00:10                      | None                                                     |
+| 247  | NH Investment & Securities    | 23:50~00:15           | 23:50~00:05                      | None                                                     |
+| 266  | SK Securities                 | 23:50~00:30           | 23:30~00:30                      | None                                                     |
+| 267  | Daishin Securities            | 23:55~00:25           | 23:55~00:25                      | None                                                     |
+| 278  | Shinhan Financial Investment  | 23:25~00:15           | 23:30~00:15                      | Every day 23:30~00:10, 03:00~03:10                       |
+| 280  | Eugene Investment & Securities| 23:30~00:30           | 23:50~00:35                      | None                                                     |
+| 287  | Meritz Securities             | 23:50~00:20           | 23:50~00:20                      | None                                                     |
+```
