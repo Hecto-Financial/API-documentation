@@ -300,24 +300,12 @@ Easy Cash Payment process is as follows:
 
 ![image](https://github.com/Hecto-Financial/API-documentation/assets/73467915/e4612d54-1aac-42e9-b738-7e4bb8a528bb)
 
-
-1. Request mobile verification
-2. Mobile verification request response
-3. Request mobile verification check
-4. Mobile verification check response
-5. Request account holder name inquiry
-6. Account holder name inquiry request response
-7. ARS authentication request
-8. ARS authentication w/customer’s mobile
-9. ARS authentication request response
-10. ARS authentication check request
-11. ARS authentication check request response
-12. Account registration request
-13. Account registration request response
-14. Payment request to registered account
-15. Payment request response
-
-
+(1) Self-authentication with customer’s mobile information 
+(3) Self-authentication result inquiry
+(5) After phone self-authentication, use the name and account details to execute account holder name inquiry.
+(7) Withdrawal transfer registration evidence is created through ARS authentication
+(12) Account registration (withdrawal transfer registration)
+(14) Pay with the registered account 
 
 ### 2.2 General
 - Required fields in the request/response parameters use the ‘●’ symbol, and selected fields use the ‘○’ symbol.
@@ -342,9 +330,9 @@ If there is an error with parameter verification such as missing required values
 }
 
 ```
-## API Invoke
+## 3. API Invoke
 
-### API Connection Information
+### 3.1 API Connection Information
 The following is API server connection information:
 
 | Environment | URL                                   |
@@ -352,7 +340,7 @@ The following is API server connection information:
 | Testbed     | https://tbnpay.settlebank.co.kr       |
 | Production  | https://npay.settlebank.co.kr         |
 
-### Request and Response Headers
+### 3.2 Request and Response Headers
 API request and response header format are as below:
 
 | Request Header   | Value                             |
@@ -363,18 +351,18 @@ API request and response header format are as below:
 |------------------|-----------------------------------|
 | Content-type     | application/json;charset=UTF-8    |
 
-### Timeout
+### 3.3 Timeout
 The timeout process of API’s response is 30 seconds.
 
-### Others
+### 3.4 Others
 The following describes the general requirement for HTTP specification:
 - Provided API is REST-oriented but does not meet the entire specification of REST (Most transaction requests use POST method only).
 - For ‘Request’ use POST method only.
 - Commonly variable values `&`, `?`, `new line`, `<`, `>` are not allowed.
 
-## Security of Important Information
+## 4. Security of Important Information
 
-### Encryption & Decryption of Personal Information and Important Information
+### 4.1 Encryption & Decryption of Personal Information and Important Information
 When sending and receiving data, the following encryption & decryption should be performed for the personal/important information fields:
 
 | Section             | Entry                          | Application                | Encoding          |
@@ -383,7 +371,7 @@ When sending and receiving data, the following encryption & decryption should be
 | Field               | The name of the person in charge, phone number, mobile phone number, e-mail, account holder’s name, account number, etc. |                        |
 
 
-### Encryption Key for Personal Information
+### 4.2 Encryption Key for Personal Information
 For encryption and decryption of personal information and important information, key information differs depending on the operation environment and is as follows:
 
 | Section           | Encryption Key                  |
@@ -393,35 +381,35 @@ For encryption and decryption of personal information and important information,
 
 
 
-### Anti-forgery Algorithm
+### 4.3 Anti-forgery Algorithm
 To verify whether the request data is forged or falsified, a hash algorithm is used. The hash value generation algorithm is as follows:
 
 | Section   | Entry                     | Application   | Encoding     |
 |-----------|---------------------------|---------------|--------------|
 | Forgery   | Algorithm                 | SHA-256       | Hex Encoding |
 
-### Hash Generation Authentication Key
+### 4.4 Hash Generation Authentication Key
 
 | Section   | Authentication key        |
 |-----------|---------------------------|
 | Testbed key | ST190808090913247723 (20 byte) |
 | Production key | Will be provided by separate notice when the service is carried out |
 
-## Mobile Phone Verification Request
+## 5. Mobile Phone Verification Request
 
-### API Summary
+### 5.1 API Summary
 Request a mobile phone verification from the merchant’s server to Hecto Financial’s server. To get the name of the customer (account holder) needed for the account holder verification and one’s mobile phone number which is needed for ARS authentication, mobile phone verification is used. The APP and SMS methods are supported. When there is an APP verification request, the customer’s mobile app is invoked, and when there is an SMS verification request, a 6-digit verification number will be sent to the customer’s device through SMS.
 
 *Mobile phone verification service can only be used for Hecto Financial Easy Payment registration.
 
-### API URL
+### 5.2 API URL
 
 | Section   | URL                                                  |
 |-----------|------------------------------------------------------|
 | Testbed   | `https://tbnpay.settlebank.co.kr/v1/api/auth/mobile/req` |
 | Production| `http://npay.settlebank.co.kr/v1/api/auth/mobile/req` |
 
-### Request (Merchant -> Hecto Financial)
+### 5.3 Request (Merchant -> Hecto Financial)
 The columns requested by Merchant server from Hecto Financial are defined as follows:
 
 | Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
@@ -439,13 +427,13 @@ The columns requested by Merchant server from Hecto Financial are defined as fol
 | custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
 | pktHash      | Hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
 
-### Request Hash Code
+### 5.4 Request Hash Code
 
 | Section   | Combination Field                                        |
 |-----------|----------------------------------------------------------|
 | pktHash value | Merchant ID + Customer ID (plain text) + Request date + Request time + Date of birth (plain text) + Mobile phone (plain text) + Certification Classification + Authentication key |
 
-### Response (Hecto Financial -> Merchant)
+### 5.5 Response (Hecto Financial -> Merchant)
 The columns that respond from Hecto Financial server to the Merchant are as follows:
 
 | Parameter    | Parameter         | Description                                                      | Type (Length) | Required | Example                    |
@@ -456,21 +444,21 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 | Tid          | Authentication key| Authentication key that matches the verification number sent as message | AN(50)     | ●        |                            |
 | trdNo        | Transaction number| Hecto Financial transaction number for mobile phone verification | AN(40)        | ●        | “SFP_FIRM12345678901234567890” |
 
-## Mobile Phone Verification Confirmation
+## 6. Mobile Phone Verification Confirmation
 
-### API Summary
+### 6.1 API Summary
 API that checks the status for the request on mobile phone verification is provided. Through ‘Mobile Phone Verification Request’ API, SMS is sent or APP verification request is made through the customer’s device. The customer runs this and through the API checks the completion status of the verification. In the case of SMS verification method, the request to check is done with the verification number sent. In the case of APP verification, the request to check the completion status is done in the APP.
 
 *Mobile phone verification service can only be used for Hecto Financial Easy Payment registration.
 
-### API URL
+### 6.2 API URL
 
 | Section   | URL                                                  |
 |-----------|------------------------------------------------------|
 | Testbed   | `https://tbnpay.settlebank.co.kr/v1/api/auth/mobile/check` |
 | Production| `https://npay.settlebank.co.kr/v1/api/auth/mobile/check`   |
 
-### Request (Merchant -> Hecto Financial)
+### 6.3 Request (Merchant -> Hecto Financial)
 The columns requested by Merchant server from Hecto Financial are defined as follows:
 
 | Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
@@ -485,13 +473,13 @@ The columns requested by Merchant server from Hecto Financial are defined as fol
 | custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
 | pktHash      | hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
 
-### Request Hash Code
+### 6.4 Request Hash Code
 
 | Section   | Combination Field                                        |
 |-----------|----------------------------------------------------------|
 | pktHash value | Merchant ID + Request date + Request time + Self Authentication key + Authentication key |
 
-### Response (Hecto Financial -> Merchant)
+### 6.5 Response (Hecto Financial -> Merchant)
 The columns that respond from Hecto Financial server to the Merchant are as follows:
 
 | Parameter    | Name                | Description                                                      | Type (Length) | Required | Example                    |
@@ -509,19 +497,19 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 | trdNo        | Transaction number  | Hecto Financial transaction number                               | AN(50)        | ●        | “SFP_FIRM12345678901234567890” |
 | custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
 
-## Account Holder Name Inquiry (Date of Birth Excluded)
+## 7. Account Holder Name Inquiry (Date of Birth Excluded)
 
-### API Summary
+### 7.2 API Summary
 Request for inquiry of the account holder’s name using the account number, excluding the date of birth.
 
-### API URL
+### 7.2 API URL
 
 | Section   | URL                                                  |
 |-----------|------------------------------------------------------|
 | Testbed   | `https://tbnpay.settlebank.co.kr/v1/api/auth/acnt/ownercheck1` |
 | Production| `https://npay.settlebank.co.kr/v1/api/auth/acnt/ownercheck1`   |
 
-### Request (Merchant -> Hecto Financial)
+### 7.3 Request (Merchant -> Hecto Financial)
 The columns requested by Merchant server from Hecto Financial are defined as follows:
 
 | Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
@@ -536,13 +524,13 @@ The columns requested by Merchant server from Hecto Financial are defined as fol
 | custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
 | pktHash      | hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
 
-### Request Hash Code
+### 7.4 Request Hash Code
 
 | Section   | Combination Field                                        |
 |-----------|----------------------------------------------------------|
 | pktHash value | Merchant ID + Account number (plain text) + Bank code + Customer name (plain text) + Authentication key |
 
-### Response (Hecto Financial -> Merchant)
+### 7.5 Response (Hecto Financial -> Merchant)
 The columns that respond from Hecto Financial server to the Merchant are as follows:
 
 | Parameter    | Name                | Description                                                      | Type (Length) | Required | Example                    |
@@ -555,19 +543,19 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 | custGndrCd   | Customer gender code| 1: Male, 2: Female                                               | N(1)          | ●        | “1”                        |
 | custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
 
-## Account Holder Name Confirmation (Date of Birth Included)
+## 8. Account Holder Name Confirmation (Date of Birth Included)
 
-### API Summary
+### 8.1 API Summary
 Request for confirmation of the account holder’s name using the account number, including the date of birth.
 
-### API URL
+### 8.2 API URL
 
 | Section   | URL                                                  |
 |-----------|------------------------------------------------------|
 | Testbed   | `https://tbnpay.settlebank.co.kr/v1/api/auth/acnt/ownercheck2` |
 | Production| `https://npay.settlebank.co.kr/v1/api/auth/acnt/ownercheck2`   |
 
-### Request (Merchant -> Hecto Financial)
+### 8.3 Request (Merchant -> Hecto Financial)
 The columns requested by Merchant server from Hecto Financial are defined as follows:
 
 | Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
@@ -583,13 +571,13 @@ The columns requested by Merchant server from Hecto Financial are defined as fol
 | custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
 | pktHash      | hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
 
-### Request Hash Code
+### 8.4 Request Hash Code
 
 | Section   | Combination Field                                        |
 |-----------|----------------------------------------------------------|
 | pktHash value | Merchant ID + Account number (plain text) + Bank code + Customer name (plain text) + Date of birth (plain text) + Authentication key |
 
-### Response (Hecto Financial -> Merchant)
+### 8.5 Response (Hecto Financial -> Merchant)
 The columns that respond from Hecto Financial server to the Merchant are as follows:
 
 | Parameter    | Name                | Description                                                      | Type (Length) | Required | Example                    |
@@ -602,12 +590,12 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 | custGndrCd   | Customer gender code| 1: Male, 2: Female                                               | N(1)          | ●        | “1”                        |
 | custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
 
-## Account Holder Name Inquiry (Including Amount)
+## 9. Account Holder Name Inquiry (Including Amount)
 
-### API Summary
+### 9.1 API Summary
 Request for inquiry of the account holder’s name using the account number, including the amount.
 
-### API URL
+### 9.2 API URL
 
 | Section   | URL                                                  |
 |-----------|------------------------------------------------------|
@@ -616,7 +604,7 @@ Request for inquiry of the account holder’s name using the account number, inc
  | `https://tbnpay.settlebank.co.kr/v1/api/auth/acnt/ownercheckWithAmount` |
 | Production| `https://npay.settlebank.co.kr/v1/api/auth/acnt/ownercheckWithAmount`   |
 
-### Request (Merchant -> Hecto Financial)
+### 9.3 Request (Merchant -> Hecto Financial)
 The columns requested by Merchant server from Hecto Financial are defined as follows:
 
 | Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
@@ -632,13 +620,13 @@ The columns requested by Merchant server from Hecto Financial are defined as fol
 | custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
 | pktHash      | hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
 
-### Request Hash Code
+### 9.4 Request Hash Code
 
 | Section   | Combination Field                                        |
 |-----------|----------------------------------------------------------|
 | pktHash value | Merchant ID + Account number (plain text) + Bank code + Customer name (plain text) + Amount + Authentication key |
 
-### Response (Hecto Financial -> Merchant)
+### 9.5 Response (Hecto Financial -> Merchant)
 The columns that respond from Hecto Financial server to the Merchant are as follows:
 
 | Parameter    | Name                | Description                                                      | Type (Length) | Required | Example                    |
@@ -651,19 +639,19 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 | custGndrCd   | Customer gender code| 1: Male, 2: Female                                               | N(1)          | ●        | “1”                        |
 | custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
 
-## Account Ownership Verification
+## 10. Account Ownership Verification
 
-### API Summary
+### 10.1 API Summary
 Request for verification of the account ownership.
 
-### API URL
+### 10.2 API URL
 
 | Section   | URL                                                  |
 |-----------|------------------------------------------------------|
 | Testbed   | `https://tbnpay.settlebank.co.kr/v1/api/auth/acnt/ownership` |
 | Production| `https://npay.settlebank.co.kr/v1/api/auth/acnt/ownership`   |
 
-### Request (Merchant -> Hecto Financial)
+### 10.3 Request (Merchant -> Hecto Financial)
 The columns requested by Merchant server from Hecto Financial are defined as follows:
 
 | Parameter    | Parameter Name           | Description                                                      | Type (Length) | Required | Example                 |
@@ -679,13 +667,13 @@ The columns requested by Merchant server from Hecto Financial are defined as fol
 | custIp       | Customer IP Address      | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
 | pktHash      | hash data                | Hash value generated by sha256 method                            | AN(200)       | ●        |                         |
 
-### Request Hash Code
+### 10.4 Request Hash Code
 
 | Section   | Combination Field                                        |
 |-----------|----------------------------------------------------------|
 | pktHash value | Merchant ID + Account number (plain text) + Bank code + Customer name (plain text) + Date of birth (plain text) + Authentication key |
 
-### Response (Hecto Financial -> Merchant)
+### 10.5 Response (Hecto Financial -> Merchant)
 The columns that respond from Hecto Financial server to the Merchant are as follows:
 
 | Parameter    | Name                | Description                                                      | Type (Length) | Required | Example                    |
