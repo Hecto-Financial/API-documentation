@@ -389,7 +389,7 @@ FAIL
 
 # Result Code
 
-# Result Codes
+## Result Codes
 
 | Result Code | Message                                      | Revision Date |
 |-------------|----------------------------------------------|---------------|
