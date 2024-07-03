@@ -71,7 +71,7 @@ Gzv1ziVXlhyFS0EYMbHvqA==
 |                | Result Inquiry      | PYV1                  | /pyag/v1/fxResult           |
 |                | Balance Inquiry     | PYV2                  | /pyag/v1/fxBalance          |
 |                | Cancellation Request| PYC1                  | /pyag/v1/fxCancel           |
-```
+
 
 # Remittance (B9)
 
