@@ -15,10 +15,12 @@
 
 ## Anylink Front Domain
 
-```
-Production: gw.settlebank.co.kr  
+
+**Production** 
+
+gw.settlebank.co.kr  
 (IP: Provided separately by Hecto Financial)
-```
+
 
 ## Character set
 
@@ -93,8 +95,11 @@ URL: Merchant's designated URL
 
 ### Address
 
-Testbed: 252.169.22  
-Production Environment: gw.settlebank.co.kr  
+**Testbed**
+252.169.22  
+
+**Production Environment**
+gw.settlebank.co.kr  
 (IP: 61.252.169.23)
 
 ### Request (Merchant -> Hecto Financial)
