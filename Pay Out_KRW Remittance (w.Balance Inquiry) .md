@@ -264,3 +264,125 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&orgTrdDt=202
 - 22: (Remittance failure) Final remittance failure status
 - 23: (Remittance cancellation) Remittance is canceled according to merchant or Hecto's internal policy
 
+# Cancellation (C1)
+
+### Detailed Address
+
+```
+/pyag/v1/fxCancel
+```
+
+### Request (Merchant → Hecto Financial)
+
+| PRMTR_NM  | PRMTR_EXPL             | Max. Len | Desc.                                                                 |
+|-----------|------------------------|----------|----------------------------------------------------------------------|
+| mchtId    | Merchant ID            | 12       |                                                                      |
+| mchtTrdNo | Merchant Order Number  | 100      | Original Transaction Merchant Transaction Number                     |
+| trdNo     | Transaction Number     | 40       | Original Transaction Hecto Financial Generated Transaction Number *Required to choose one between mchtTrdNo or trdNo |
+| orgTrdDt  | Original Transaction Date | 8    |                                                                      |
+
+## Request Sample
+
+```
+https://[Address]/pyag/v1/fxCancel
+PostData: mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&orgTrdDt=20230920
+```
+
+### Response (Merchant ← Hecto Financial)
+
+| PRMTR_NM   | PRMTR_EXPL              | Max. Len | Desc.                                                   |
+|------------|-------------------------|----------|--------------------------------------------------------|
+| mchtId     | Merchant ID             | 12       |                                                        |
+| mchtTrdNo  | Merchant Order Number   | 100      | Original Transaction Merchant Transaction Number        |
+| trdNo      | Transaction Number      | 40       | Original Transaction Transaction Number                 |
+| trdDt      | Transaction Date        | 8        | Cancellation Date                                       |
+| trdTm      | Transaction Time        | 6        | Cancellation Time                                       |
+| outStatCd  | Transaction Status      | 4        |                                                        |
+| outRsltCd  | Response Result         | 8        |                                                        |
+| outRsltMsg | Response Message        | 200      |                                                        |
+
+## Response Sample
+
+```json
+{
+  "mchtId": "mid_test",
+  "mchtTrdNo": "1234567890",
+  "trdNo": "20230920HF1234",
+  "trdDt": "20230920",
+  "trdTm": "120000",
+  "outStatCd": "0021",
+  "outRsltCd": "0000",
+  "outRsltMsg": "Normal Processing"
+}
+```
+
+# Deposit Notificaiton
+
+# Notification Details
+
+## Start IP (Hecto Financial Notification Server IP)
+```
+Testbed: 61.252.169.22
+Production Environment: 61.252.169.24, 14.34.14.23
+```
+
+## End Address (Merchant Notification API URL)
+```
+Provided by the merchant side, register on merchant web notification information.
+```
+
+※ Only deposit notifications inputted through the above-mentioned Hecto Financial's start IP should be processed.
+
+### Request (Hecto Financial → Merchant)
+
+| PRMTR_NM    | PRMTR_EXPL                      | Max. Len | Mandatory | Desc.                                |
+|-------------|---------------------------------|----------|-----------|--------------------------------------|
+| notiType    | Notification Type               | 12       | ●         | Fixed Value: DEPOSIT                 |
+| mchtId      | Merchant ID                     | 12       | ●         |                                      |
+| dpDt        | Deposit Date                    | 8        | ●         | YYYYMMDD                             |
+| dpTm        | Deposit Time                    | 6        | ●         | hhmmss                               |
+| dpTrdNo     | Deposit Transaction Number      | 32       | ●         |                                      |
+| outStatCd   | Transaction Status Code         | 4        | ●         | Fixed Value: 0021                    |
+| dpCrcCd     | Deposit Currency Code           | 20       | ●         | Fixed Value: KRW                     |
+| dpAmt       | Deposit Amount                  | 20       | ●         |                                      |
+| blc         | Deposit Balance                 | 20       | ●         |                                      |
+| bankCd      | Deposit Virtual Account Bank Code| 3       | ●         |                                      |
+| vtlAcntNo   | Deposit Virtual Account Number  | 32       | ●         | *Url encoding after encryption       |
+| treatBankCd | Treated Bank codes              | 3        | ●         | Bank code merchant used              |
+| dpstrNm     | Depositor Name                  | 30       | ●         | UTF-8 + URL encoding                 |
+
+### Request Sample
+
+```
+[Notification URL]?
+PostData: notiType=DEPOSIT&mchtId=mid_test&dpDt=20231220&dpTm=120000&dpTrdNo=0A52B81FBNHIAFEACEHNDDKF008106FC&outStatCd=0021&dpCrcCd=KRW&dpAmt=100000&blc=150000&bankCd=023&vtlAcntNo=Gzv1ziVXlhyFS0EYMbHvqA%3d%3d&treatBankCd=011&dpStrNm=%ed%99%8d%ea%b8%b8%eb%8f%99
+```
+
+### Response (Hecto Financial ← Merchant)
+
+| PRMTR_NM | PRMTR_EXPL                                                                                   | Max. Len | Mandatory | Desc. |
+|----------|----------------------------------------------------------------------------------------------|----------|-----------|-------|
+| Normal Processing: OK  (If there is OK in the response data, processed as success) Notification not resent|          |           |       |
+| Failure: FAIL (Notification resent)                                                                      |          |           |       |
+| Others: Failure (Notification resent)                                                                    |          |           |       |
+| ※ Resent according to the set interval/number of times.                                                  |          |           |       |
+
+### Response Sample : Success
+
+```
+OK
+```
+
+### Response Sample : Failure
+
+```
+FAIL
+```
+
+### Response Sample : Success
+
+```
+<HTML><BODY>OK : Normal Processing </BODY></HTML>
+※ If there is OK in the response, processed as success.
+
+
