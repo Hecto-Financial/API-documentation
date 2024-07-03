@@ -1,3 +1,94 @@
+# Foreign Exchange Service API
+
+![image](https://github.com/Hecto-Financial/API-documentation/assets/73467915/939d9b90-6f12-4f0c-96dd-93bfba443ca2)
+
+# History of Change
+
+| Version | Revision Date         | Revision                                        |
+|---------|-----------------------|-------------------------------------------------|
+| 1.0     | 2023-09-13            | *Draft                                          |
+| 1.1     | 2023-10-05            | Status code and result code added               |
+| 1.2     | 2023-10-17            | Result inquiry status code description added    |
+| 1.3     | 2023-11-22            | Url encoding description added                  |
+
+# Overview
+
+## Anylink Front Domain
+
+```
+Production: gw.settlebank.co.kr  
+(IP: Provided separately by Hecto Financial)
+```
+
+## Character set
+
+UTF-8
+
+## Integration Method
+
+Request: POST  
+Response: JSON
+
+## URL Encoding
+
+Request: URL encoding required  
+Response: No URL encoding required
+
+## Timeout (Seconds)
+
+30 seconds
+
+## IP Access Control
+
+Register merchant's server IP at HF
+
+## Transaction Success
+
+```
+
+Success: outStatCd=0021 + outRsltCd=0000  
+Fail: Refer to the result code sheet
+
+```
+
+## Parameter Requirement
+
+●: Required  
+◐: Required depending on the situation
+
+## Encryption Method
+
+AES256-ECB + BASE64 Encoding
+
+## Plain Text/Encryption Key Sample
+
+1111 / 12345678901234567890123456789012
+
+## Encryption Result Sample
+
+Gzv1ziVXlhyFS0EYMbHvqA==
+
+**Note:** Encryption sample is not for integration test use.
+
+## Classification
+
+### Transaction Type Code
+
+| Code | Description               |
+|------|---------------------------|
+| PYA1 | /pyag/v1/fxRate           |
+| PYB1 | /pyag/v1/fxTrans          |
+| PYV1 | /pyag/v1/fxResult         |
+| PYV2 | /pyag/v1/fxBalance        |
+| PYC1 | /pyag/v1/fxCancel         |
+| PYA2 | /pyag/v1/fxVaccount       |
+
+### Notification
+
+Transaction Type Code: -  
+URL: Merchant's designated URL
+
+
 ## Exchange Rate Inquiry (A1)
 
 ### Address
