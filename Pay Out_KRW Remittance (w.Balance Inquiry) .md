@@ -201,4 +201,64 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&orgTrdDt=202
 - 22: (Remittance failure) Final remittance failure status
 - 23: (Remittance cancellation) Remittance is canceled according to merchant or Hecto's internal policy
 
+# Balance Inquiry(V2)
+
+# Detailed Address
+
+## /pyag/v1/fxResult
+
+### Request (Merchant → Hecto Financial)
+
+| PRMTR_NM  | PRMTR_EXPL             | Max. Len | Desc.                                                                 |
+|-----------|------------------------|----------|----------------------------------------------------------------------|
+| mchtId    | Merchant ID            | 12       |                                                                      |
+| mchtTrdNo | Merchant Order Number  | 100      | Original Transaction Merchant Transaction Number                     |
+| trdNo     | Transaction Number     | 40       | Original Transaction Hecto Financial Generated Transaction Number *Required to choose one between mchtTrdNo or trdNo |
+| orgTrdDt  | Original Transaction Date | 8    |                                                                      |
+
+## Request Sample
+
+```
+https://[Address]/pyag/v1/fxResult
+PostData: mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&orgTrdDt=20230920
+```
+
+### Response (Merchant ← Hecto Financial)
+
+| PRMTR_NM   | PRMTR_EXPL              | Max. Len | Desc.                                                   |
+|------------|-------------------------|----------|--------------------------------------------------------|
+| mchtId     | Merchant ID             | 12       |                                                        |
+| mchtTrdNo  | Merchant Order Number   | 100      | Original Transaction Merchant Transaction Number        |
+| trdNo      | Transaction Number      | 40       | Original Transaction Transaction Number                 |
+| trdDt      | Transaction Date        | 8        | Inquiry Date                                           |
+| trdTm      | Transaction Time        | 6        | Inquiry Time                                           |
+| outStatCd  | Transaction Status      | 4        |                                                        |
+| outRsltCd  | Response Result         | 8        |                                                        |
+| outRsltMsg | Response Message        | 200      |                                                        |
+| status     | Status                  | 12       |                                                        |
+
+## Response Sample
+
+```json
+{
+  "mchtId": "mid_test",
+  "mchtTrdNo": "1234567890",
+  "trdNo": "20230920HF1234",
+  "trdDt": "20230920",
+  "trdTm": "120000",
+  "outStatCd": "0021",
+  "outRsltCd": "0000",
+  "outRsltMsg": "Normal Processing",
+  "status": "0"
+}
+```
+
+## Status Description
+
+- 00: (Request Data Error) Remittance cannot be processed
+- 99: (Undefined error status)
+- 29: (Processing remittance) Did not receive the final result due to bank timeout
+- 21: (Remittance success)
+- 22: (Remittance failure) Final remittance failure status
+- 23: (Remittance cancellation) Remittance is canceled according to merchant or Hecto's internal policy
 
