@@ -242,15 +242,15 @@ Hecto Financial IT Division
     3. [Bank Regular Maintenance Time](#bank-regular-maintenance-time)
 
 
-## Outline
+## 1.Outline
 
-### Purpose
+### 1.1 Purpose
 This document is created for understanding the technical requirements for integration of Easy Cash Payment Non-UI API provided by Hecto Financial and to define detailed specifications.
 
-### Target
+### 1.2 Target
 This document is intended for clients’ developers to integrate Easy Cash Payment through easy payment system of Hecto Financial.
 
-### API URI
+### 1.3 API URI
 Easy Cash Payment service provides the following APIs; each API is mapped to a web service URL.
 
 | Function                                   | API                                      | URI                                              | HTTP Method |
@@ -288,15 +288,18 @@ Easy Cash Payment service provides the following APIs; each API is mapped to a w
 | Test call                                  |                                          | `http://npay.settlebank.co.kr/v1/api/test/testcall` | POST        |
 | Check payment password                     |                                          | `http://npay.settlebank.co.kr/v1/api/auth/pwdcnf`  | POST        |
 
-### Caution
+### 1.4 Caution
 - If a test in the operating environment is needed, there should be a consultation with the Hecto Financial representative. The cost caused by operating test transactions done without prior discussion should be paid by the merchant.
 - Response parameters may be changed without prior notice. When developing, please develop so that there would be no impact caused by the change in parameters.
 - **Merchants that use Easy Cash Payment UI standard payment window:** When using the Easy Payment UI Standard Payment window, if the standard payment window is invoked through an iframe tag, there are cases in which it doesn’t work normally on some browsers or devices. If you are using the Easy Payment UI standard payment window, please refrain from using the iframe tag.
 
-## Easy Cash Payment API General
+## 2 Easy Cash Payment API General
 
-### Easy Cash Payment Process
+### 2.1 Easy Cash Payment Process
 Easy Cash Payment process is as follows:
+
+![image](https://github.com/Hecto-Financial/API-documentation/assets/73467915/e4612d54-1aac-42e9-b738-7e4bb8a528bb)
+
 
 1. Request mobile verification
 2. Mobile verification request response
@@ -314,7 +317,9 @@ Easy Cash Payment process is as follows:
 14. Payment request to registered account
 15. Payment request response
 
-### General
+
+
+### 2.2 General
 - Required fields in the request/response parameters use the ‘●’ symbol, and selected fields use the ‘○’ symbol.
 
 #### Data Type
@@ -1780,52 +1785,121 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 | outRsltMsg   | Result message      | When an error occurs, a message on error is sent                 | AN(300)       | ●        | “Success”                  |
 | pwdCnfRslt   | Password confirmation result | Result of payment password confirmation                        | AN(4)         | ●        | “0000”                  |
 
-## Others
+```markdown
+### Others
+#### Table of Reject Codes
+The server-side response rejection code field details are as follows.
+*The recent common reject codes can be downloaded from common reject codes.*
 
-### Table of Reject Codes
+| Code | Description                          | Code | Description                                      |
+|------|--------------------------------------|------|--------------------------------------------------|
+| 0021 | Success                              | 0031 | Fail                                             |
+| ST01 | Non-Existent Account                 | ST02 | Invalid Account                                  |
+| ST03 | Double withdrawal has occurred       | ST04 | System Error During VAN Request                  |
+| ST05 | No VAN Response Information          | ST06 | No transaction number information                |
+| ST07 | Communication disruption             | ST08 | Already registered account                       |
+| ST09 | Invalid Request                      | ST10 | Internal System Error                            |
+| ST11 | Bank maintenance time                | ST12 | Insufficient balance in withdrawal account       |
+| ST13 | No ARS authentication result         | ST14 | ARS authentication request values differ         |
+| ST15 | Automatic transfer canceled account  | ST16 | Withdrawal account transaction restriction       |
+| ST17 | Resident Number Business Number Error| ST18 | Account error (Easy Account Registration not possible) |
+| ST19 | Other transactions impossible        | ST20 | Account error                                    |
+| ST21 | No recipient account                 | ST22 | Legally Restricted Accounts                      |
+| ST23 | A non-real-name account              | ST24 | Account holder mismatch                          |
+| ST25 | Already canceled transaction         | ST26 | Cancellation amount error                        |
+| ST27 | ARS authentication failed            | ST28 | Unable to receive ARS                            |
+| ST29 | Account registration in progress     | ST30 | Refund in progress                               |
+| ST31 | Double remittance occurred           | ST32 | Failed to check payer's name                     |
+| ST33 | Exceeded the limit per transaction   | ST34 | Exceeded the daily limit                         |
+| ST35 | Fraudulent account                   | ST36 | The connection was lost after a certain period of time. |
+| ST37 | Easy Payment cancellation            | ST38 | Request in progress                              |
+| ST39 | Duplicate refund request             | ST40 | There is a request in progress                   |
+| ST41 | Service capacity exceeded            | ST42 | System BUSY                                      |
+| ST43 | The account is already registered.   | ST44 | A non-tradeable bank                             |
+| ST50 | Duplicate request                    | ST51 | Cash receipt user already registered             |
+| ST52 | Unregistered cash receipt user       | ST53 | Already canceled account                         |
+| ST60 | Transaction failed                   | ST61 | Exceeded the limit in amount per transaction     |
+| ST62 | Exceeded the daily limit in amount   | ST63 | Exceeded the monthly limit in amount             |
+| ST64 | Exceeded the daily limit in number of transactions | ST65 | Exceeded the monthly limit in number of transactions |
+| ST66 | Password registration failed         | ST67 | Password mismatch                                |
+| ST68 | Service suspension                   | ST69 | The selected payment service is not available due to policy. Please use another payment method. |
+| ST70 | The selected payment service is not available due to policy. Please contact Hecto Financial Customer Center (1600-5220) | ST72 | ARS 2nd Authentication Required for Payment      |
+| ST75 | Multiple attempts were made with wrong information. The account cannot be used. Please try again on the next day. | ST76 | Multiple attempts were made with wrong information. The account cannot be used. Please try again on the next day. |
+| ST86 | Authentication failed (Mobile phone verification) | ST87 | Not registered for Easy Self-Authentication. (Mobile Phone Verification) |
+| VTIM | A relay institution TIMEOUT          | ST99 | Easy Payment System is under maintenance         |
+| SE01 | The authentication validity time has expired. | SE02 | Verification number mismatch.                    |
+| SE03 | Exceeded the number of authentications allowed. | SE04 | Open Banking canceled account. Need to be cancelled. |
+| SE05 | Open Banking is not valid for the account. Need to be cancelled. |      |                                                  |
 
-| Reject Code | Description                                |
-|-------------|--------------------------------------------|
-| 0000        | Success                                    |
-| 0010        | Invalid request format                     |
-| 0011        | Missing required parameters                |
-| 0012        | Invalid parameter value                    |
-| 0013        | Authentication failed                      |
-| 0014        | Permission denied                          |
-| 0015        | Duplicate request                          |
-| 0016        | Data not found                             |
-| 0017        | Service unavailable                        |
-| 0018        | Internal server error                      |
-| 0019        | Timeout                                    |
-| 0020        | Operation not supported                    |
-| 0021        | Invalid authentication key                 |
-| 0022        | Invalid hash value                         |
-| 0023        | Account number not found                   |
-| 0024        | Insufficient balance                       |
-| 0025        | Account closed                             |
-| 0026        | Transaction amount exceeds limit           |
-| 0027        | Transaction not allowed                    |
-| 0028        | Invalid transaction number                 |
-| 0029        | Duplicate transaction number               |
-| 0030        | Transaction cancelled                      |
-| 0031        | Invalid request parameter                  |
+> **Note:** 
+> - ST75: Account cannot be used due to account holder inquiry abusing attempt (several account numbers).
+> - ST76: Account cannot be used due to account holder inquiry abusing attempt (exceeded number of failures).
 
-### Financial Institution Identifier
+#### Financial Institution Identifier
+Financial institution unique identification codes provided by Hecto Financial are as follows:
 
-| Bank Code | Bank Name                   |
-|-----------|-----------------------------|
-| 001       | Kookmin Bank                |
-| 002       | Shinhan Bank                |
-| 003       | Woori Bank                  |
-| 004       | KEB Hana Bank               |
-| 005       | NH Bank                     |
-| 007       | Industrial Bank of Korea    |
-| 008       | SC Bank Korea               |
-| 009       | Daegu Bank                  |
-| 010       | Busan Bank                  |
-| 011       | Kwangju Bank                |
-| 012       | Jeonbuk Bank                |
-| 013       | Kyongnam Bank               |
-| 014       | Jeju Bank                   |
-| 015       |
+| Financial Institution Code | Name of Financial Institution                    | Financial Institution Code | Name of Financial Institution                  |
+|----------------------------|--------------------------------------------------|----------------------------|------------------------------------------------|
+| 002                        | KDB                                              | 071                        | Korea Post                                     |
+| 003                        | IBK                                              | 081                        | Hana Bank                                      |
+| 004                        | Kookmin Bank                                     | 088                        | Shinhan Bank                                   |
+| 007                        | Suhyup Bank                                      | 089                        | Kbank                                          |
+| 011                        | Nonghyup Bank                                    | 090                        | Kakao Bank                                     |
+| 012                        | National Agricultural Cooperative Federation (NACF) | 092                        | Toss Bank                                      |
+| 020                        | Woori Bank                                       | 103                        | SBI Savings Bank                               |
+| 023                        | SC Bank                                          | 209                        | Yuanta Securities                              |
+| 027                        | Citi Bank                                        | 238                        | Mirae Asset Securities                         |
+| 031                        | Daegu Bank                                       | 240                        | Samsung Securities                             |
+| 032                        | Busan Bank                                       | 243                        | Korea Investment & Securities                  |
+| 034                        | Kwangju Bank                                     | 247                        | NH Investment & Securities                     |
+| 035                        | Jeju Bank                                        | 266                        | SK Securities                                  |
+| 037                        | Jeonbuk Bank                                     | 267                        | Daishin Securities                             |
+| 039                        | Kyongnam Bank                                    | 278                        | Shinhan Financial Investment                   |
+| 045                        | Korean Federation of Community Credit Cooperatives (KFCC) | 280                        | Eugene Investment & Securities                 |
+| 048                        | National Credit Union Federation of Korea (NACUFOK) | 287                        | Meritz Securities                              |
+| 050                        | Korea Federation of Savings Banks (KFSB)         | 099                        | KFTC                                           |
+| 064                        | National Forestry Cooperative Federation (NFCF)  |                            |                                                |
 
+#### Bank Regular Maintenance Time
+Due to the specifics of bank operating hours, Hecto Financial recommends transactions between 01:00 and 23:30. Maintenance time could be extended by bank.
+
+| Code | Name                                     | Bank Maintenance Time | Hecto Financial Maintenance Time | Regular Maintenance                             |
+|------|------------------------------------------|-----------------------|----------------------------------|------------------------------------------------|
+| 002  | KDB                                      | 23:30~00:30           | 23:50~00:15                      | Every 2nd Sunday of the month 00:00~04:00       |
+| 003  | IBK                                      | 24:00~00:30           | 23:50~00:12                      | Every Sunday 00:00~00:30                       |
+| 004  | Kookmin Bank                             | 24:00:~00:30          | 23:50~00:12                      | Every 3rd Sunday of the month 00:00~00:30, 05:00~05:30. External work 01:00~06:00 (Intermittent transaction error) |
+| 007  | Suhyup Bank                              | 23:50~00:30           | 23:30~00:30                      | None                                           |
+| 011  | Nonghyup Bank                            | 24:00~00:30           | 23:50~00:12                      | Every 3rd Monday of the month 00:00 to 04:00 (Next business day if the date is a public holiday) |
+| 020  | Woori Bank                               | 23:50~00:30           | 23:50~00:10                      | Every 2nd Sunday of the month 02:00 to 06:00 (Work date is notified by bank in advance) |
+| 023  | SC Bank                                  | 23:30~00:30           | 23:50~00:12                      | None                                           |
+| 027  | Citi Bank                                | 23:40~00:30           | 23:50~00:30                      | Every day 00:30~04:30                          |
+| 031  | Daegu Bank                               | 23:40~00:30           | 23:50~00:05                      | None                                           |
+| 032  | Busan Bank                               | 23:30~00:30           | 23:50~00:05                      | None                                           |
+| 034  | Kwangju Bank                             | 23:40~00:30           | 23:50~00:05                      | Every 2nd Sunday of the month 02:00~06:00       |
+| 035  | Jeju Bank                                | 23:40~00:30           | 23:50~00:12                      | Every Sunday 04:30~05:00                       |
+| 037  | Jeonbuk Bank                             | 24:00~00:30           | 23:50~00:05                      | Every 2nd Saturday of the month 00:00~04:00     |
+| 039  | Kyongnam Bank
+
+                            | 23:40~00:30           | 23:50~00:05                      | Every 2nd Sunday of the month 00:00~07:00       |
+| 045  | KFCC                                     | 23:50~00:30           | 23:30~00:30                      | None                                           |
+| 048  | NACUFOK                                  | 23:40~00:30           | 23:50~00:05                      | None                                           |
+| 050  | KFSB                                     | 23:50~00:10           | 23:50~00:35                      | None                                           |
+| 064  | NFCF                                     | 23:30~00:30           | 23:30~01:00                      | None                                           |
+| 071  | Korea Post                               | 23:40~00:30           | 23:50~00:05                      | Daily 04:00~05:00                              |
+| 081  | Hana Bank                                | 23:40~00:30           | 23:50~00:15                      | Every 2nd Sunday of the month 00:00~08:00       |
+| 088  | Shinhan Bank                             | 23:40~00:30           | 23:50~00:05                      | None                                           |
+| 089  | Kbank                                    | 23:40~00:30           | 23:35~00:35                      | None                                           |
+| 090  | Kakao Bank                               | 23:50~00:10           | 23:50~00:05                      | None                                           |
+| 092  | Toss Bank                                | 23:55~00:05           | 23:55~00:05                      | None                                           |
+| 103  | SBI Savings Bank                         | 23:55~00:10           | 23:50~00:05                      | None                                           |
+| 209  | Yuanta Securities                        | 23:50~00:10           | 23:50~00:10                      | None                                           |
+| 238  | Mirae Asset Securities                   | 23:30~00:20           | 23:30~00:20                      | None                                           |
+| 240  | Samsung Securities                       | 23:30~00:20           | 23:50~00:10                      | None                                           |
+| 243  | Korea Investment & Securities            | 23:40~00:10           | 23:40~00:10                      | None                                           |
+| 247  | NH Investment & Securities               | 23:50~00:15           | 23:50~00:05                      | None                                           |
+| 266  | SK Securities                            | 23:50~00:30           | 23:30~00:30                      | None                                           |
+| 267  | Daishin Securities                       | 23:55~00:25           | 23:55~00:25                      | None                                           |
+| 278  | Shinhan Financial Investment             | 23:25~00:15           | 23:30~00:15                      | Every day 23:30~00:10, 03:00~03:10              |
+| 280  | Eugene Investment & Securities           | 23:30~00:30           | 23:50~00:35                      | None                                           |
+| 287  | Meritz Securities                        | 23:50~00:20           | 23:50~00:20                      | None                                           |
+```
