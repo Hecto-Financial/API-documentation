@@ -97,7 +97,9 @@ Gzv1ziVXlhyFS0EYMbHvqA==
 
 ```
 https://[Address]/pyag/v1/fxTransKrw
-PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&trdDt=20230919&trdTm=191919&bankCd=011&custAcntNo=r8tZfMLqcIzxano31w57V=&custAcntSumry=헥토&amt=zfaskAWEVZwewef=
+PostData:
+mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&trdDt=20230919&trdTm=191919&bankCd=011&custAcntN
+o=r8tZfMLqcIzxano31w57V=&custAcntSumry=헥토&amt=zfaskAWEVZwewef=
 ```
 
 * The content above is just randomly generated content for reference. custAcntNo and amt may vary based on the encryption key provided to merchants.
@@ -159,7 +161,8 @@ If the provider(bank)'s error(or maintenance) gets extended, success/failure may
 
 ```
 https://[Address]/pyag/v1/fxResult
-PostData: mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&orgTrdDt=20230920
+PostData:
+mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&orgTrdDt=20230920
 ```
 
 # Response (Merchant ← Hecto Financial)
@@ -222,7 +225,8 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&orgTrdDt=202
 
 ```
 https://[Address]/pyag/v1/fxResult
-PostData: mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&orgTrdDt=20230920
+PostData:
+mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&orgTrdDt=20230920
 ```
 
 ### Response (Merchant ← Hecto Financial)
@@ -266,7 +270,7 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&orgTrdDt=202
 
 # Cancellation (C1)
 
-### Detailed Address
+#### Detailed Address
 
 ```
 /pyag/v1/fxCancel
@@ -318,15 +322,15 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&orgTrdDt=202
 
 # Deposit Notificaiton
 
-# Notification Details
+## Notification Details
 
-## Start IP (Hecto Financial Notification Server IP)
+### Start IP (Hecto Financial Notification Server IP)
 ```
 Testbed: 61.252.169.22
 Production Environment: 61.252.169.24, 14.34.14.23
 ```
 
-## End Address (Merchant Notification API URL)
+### End Address (Merchant Notification API URL)
 ```
 Provided by the merchant side, register on merchant web notification information.
 ```
@@ -355,7 +359,8 @@ Provided by the merchant side, register on merchant web notification information
 
 ```
 [Notification URL]?
-PostData: notiType=DEPOSIT&mchtId=mid_test&dpDt=20231220&dpTm=120000&dpTrdNo=0A52B81FBNHIAFEACEHNDDKF008106FC&outStatCd=0021&dpCrcCd=KRW&dpAmt=100000&blc=150000&bankCd=023&vtlAcntNo=Gzv1ziVXlhyFS0EYMbHvqA%3d%3d&treatBankCd=011&dpStrNm=%ed%99%8d%ea%b8%b8%eb%8f%99
+PostData: notiType=DEPOSIT&mchtId=mid_test&dpDt=20231220&dpTm=120000&dpTrdNo=0A52B81FBNHIAFEACEHNDDKF008106FC&outStatCd=0021&dpCrcCd=
+KRW&dpAmt=100000&blc=150000&bankCd=023&vtlAcntNo=Gzv1ziVXlhyFS0EYMbHvqA%3d%3d&treatBankCd=011&dpStrNm=%ed%99%8d%ea%b8%b8%eb%8f%99
 ```
 
 ### Response (Hecto Financial ← Merchant)
