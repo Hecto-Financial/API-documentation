@@ -686,9 +686,6 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 | custGndrCd   | Customer gender code| 1: Male, 2: Female                                               | N(1)          | ●        | “1”                        |
 | custIp       | Customer IP Address | Customer’s device’s IP address, Not the Merchant server’s IP     | AN(15)        | ○        | “127.0.0.1”             |
 
-Sure, here is the content with numbered headers and subheaders, converted to README annotation file format:
-
-```markdown
 ## 11. Request for Account Ownership Verification
 
 ### 11.1 API Summary
@@ -1511,7 +1508,6 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 |                 |                              |                                            |               |          | 2 : Open Banking       |
 |                 |                              |                                            |               |          | 3 : Firm & Open Banking|
 | --recordUnregDt | Date of cancellation         | yyyyMMddhhmmss                             | AN(14)        | ○        | "20210820000000"       |
-```
 
 ## 29. Bank List Inquiry
 
@@ -1846,8 +1842,6 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 | mchtCustld  | Customer ID               | Unique Customer ID provided by Merchant or Unique Key (AES Encryption) | AN(100) | ● | "honggildong"       |
 | mchtTrdNo   | Order number              | Merchant order number (Exclude Korean)    | AN(100)       | ○                          | "OLD20190221001"              |
 | trdNo       | Transaction number        | Hecto Financial transaction number        | AN(40)        | ●                          | “SFP_FIRM12345678901234567890” |
-```
-
 
 ### Others
 #### Table of Reject Codes
