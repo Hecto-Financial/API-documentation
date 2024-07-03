@@ -386,9 +386,6 @@ FAIL
 
 ### Response Sample : Success
 
-```
-<HTML><BODY>OK : Normal Processing </BODY></HTML>
-※ If there is OK in the response, processed as success.
 
 # Result Code
 
