@@ -251,5 +251,181 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd
 | buyCrcCd        | Buying Currency                 | 12       | ●            |               | ●               |                                                                                                     |
 | buyAmt          | Buying Amount                   | 32       | ●            |               | ●               | Amount requested for exchange(Buying currency standard) *Encryption                                  |
 | remitCat        | Remittance Classification       | 12       |              | ●             | ●               | 1:Overseas, 2:Domestic, 3:Same Bank                                                                 |
-| remitAmt        | Remittance Amount               | 32       |              | ●             | ●               | In the case of USD, upto two decimal places allowed *Encryption
+| remitAmt        | Remittance Amount               | 32       |              | ●             | ●               | In the case of USD, upto two decimal places allowed *Encryption                                     |
+
+
+# Balance Inquiry (V2)
+
+## Request (Merchant -> Hecto Financial)
+
+| PRMTR_NM  | PRMTR_EXPL   | Max. Len | Mandatory | Desc. |
+|-----------|--------------|-----------|-----------|-------|
+| mchtId    | Merchant ID  | 12        | ●         |       |
+| trdNo     | Transaction Number | 40  | ●         |       |
+| trdDt     | Original Transaction Date | 8 | ● |       |
+
+## Request Sample
+
+```
+https://[Address]/pyag/v1/fxBalance
+PostData: mchtId=mid_test&trdNo=1234567890&trdDt=20230920
+```
+
+
+## Response (Hecto Financial -> Merchant)
+
+| PRMTR_NM  | PRMTR_EXPL   | Max. Len | Mandatory | Desc. |
+|-----------|--------------|-----------|-----------|-------|
+| mchtId    | Merchant ID  | 12        | ●         |       |
+| trdNo     | Transaction Number | 40  | ●         |       |
+| trdDt     | Transaction Date | 8     | ●         |       |
+| trdTm     | Transaction Time | 6     | ●         |       |
+| outStatCd | Transaction Status | 4   | ●         | 0021: Success, 0031: Failure |
+| outRsltCd | Response Result | 8      | ●         | 0000: Success, Others: Refer to Result Code sheet |
+| outRsltMsg | Response Message | 200  | ●         |       |
+| balance   | Balance      | 32        | ●         | Balance after inquiry. KRW |
+
+## Response Sample (Success)
+
+```json
+{
+  "mchtId": "mid_test",
+  "trdNo": "20230920HF1234",
+  "trdDt": "20230920",
+  "trdTm": "120000",
+  "outStatCd": "0021",
+  "outRsltCd": "0000",
+  "outRsltMsg": "Normal Processing",
+  "balance": "120000"
+}
+```
+
+### Cancellation (C1)
+
+# Cancellation (C1)
+
+## Request (Merchant -> Hecto Financial)
+
+| PRMTR_NM  | PRMTR_EXPL   | Max. Len | Mandatory | Desc. |
+|-----------|--------------|-----------|-----------|-------|
+| mchtId    | Merchant ID  | 12        | ●         |       |
+| mchtTrdNo | Merchant Order Number | 100 | ● | Original Transaction Merchant Transaction Number |
+| trdNo     | Transaction Number | 40  | ●         | Original Transaction Hecto Financial Generated Transaction Number |
+| trdDt     | Original Transaction Date | 8 | ● |       |
+
+## Request Sample
+
+```
+https://[Address]/pyag/v1/fxCancel
+PostData: mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&trdDt=20230920
+```
+
+## Response (Hecto Financial -> Merchant)
+
+| PRMTR_NM  | PRMTR_EXPL   | Max. Len | Mandatory | Desc. |
+|-----------|--------------|-----------|-----------|-------|
+| mchtId    | Merchant ID  | 12        | ●         |       |
+| mchtTrdNo | Merchant Order Number | 100 | ● | Original Transaction Merchant Transaction Number |
+| trdNo     | Transaction Number | 40  | ●         | Original Transaction Transaction Number |
+| trdDt     | Transaction Date | 8     | ●         | Inquiry Date |
+| trdTm     | Transaction Time | 6     | ●         | Inquiry Time |
+| outStatCd | Transaction Status | 4   | ●         | 0021: Success, 0031: Failure |
+| outRsltCd | Response Result | 8      | ●         | 0000: Success, Others: Refer to Result Code sheet |
+| outRsltMsg | Response Message | 200  | ●         |       |
+| status    | Status       | 12        | ●         | 00:Request Data Error, 99: Undefined Status, 10:Exchange Pending, 11:Exchange Success, 12:Exchange Failure, 13:Exchange Cancellation, 20:Pending Remittance, 21:Remittance Success, 22:Remittance Failure, 23:Remittance Cancellation, 29: Processing Remittance |
+
+## Response Sample (Success)
+
+```json
+{
+  "mchtId": "mid_test",
+  "mchtTrdNo": "1234567890",
+  "trdNo": "20230920HF1234",
+  "trdDt": "20230920",
+  "trdTm": "120000",
+  "outStatCd": "0021",
+  "outRsltCd": "0000",
+  "outRsltMsg": "Normal Processing",
+  "status": "11"
+}
+```
+## Status Description
+00: (Request Data Error) Exchange and remittance cannot be processed
+99: (Undefined) Internal error
+10: (Exchange Pending) Merchant has made the exchange request normally, it is in the status of before processing the exchange
+11: (Exchange Success) Exchange process success.
+12: (Exchange Failure) Exchange process failure, can retry automatically to change to Exchange Success
+13: (Exchange Cancellation) Merchant cancelled the exchange
+20: (Pending Remittance) Pending remittance status. If requested with exchange, after exchange success, pending remittance status
+29: (Processing Remittance) Hecto Financial → Domestic Bank remittance request completed. Before processing Domestic Bank → Overseas Bank.
+21: (Remittance Success) Domestic Bank → Overseas Bank remittance request completed, in the status in which remittance failure can occur later on in the Overseas Bank.
+22: (Remittance Failure) Hecto Financial → Domestic Bank failure
+24: (Remittance Failure) After Hecto Financial → Domestic Bank success, Domestic Bank → Overseas Bank failure
+23: (Remittance Cancellation) Remittance cancelled due to merchant or Hecto's internal policy
+
+
+
+# Deposit Notification
+
+## Request (Hecto Financial -> Merchant)
+
+### Start IP (Hecto Financial Notification Server IP)
+Testbed: 61.252.169.22  
+Production Environment: Provided by the merchant side, register on merchant's server beforehand.
+
+### End Address (Merchant Notification API URL)
+Provided by the merchant side, register on merchant's server beforehand.
+
+### Note
+Only deposit notifications inputted through Hecto Financial's server will be notified.
+
+## Request Sample
+
+### Request (Hecto Financial -> Merchant)
+
+| PRMTR_NM | PRMTR_EXPL | Max. Len | Mandatory | Desc. |
+|----------|------------|----------|-----------|-------|
+| mchtId   | Merchant ID | 12       | ●         |       |
+| trdNo    | Transaction Number | 40 | ●         |       |
+| trdDt    | Transaction Date | 8   | ●         |       |
+| trdTm    | Transaction Time | 6   | ●         |       |
+| outStatCd | Transaction Status | 4 | ●         | 0021: Success, 0031: Failure |
+| outRsltCd | Response Result | 8  | ●         | 0000: Success, Others: Refer to Result Code sheet |
+| outRsltMsg | Response Message | 200 | ●         |       |
+| balance  | Balance      | 32      | ●         | Balance after notification. KRW |
+
+## Response Sample (Success)
+
+```json
+{
+  "mchtId": "mid_test",
+  "trdNo": "20230920HF1234",
+  "trdDt": "20230920",
+  "trdTm": "120000",
+  "outStatCd": "0021",
+  "outRsltCd": "0000",
+  "outRsltMsg": "Normal Processing",
+  "balance": "120000"
+}
+```
+
+# Result Code
+
+| Result Code | Message                        | Revision Date |
+|-------------|--------------------------------|---------------|
+| 0000        | Normal processing              | 2023.09.18    |
+| PY11        | Bank maintenance time          | 2023.09.18    |
+| PY12        | Insufficient deposit balance   | 2023.09.18    |
+| PY21        | No receiving account           | 2023.09.18    |
+| PY22        | Receiver's bank maintenance time | 2023.09.18    |
+| PY23        | Withdrawal limit exceeded      | 2023.09.18    |
+| PY24        | Sender account does not exist  | 2023.09.18    |
+| PY25        | Incorrect password             | 2023.09.18    |
+| PY26        | Insufficient balance in sender's account | 2023.09.18 |
+| PY31        | Remittance request rejected    | 2023.09.18    |
+| PY32        | Remittance limit exceeded      | 2023.09.18    |
+| PY33        | Exceed remittance amount limit | 2023.09.18    |
+| PY34        | Sender &#8203;:citation[oaicite:0]{index=0}&#8203;
+
+
 
