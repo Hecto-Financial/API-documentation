@@ -243,7 +243,9 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 
 ```
 https://[Address]/pyag/v1/fxTrans
-PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCrcCd=USD&buyAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCat=1&remitAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCrcCd=USD&rcvrNm=JACKSON&rcvrNmKr=JACKSON&rcvrBirthDt=Gzv1ziVXlhyFS0EYMbHvqA==&rcvrLiveNtnCd=US&rcvrNtnCd=US&rcvrBankCd=CITIUS33&rcvrBankAddr=24STREET NEWYORK CITY US&rcvrAcntNo=Gzv1ziVXlhyFS0EYMbHvqA==&remitRsnCd=10101&invFileNm=INVOID_2023.JPG
+PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCrcCd=USD&buyAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCat=1&remitAmt=Gzv1
+ziVXlhyFS0EYMbHvqA==&remitCrcCd=USD&rcvrNm=JACKSON&rcvrNmKr=JACKSON&rcvrBirthDt=Gzv1ziVXlhyFS0EYMbHvqA==&rcvrLiveNtnCd=US&rcvrNtnCd=US&rcvrBankCd=CITIUS33&
+rcvrBankAddr=24STREET NEWYORK CITY US&rcvrAcntNo=Gzv1ziVXlhyFS0EYMbHvqA==&remitRsnCd=10101&invFileNm=INVOID_2023.JPG
 ```
 
 
@@ -316,7 +318,9 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd
 **Issuance**  
 ```
 https://[Address]/pyag/v1/fxTrans
-PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCrcCd=USD&buyAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCat=1&remitAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCrcCd=USD&rcvrNm=JACKSON&rcvrNmKr=JACKSON&rcvrBirthDt=Gzv1ziVXlhyFS0EYMbHvqA==&rcvrLiveNtnCd=US&rcvrNtnCd=US&rcvrBankCd=CITIUS33&rcvrBankAddr=24STREET NEWYORK CITY US&rcvrAcntNo=Gzv1ziVXlhyFS0EYMbHvqA==&remitRsnCd=10101&invFileNm=INVOID_2023.JPG
+PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCrcCd=USD&buyAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCat=1&remitAmt
+=Gzv1ziVXlhyFS0EYMbHvqA==&remitCrcCd=USD&rcvrNm=JACKSON&rcvrNmKr=JACKSON&rcvrBirthDt=Gzv1ziVXlhyFS0EYMbHvqA==&rcvrLiveNtnCd=US&rcvrNtnCd=US&rcvrBankC
+d=CITIUS33&rcvrBankAddr=24STREET NEWYORK CITY US&rcvrAcntNo=Gzv1ziVXlhyFS0EYMbHvqA==&remitRsnCd=10101&invFileNm=INVOID_2023.JPG
 ```
 
 
