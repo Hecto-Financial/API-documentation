@@ -168,14 +168,12 @@ PostData: mchtId=mid_test&trdType=1&validTo=20501231235959&accountNm=HECTO
 
 
 **Terminate**  
-
 ```
 https://[Address]/pyag/v1/fxVaccount
 PostData: mchtId=mid_test&trdType=2&bankCd=023&vaccountNo=1234567890
 ```
 
 **Change**  
-
 ```
 https://[Address]/pyag/v1/fxVaccount
 PostData: mchtId=mid_test&trdType=2&bankCd=023&vaccountNo=1234567890&accountNm=NEW_HECTO
@@ -244,16 +242,8 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 **Issuance**
 
 ```
-
-
-
-
 https://[Address]/pyag/v1/fxTrans
 PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCrcCd=USD&buyAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCat=1&remitAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCrcCd=USD&rcvrNm=JACKSON&rcvrNmKr=JACKSON&rcvrBirthDt=Gzv1ziVXlhyFS0EYMbHvqA==&rcvrLiveNtnCd=US&rcvrNtnCd=US&rcvrBankCd=CITIUS33&rcvrBankAddr=24STREET NEWYORK CITY US&rcvrAcntNo=Gzv1ziVXlhyFS0EYMbHvqA==&remitRsnCd=10101&invFileNm=INVOID_2023.JPG
-
-
-
-
 ```
 
 
@@ -325,14 +315,8 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd
 
 **Issuance**  
 ```
-
-
-
 https://[Address]/pyag/v1/fxTrans
 PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCrcCd=USD&buyAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCat=1&remitAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCrcCd=USD&rcvrNm=JACKSON&rcvrNmKr=JACKSON&rcvrBirthDt=Gzv1ziVXlhyFS0EYMbHvqA==&rcvrLiveNtnCd=US&rcvrNtnCd=US&rcvrBankCd=CITIUS33&rcvrBankAddr=24STREET NEWYORK CITY US&rcvrAcntNo=Gzv1ziVXlhyFS0EYMbHvqA==&remitRsnCd=10101&invFileNm=INVOID_2023.JPG
-
-
-
 ```
 
 
@@ -393,8 +377,6 @@ PostData: mchtId=mid_test&trdNo=1234567890&trdDt=20230920
 ## Response Sample (Success)
 
 ```
-
-
 json
 {
   "mchtId": "mid_test",
@@ -406,9 +388,6 @@ json
   "outRsltMsg": "Normal Processing",
   "balance": "120000"
 }
-
-
-
 ```
 
 ### Cancellation (C1)
@@ -448,9 +427,6 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&trdDt=202309
 ## Response Sample (Success)
 
 ```json
-
-
-
 {
   "mchtId": "mid_test",
   "mchtTrdNo": "1234567890",
@@ -462,9 +438,6 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&trdDt=202309
   "outRsltMsg": "Normal Processing",
   "status": "11"
 }
-
-
-
 ```
 ## Status Description
 00: (Request Data Error) Exchange and remittance cannot be processed
@@ -514,9 +487,6 @@ Only deposit notifications inputted through Hecto Financial's server will be not
 ## Response Sample (Success)
 
 ```json
-
-
-
 {
   "mchtId": "mid_test",
   "trdNo": "20230920HF1234",
@@ -527,9 +497,6 @@ Only deposit notifications inputted through Hecto Financial's server will be not
   "outRsltMsg": "Normal Processing",
   "balance": "120000"
 }
-
-
-
 ```
 
 # Result Code
