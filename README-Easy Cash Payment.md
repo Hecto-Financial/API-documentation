@@ -888,12 +888,10 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 | outStatCd   | Transaction status        | Transaction status code (Success/Fail)                                      | AN(4)         | ●        | Success: 0021               |
 |             |                           |                                                                             |               |          | Fail: 0031                  |
 | outRsltCd   | Reject code               | Refer to reject code table                                                  | AN(4)         | ●        |                             |
-| outRsltMsg  | Result message            | When an error occurs, a message on error is sent
-
-                            | AN(300)       | ●        | “Success”                   |
+| outRsltMsg  | Result message            | When an error occurs, a message on error is sent | AN(300)       | ●        | “Success”                |
 | mchtTrdNo   | Order number              | Merchant order number                                                       | AN(100)       | ○        | “OID201902210001”           |
 |             | * Exclude Korean          |                                                                             |               |          |                             |
-| trdNo       | Transaction number        | Hecto Financial transaction number regarding mobile phone verification request | AN(40)      | ●        | “SFP_FIRM12345678901234567890” |    |
+| trdNo       | Transaction number        | Hecto Financial transaction number regarding mobile phone verification request | AN(40)      | ●        | “SFP_FIRM12345678901234567890” |    
 
 ## Confirmation of ARS Authentication 
 
