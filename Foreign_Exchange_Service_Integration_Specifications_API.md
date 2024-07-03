@@ -63,11 +63,11 @@ The columns requested by Merchant server from Hecto Financial are defined as fol
 #### Request Samples
 
 **Issuance**  
-```json
-{
+```
+
 (https://[Address]/pyag/v1/fxVaccount
 PostData: mchtId=mid_test&trdType=1&validTo=20501231235959&accountNm=HECTO)
-}
+
 
 ```
 https://[Address]/pyag/v1/fxVaccount
@@ -76,15 +76,17 @@ PostData: mchtId=mid_test&trdType=1&validTo=20501231235959&accountNm=HECTO
 
 **Terminate**  
 
+```
 https://[Address]/pyag/v1/fxVaccount
 PostData: mchtId=mid_test&trdType=2&bankCd=023&vaccountNo=1234567890
-
+```
 
 **Change**  
 
+```
 https://[Address]/pyag/v1/fxVaccount
 PostData: mchtId=mid_test&trdType=2&bankCd=023&vaccountNo=1234567890&accountNm=NEW_HECTO
-
+```
 
 ### Response (Hecto Financial -> Merchant)
 
@@ -148,8 +150,10 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 
 **Issuance**
 
-**_https://[Address]/pyag/v1/fxTrans
-PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCrcCd=USD&buyAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCat=1&remitAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCrcCd=USD&rcvrNm=JACKSON&rcvrNmKr=JACKSON&rcvrBirthDt=Gzv1ziVXlhyFS0EYMbHvqA==&rcvrLiveNtnCd=US&rcvrNtnCd=US&rcvrBankCd=CITIUS33&rcvrBankAddr=24STREET NEWYORK CITY US&rcvrAcntNo=Gzv1ziVXlhyFS0EYMbHvqA==&remitRsnCd=10101&invFileNm=INVOID_2023.JPG_**
+```
+https://[Address]/pyag/v1/fxTrans
+PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCrcCd=USD&buyAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCat=1&remitAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCrcCd=USD&rcvrNm=JACKSON&rcvrNmKr=JACKSON&rcvrBirthDt=Gzv1ziVXlhyFS0EYMbHvqA==&rcvrLiveNtnCd=US&rcvrNtnCd=US&rcvrBankCd=CITIUS33&rcvrBankAddr=24STREET NEWYORK CITY US&rcvrAcntNo=Gzv1ziVXlhyFS0EYMbHvqA==&remitRsnCd=10101&invFileNm=INVOID_2023.JPG
+```
 
 
 ### Response (Hecto Financial -> Merchant)
