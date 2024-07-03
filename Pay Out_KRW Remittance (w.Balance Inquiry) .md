@@ -75,10 +75,10 @@ Gzv1ziVXlhyFS0EYMbHvqA==
 
 # Remittance (B9)
 
-# Detailed Address
-
-## /pyag/v1/fxTransKrw
-
+#### Detailed Address
+```
+/pyag/v1/fxTransKrw
+```
 ### Request (Merchant → Hecto Financial)
 
 | PRMTR_NM     | PRMTR_EXPL               | Max. Len | Desc.                                                                                       |
@@ -203,9 +203,11 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&trdNo=20230920HF1234&orgTrdDt=202
 
 # Balance Inquiry(V2)
 
-# Detailed Address
+### Detailed Address
 
-## /pyag/v1/fxResult
+```
+/pyag/v1/fxResult
+```
 
 ### Request (Merchant → Hecto Financial)
 
