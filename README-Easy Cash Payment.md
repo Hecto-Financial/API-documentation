@@ -1430,27 +1430,32 @@ The columns requested by Merchant server from Hecto Financial are defined as fol
 
 The columns that respond from Hecto Financial server to the Merchant are as follows.
 
-| Parameter   | Name                       | Description                                                                 | Type (Length) | Description                 | Example                     |
-|-------------|----------------------------|-----------------------------------------------------------------------------|---------------|-----------------------------|-----------------------------|
-| outStatCd   | Transaction status         | Transaction status code (success/fail)                                      | AN(4)         | ●                           | Success: 0021               |
-|             |                            |                                                                             |               |                             | Fail: 0031                  |
-| outRsltCd   | Reject code                | Refer to reject code table                                                  | AN(4)         | ●                           | ST08 : If it is an account that is already registered, send the information of the registered account |
-| outRsltMsg  | Result message             | When an error occurs, a message on error is sent                            | AN(100)       | ●                           | “Processed normally.”       |
-| bankCd      | Bank code                  | Bank code                                                                   | N(3)          | ○                           | “011”                       |
-| bankNm      | Bank name                  | Bank name (Korean 3 byte)                                                   | AN(45)        | ○                           | “Kookmin Bank”              |
-| custAcntNo  | Account number             | Masked account number ex) 234*********123                                   | AN(15)        | ○                           | “234*********123”           |
-| useStDt     | Recurring payment start date | yyyyMMdd                                                                   | AN(8)         | ○                           | "20210830"                  |
-| useEdDt     | Recurring payment end date | yyyyMMdd                                                                   | AN(8)         | ○                           | “20991231”                  |
-| rglPmtAmt   | Amount of recurring payment | Amount of the first recurring payment                                       | N(13)         | ○
+| Parameter      | Name                          | Description                                                                | Type (Length) | Required | Example                     |
+|----------------|-------------------------------|----------------------------------------------------------------------------|---------------|----------|-----------------------------|
+| outStatCd      | Transaction status            | Transaction status code (success/fail)                                     | AN(4)         | ●        | Success: 0021               |
+|                |                               |                                                                            |               |          | Fail: 0031                  |
+| outRsltCd      | Reject code                   | Refer to reject code table                                                 | AN(4)         | ●        | ST08 : If it is an account that is already registered, send the information of the registered account |
+| outRsltMsg     | Result message                | When an error occurs, a message on error is sent                           | AN(100)       | ●        | “Processed normally.”       |
+| bankCd         | Bank code                     | Bank code                                                                  | N(3)          | ○        | “011”                       |
+| bankNm         | Bank name                     | Bank name (Korean 3 byte)                                                  | AN(45)        | ○        | “Kookmin Bank”              |
+| custAcntNo     | Account number                | Masked account number                                                      | AN(15)        | ○        | “234*********123”           |
+|                |                               | ex) 234*********123                                                        |               |          |                             |
+| useStDt        | Recurring payment start date  | yyyyMMdd                                                                   | AN(8)         | ○        | "20210830"                  |
+| useEdDt        | Recurring payment end date    | yyyyMMdd                                                                   | AN(8)         | ○        | “20991231”                  |
+| rglPmtAmt      | Amount of recurring payment   | Amount of the first recurring payment                                      | N(13)         | ○        | “1000”                      |
+| pmtAcmAmt      | Accumulated payment amount    | Accumulated amount of successful recurring payment                         | N(13)         | ○        | “5000”                      |
+| pmtAcmOrd      | Accumulated payment round     | Recurring payment success count                                            | N(13)         | ○        | “5”                         |
+| unregDt        | Cancellation date             | yyyyMMddhhmmss                                                             | AN(14)        | ○        | "20210830080000"            |
+| unregStatCd    | Cancellation code             | Cancellation details, user input or bank system cancellation code           | AN(10)        | ○        | EXPIRE: End of Period       |
+|                |                               |                                                                            |               |          | FAIL: Payment failed        |
+|                |                               |                                                                            |               |          | CANCEL: Merchant cancellation. |
+|                |                               |                                                                            |               |          | ADMIN: Administrator cancellation |
 
-                           | “1000”                      |
-| pmtAcmAmt   | Accumulated payment amount | Accumulated amount of successful recurring payment                          | N(13)         | ○                           | “5000”                      |
-| pmtAcmOrd   | Accumulated payment round  | Recurring payment success count                                             | N(13)         | ○                           | “5”                         |
-| unregDt     | Cancellation date          | yyyyMMddhhmmss                                                              | AN(14)        | ○                           | "20210830080000"            |
-| unregStatCd | Cancellation code          | Cancellation details, user input or bank system cancellation code           | AN(10)        | ○                           | EXPIRE: End of Period       |
-|             |                            |                                                                             |               |                             | FAIL: Payment failed        |
-|             |                            |                                                                             |               |                             | CANCEL: Merchant cancellation |
-|             |                            |                                                                             |               |                             | ADMIN: Administrator cancellation |
+
+
+
+
+
 
 ## 23. Recurring Payment Transaction History Inquiry
 
