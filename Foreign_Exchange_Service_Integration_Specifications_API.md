@@ -65,8 +65,8 @@ The columns requested by Merchant server from Hecto Financial are defined as fol
 **Issuance**  
 ```
 
-(https://[Address]/pyag/v1/fxVaccount
-PostData: mchtId=mid_test&trdType=1&validTo=20501231235959&accountNm=HECTO)
+https://[Address]/pyag/v1/fxVaccount
+PostData: mchtId=mid_test&trdType=1&validTo=20501231235959&accountNm=HECTO
 
 
 ```
@@ -181,4 +181,75 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd
 | rcvrNm         | Receiver's English Name            | 35        |             | ●
 
 
+# Result Inquiry (V1)
+
+## /pyag/v1/fxTrans
+
+### Request (Merchant -> Hecto Financial)
+
+| Parameter Name  | Description                     | Max. Len | Mandatory FX | Mandatory RMT | Mandatory FXRMT | Description                                                                                         |
+|-----------------|---------------------------------|----------|--------------|---------------|-----------------|-----------------------------------------------------------------------------------------------------|
+| mchtId          | Merchant ID                     | 12       | ●            | ●             | ●               |                                                                                                     |
+| mchtTrdNo       | Merchant Order Number           | 100      | ●            | ●             | ●               | *At least unique per month                                                                          |
+| encCd           | Encryption Code                 | 2        | ●            | ●             | ●               | 23: AES256ECB+BASE64                                                                                |
+| trdDt           | Transaction Date                | 8        | ○            | ○             | ○               | For response, changed to Hecto Financial processed date                                             |
+| trdTm           | Transaction Time                | 6        | ○            | ○             | ○               | For response, changed to Hecto Financial processed time                                             |
+| svcDivCd        | Transaction Classification      | 12       | ●            | ●             | ●               | FX:Exchange, RMT:Remittance, FXRMT:Exchange+Remittance                                              |
+| rateQuoteId     | Exchange Rate ID                | 32       | ●            |               | ●               |                                                                                                     |
+| sellCrcCd       | Selling Currency                | 12       | ●            |               | ●               |                                                                                                     |
+| sellAmt         | Selling Amount                  | 32       | ○            |               | ○               | Amount requested for exchange(Selling currency standard), just one between selling/buying. *Url encoding after encryption is required. |
+| buyCrcCd        | Buying Currency                 | 12       | ●            |               | ●               | Required for foreign exchange                                                                       |
+| buyAmt          | Buying Amount                   | 32       | ○            |               | ○               | Amount requested for exchange(Buying currency standard) *Url encoding after encryption is required. |
+| remitCat        | Remittance Classification       | 12       |              | ●             | ●               | 1:Overseas, 2:Domestic, 3:Same Bank                                                                 |
+| remitAmt        | Remittance Amount               | 32       |              | ●             | ●               | In the case of USD, upto two decimal places allowed *Url encoding after encryption is required.     |
+| remitCrcCd      | Remittance Currency             | 12       |              | ●             | ●               | USD, KRW *For KRW remittance without foreign exchange, real-time remittance is executed             |
+| rcvrNm          | Receiver's English Name         | 35       |              | ●             | ●               |                                                                                                     |
+| rcvrNmKr        | Receiver's Korean Name          | 35       |              | ◐             | ◐               | Url encoding required. Required if the nationality of the receiver is 'KR'                          |
+| rcvrBirthDt     | Receiver's Date of Birth        | 32       |              | ●             | ●               | *Url encoding after encryption is required.                                                         |
+| rcvrLiveNtnCd   | Receiver's Country of Residence | 2        |              | ●             | ●               | 2-digit ISO country code                                                                            |
+| rcvrNtnCd       | Receiver's Nationality          | 2        |              | ●             | ●               | 2-digit ISO country code                                                                            |
+| rcvrAddr        | Receiver's Address              | 135      |              | ◐             | ◐               | Omit for domestic KRW remittance                                                                    |
+| rcvrBankCd      | Receiving Bank's Code           | 11       |              | ●             | ●               | SWIFT BIC code For domestic KRW remittance, 3-digit domestic bank code                              |
+| rcvrBankNm      | Receiving Bank's Name           | 128      |              | ◐             | ◐               | Omit for domestic KRW remittance                                                                    |
+| rcvrBankAddr    | Receiving Bank's Address        | 135      |              | ◐             | ◐               | Omit for domestic KRW remittance                                                                    |
+| rcvrAcntNo      | Receiving Account Number        | 64       |              | ●             | ●               | *Url encoding after encryption is required                                                          |
+| remitRsnCd      | Remittance Reason Code          | 5        |              | ◐             | ◐               | Omit for domestic KRW remittance *Attached                                                          |
+| rcvrAcntSumry   | Receiving Account Remark        | 32       |              | ◐             | ◐               | Valid only for KRW domestic remittance. Valid until maximum 7th letter only (Url encoding)          |
+| invFileNm       | Invoice File Name               | 32       |              | ◐             | ◐               | File name. (Korean letter and special character not allowed) Allowed extensions: jpg, png, jpeg * Required for domestic -> overseas remittance (excluding remittance to one's own account) |
+| invFileData     | Invoice File Data               | -        |              | ◐             | ◐               | BASE64 encoding then sent *For size, only below 100KB is allowed.                                   |
+
+* Excluding 'Receiver's Korean Name' and 'Receiving Account Remark', only English capital letters are allowed.
+
+### Request Sample
+
+**Issuance**  
+```
+
+https://[Address]/pyag/v1/fxTrans
+PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCrcCd=USD&buyAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCat=1&remitAmt=Gzv1ziVXlhyFS0EYMbHvqA==&remitCrcCd=USD&rcvrNm=JACKSON&rcvrNmKr=JACKSON&rcvrBirthDt=Gzv1ziVXlhyFS0EYMbHvqA==&rcvrLiveNtnCd=US&rcvrNtnCd=US&rcvrBankCd=CITIUS33&rcvrBankAddr=24STREET NEWYORK CITY US&rcvrAcntNo=Gzv1ziVXlhyFS0EYMbHvqA==&remitRsnCd=10101&invFileNm=INVOID_2023.JPG
+
+```
+
+
+### Response (Hecto Financial -> Merchant)
+
+| Parameter Name  | Description                     | Max. Len | Mandatory FX | Mandatory RMT | Mandatory FXRMT | Description                                                                                         |
+|-----------------|---------------------------------|----------|--------------|---------------|-----------------|-----------------------------------------------------------------------------------------------------|
+| mchtId          | Merchant ID                     | 12       | ●            | ●             | ●               |                                                                                                     |
+| mchtTrdNo       | Merchant Order Number           | 100      | ●            | ●             | ●               | *At least unique per month                                                                          |
+| encCd           | Encryption Code                 | 2        | ●            | ●             | ●               | 23: AES256ECB+BASE64                                                                                |
+| trdNo           | Transaction Number              | 40       | ●            | ●             | ●               | Hecto Financial generated transaction number, valid for response only                               |
+| trdDt           | Transaction Date                | 8        | ●            | ●             | ●               |                                                                                                     |
+| trdTm           | Transaction Time                | 6        | ●            | ●             | ●               |                                                                                                     |
+| outStatCd       | Transaction Status              | 4        | ●            | ●             | ●               | 0021: Success, 0031: Failure                                                                        |
+| outRsltCd       | Response Result                 | 8        | ●            | ●             | ●               | 0000: Success, Others: Refer to Result Code sheet                                                   |
+| outRsltMsg      | Response Message                | 200      | ●            | ●             | ●               |                                                                                                     |
+| svcDivCd        | Transaction Classification      | 12       | ●            | ●             | ●               | FX:Foreign Exchange, RMT:Remittance, FXRMT:Foreign Exchange+Remittance                              |
+| rateQuoteId     | Exchange Rate ID                | 32       | ●            |               | ●               |                                                                                                     |
+| sellCrcCd       | Selling Currency                | 12       | ●            |               | ●               |                                                                                                     |
+| sellAmt         | Selling Amount                  | 32       | ●            |               | ●               | Amount requested for exchange(Selling currency standard), just one between selling/buying. *Encryption |
+| buyCrcCd        | Buying Currency                 | 12       | ●            |               | ●               |                                                                                                     |
+| buyAmt          | Buying Amount                   | 32       | ●            |               | ●               | Amount requested for exchange(Buying currency standard) *Encryption                                  |
+| remitCat        | Remittance Classification       | 12       |              | ●             | ●               | 1:Overseas, 2:Domestic, 3:Same Bank                                                                 |
+| remitAmt        | Remittance Amount               | 32       |              | ●             | ●               | In the case of USD, upto two decimal places allowed *Encryption
 
