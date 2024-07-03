@@ -63,6 +63,13 @@ The columns requested by Merchant server from Hecto Financial are defined as fol
 #### Request Samples
 
 **Issuance**  
+```json
+{
+(https://[Address]/pyag/v1/fxVaccount
+PostData: mchtId=mid_test&trdType=1&validTo=20501231235959&accountNm=HECTO)
+}
+
+```
 https://[Address]/pyag/v1/fxVaccount
 PostData: mchtId=mid_test&trdType=1&validTo=20501231235959&accountNm=HECTO
 
