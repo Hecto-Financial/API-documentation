@@ -2187,7 +2187,7 @@ Financial institution unique identification codes provided by Hecto Financial ar
 | 020                        | Woori Bank                                       | 103                        | SBI Savings Bank                               |
 | 023                        | SC Bank                                          | 209                        | Yuanta Securities                              |
 | 027                        | Citi Bank                                        | 238                        | Mirae Asset Securities                         |
-| 031                        | Daegu Bank                                       | 240                        | Samsung Securities                             |
+| 031                        | IM Bank                                       | 240                        | Samsung Securities                             |
 | 032                        | Busan Bank                                       | 243                        | Korea Investment & Securities                  |
 | 034                        | Kwangju Bank                                     | 247                        | NH Investment & Securities                     |
 | 035                        | Jeju Bank                                        | 266                        | SK Securities                                  |
@@ -2215,7 +2215,7 @@ Due to the specifics of bank operating hours, Hecto Financial recommends transac
 |      |                               |                       |                                  | (Work date is notified by bank in advance)               |
 | 023  | SC Bank                       | 23:30~00:30           | 23:50~00:12                      | None                                                     |
 | 027  | Citi Bank                     | 23:40~00:30           | 23:50~00:30                      | Every day 00:30~04:30                                    |
-| 031  | Daegu Bank                    | 23:40~00:30           | 23:50~00:05                      | None                                                     |
+| 031  | IM Bank                    | 23:40~00:30           | 23:50~00:05                      | None                                                     |
 | 032  | Busan Bank                    | 23:30~00:30           | 23:50~00:05                      | None                                                     |
 | 034  | Kwangju Bank                  | 23:40~00:30           | 23:50~00:05                      | Every 2nd Sunday of the month 02:00~06:00                |
 | 035  | Jeju Bank                     | 23:40~00:30           | 23:50~00:12                      | Every Sunday 04:30~05:00                                 |
