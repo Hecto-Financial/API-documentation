@@ -134,3 +134,6 @@ Response:
 - inFileNm (Invoice File Name) and inFileData (Invoice File Data) are request items of Currency Exchange, Remittance (B1), and should be sent together when requesting.
 - Invoice is required for foreign currency remittance (USD remittance) and can be omitted only if the recipient account is a 'settlement account' in the name of a pre-registered merchant. 
 - For inFileData (Invoice File Data), there is no specific form so please send it according to the specification.
+
+2. **Q:** Are the blcKrw and blcUsd in the response results real-time available balances
+  **A:** These they represent real-time available balances
