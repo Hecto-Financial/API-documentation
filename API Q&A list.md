@@ -127,10 +127,9 @@ Response:
     - inFileNm and inFileData are requested on Exchange, remittance (B1).
 
 ## Balance Inquiry (B2)
-1.When do we have to send inFileNm, inFileData, and are they required?
+1. **Q**When do we have to send inFileNm, inFileData, and are they required?
  - For inFileData, there is no example in the API documentation, can you provide an example?	
-
-A: 
+  **A**
 - inFileNm (Invoice File Name) and inFileData (Invoice File Data) are request items of Currency Exchange, Remittance (B1), and should be sent together when requesting.
 - Invoice is required for foreign currency remittance (USD remittance) and can be omitted only if the recipient account is a 'settlement account' in the name of a pre-registered merchant. 
 - For inFileData (Invoice File Data), there is no specific form so please send it according to the specification.
