@@ -126,6 +126,18 @@ Response:
     **A:** 
     - inFileNm and inFileData are requested on Exchange, remittance (B1).
 
+12. On the api  fxTrans, It returned the following  error 'PY98: Invalid request parameter".
+    
+mchtTrdNo：43169d87deewwedsew7b08bere4dd5ea69782f1e83e121243.
+
+request boby  : mchtId=M2439797&mchtTrdNo=43169d87deewwedsew7b08bere4dd5ea69782f1e83e121243&encCd=23&trdDt=&trdTm=&svcDivCd=FX&rateQuoteId=HCTO1NUZ0ABYJOVQV&sellCrcCd=KRW&sellAmt=xn313UzZ%2BqHl3EhKaZJCVw%3D%3D&buyCrcCd=&buyAmt=&remitCat=&remitAmt=&remitCrcCd=&rcvrNm=&rcvrNmKr=&rcvrBirthDt=&rcvrLiveNtnCd=&rcvrNtnCd=&rcvrAddr=&rcvrBankCd=&rcvrBankNm=&rcvrBankAddr=&rcvrAcntNo=&remitRsnCd=&rcvrAcntSumry=&invFileNm=&invFileData=
+
+Could you help me fix this error?
+
+Answer: the input parameter "HCTO1WY29105U55LS" of rateQuoteId is valid between 10:23:42~10:24:42 only, and the value entered after this valid period.
+
+We are currenly using 1min currency so you need to be aware of this when you conduct the test.
+
 ## Balance Inquiry (B2)
 1. **Q:** When do we have to send inFileNm, inFileData, and are they required?
  - For inFileData, there is no example in the API documentation, can you provide an example?
