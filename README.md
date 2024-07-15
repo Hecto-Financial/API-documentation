@@ -1,6 +1,6 @@
 # API Assistant
 
-Below is the link to 
+Below is the link to our API assistant. Please use this chatbot for inquiries about our API when we are not available.
 https://chatgpt.com/g/g-bR0jrEklh-hecto-financial-api-assistant
 
 # API-documentation
