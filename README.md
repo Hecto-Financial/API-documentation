@@ -1,3 +1,8 @@
+# API Assistant
+
+Below is the link to 
+https://chatgpt.com/g/g-bR0jrEklh-hecto-financial-api-assistant
+
 # API-documentation
 This repository contains all the API documents for Hecto Financial`s banking and payment services.
 
