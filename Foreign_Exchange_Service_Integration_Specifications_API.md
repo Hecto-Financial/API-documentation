@@ -10,6 +10,18 @@
 | 1.1     | 2023-10-05            | Status code and result code added               |
 | 1.2     | 2023-10-17            | Result inquiry status code description added    |
 | 1.3     | 2023-11-22            | Url encoding description added                  |
+| 1.4     |	2023-12-05	          | Overseas remittance failure status code added (classify domestic and overseas) |
+|1.5      |	2023-12-20	          | "Deposit notification added                      
+|         |                       |  For overseas remittance, added receiver's address parameter" |
+|1.6      |	2023-12-21	          |"Deposit balance inquiry API added               |
+|         |                       |B1 parameter modification: Domestic KRW remittance receiving bank remark parameter added" |
+|1.7      |	2024-01-16	          |"Added Virtual account issuance API for deposits,|
+|         |                       |Changed invoice requirement: required only for domestic -> international transfers (but not for transfers to own account).|
+|         |                       |Added error codes for virtual accounts"          |
+|1.7.1	  |2024-03-28	            |Added information about required field           |
+|1.7.2    |2024-04.24	            |treadBankCd field added in Deposit Notification  |
+|1.7.3	  |2024-07-09             |Status code 19(Processing currency exchange) added|
+
 
 # Overview
 
