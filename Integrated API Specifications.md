@@ -232,15 +232,21 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 | remitCat       | Remittance Classification          | 12        |             | ●           | ●           | 1:Overseas, 2:Domestic, 3:Same Bank |
 | remitAmt       | Remittance Amount                  | 32        |             | ●           | ●           | In the case of USD, upto two decimal places allowed *Url encoding after encryption is required. |
 | remitCrcCd     | Remittance Currency                | 12        |             | ●           | ●           | USD, KRW *For KRW remittance without foreign exchange, real-time remittance is executed |
-| rcvrNm         | Receiver's English Name            | 35        |             | ●           | ●           |             |
+| rcvrNm         | Receiver's English Name            | 35        |             | ●           | ●           | Allowed special characters:[ ,, -, ., /, @, (, )] |
+            |
 | rcvrNmKr       | Receiver's Korean Name             | 35        |             | ◐           | ◐           | Url encoding required. Required if the nationality of the receiver is 'KR' |
+|                |                                    |           |             |             |             |  Allowed special characters:[ ,, -, ., /, @, (, )] |
+
 | rcvrBirthDt    | Receiver's Date of Birth           | 32        |             | ●           | ●           | *Url encoding after encryption is required. |
 | rcvrLiveNtnCd  | Receiver's Country of Residence    | 2         |             | ●           | ●           | 2-digit ISO country code |
 | rcvrNtnCd      | Receiver's Nationality             | 2         |             | ●           | ●           | 2-digit ISO country code |
 | rcvrAddr       | Receiver's Address                 | 135       |             | ◐           | ◐           | Omit for domestic KRW remittance |
+|                |                                    |           |             |             |             |  Allowed special characters:[ ,, -, ., /, @, (, )] |
 | rcvrBankCd     | Receiving Bank's Code              | 11        |             | ●           | ●           | SWIFT BIC code For domestic KRW remittance, 3-digit domestic bank code |
 | rcvrBankNm     | Receiving Bank's Name              | 128       |             | ◐           | ◐           | Omit for domestic KRW remittance |
+|                |                                    |           |             |             |             |  Allowed special characters:[ ,, -, ., /, @, (, )] |
 | rcvrBankAddr   | Receiving Bank's Address           | 135       |             | ◐           | ◐           | Omit for domestic KRW remittance |
+|                |                                    |           |             |             |             |  Allowed special characters:[ ,, -, ., /, @, (, )] |
 | rcvrAcntNo     | Receiving Account Number           | 64        |             | ●           | ●           | *Url encoding after encryption is required |
 | remitRsnCd     | Remittance Reason Code             | 5         |             | ◐           | ◐           | Omit for domestic KRW remittance *Attached |
 | rcvrAcntSumry  | Receiving Account Remark           | 32        |             | ◐           | ◐           | Valid only for KRW domestic remittance. Valid until maximum 7th letter only (Url encoding) |
