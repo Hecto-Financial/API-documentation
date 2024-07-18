@@ -1,4 +1,4 @@
-# Foreign Exchange Service API
+# Integrated API
 
 ![image](https://github.com/Hecto-Financial/API-documentation/assets/73467915/939d9b90-6f12-4f0c-96dd-93bfba443ca2)
 
@@ -392,19 +392,35 @@ PostData: mchtId=mid_test&trdNo=1234567890&trdDt=20230920
 
 ## Response Sample (Success)
 
-```
-json
+```json
 {
   "mchtId": "mid_test",
+  "mchtTrdNo": "1234567890",
   "trdNo": "20230920HF1234",
   "trdDt": "20230920",
   "trdTm": "120000",
   "outStatCd": "0021",
   "outRsltCd": "0000",
   "outRsltMsg": "Normal Processing",
-  "balance": "120000"
+  "status": "11"
 }
 ```
+
+## Status Description
+
+- **00: (Request Data Error)** Exchange and remittance cannot be processed
+- **99: (Undefined)** Internal error
+- **10: (Exchange Pending)** Merchant has made the exchange request normally, it is in the status of before processing the exchange
+- **19: (Processing Currency Exchange)** Bank is processing currency exchange. Exchanged funds are not transmitted to bank account yet.
+- **11: (Exchange Success)** Exchange process success.
+- **12: (Exchange Failure)** Exchange process failure, can retry automatically to change to Exchange Success
+- **13: (Exchange Cancellation)** Merchant cancelled the exchange
+- **20: (Pending Remittance)** Pending remittance status. If requested with exchange, after exchange success, pending remittance status
+- **29: (Processing Remittance)** Hecto Financial → Domestic Bank remittance request completed. Before processing Domestic Bank → Overseas Bank.
+- **21: (Remittance Success)** Domestic Bank → Overseas Bank remittance request completed, in the status in which remittance failure can occur later on in the Overseas Bank.
+- **22: (Remittance Failure)** Hecto Financial → Domestic Bank failure
+- **24: (Remittance Failure)** After Hecto Financial → Domestic Bank success, Domestic Bank→Overseas Bank failure
+- **23: (Remittance Cancellation)** Remittance cancelled due to merchant or Hecto's internal policy
 
 ### Cancellation (C1)
 
