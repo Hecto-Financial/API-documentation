@@ -216,9 +216,6 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 
 ### Request (Merchant -> Hecto Financial)
 
-Here is the corrected markdown table that should render correctly in a readme.md file:
-
-```markdown
 | Parameter Name | Description                        | Max. Len | Mandatory FX | Mandatory RMT | Mandatory FXRMT | Notes |
 |----------------|------------------------------------|----------|--------------|---------------|-----------------|-------|
 | mchtId         | Merchant ID                        | 12       | ●            | ●             | ●               |       |
