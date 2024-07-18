@@ -233,7 +233,8 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 | remitAmt       | Remittance Amount                  | 32        |             | ●           | ●           | In the case of USD, upto two decimal places allowed *Url encoding after encryption is required. |
 | remitCrcCd     | Remittance Currency                | 12        |             | ●           | ●           | USD, KRW *For KRW remittance without foreign exchange, real-time remittance is executed |
 | rcvrNm         | Receiver's English Name            | 35        |             | ●           | ●           | Allowed special characters:[ ,, -, ., /, @, (, )] |
-| rcvrNmKr       | Receiver's Korean Name             | 35        |             | ◐           | ◐       | Url encoding required. Required if the nationality of the receiver is 'KR' |
+| rcvrNmKr       | Receiver's Korean Name             | 35        |             | ◐          | ◐          | Url encoding required.|
+|                |                                    |           |             |             |             |Required if the nationality of the receiver is 'KR' |
 |                |                                    |           |             |             |             |  Allowed special characters:[ ,, -, ., /, @, (, )] |
 
 | rcvrBirthDt    | Receiver's Date of Birth           | 32        |             | ●           | ●           | *Url encoding after encryption is required. |
