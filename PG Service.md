@@ -249,17 +249,17 @@ Hecto Financial -> Merchant)](#response-parameter-hecto-financial---merchant-25)
     - [Credit Card Identifiers](#credit-card-identifiers)
     - [Financial Institution Identifiers](#financial-institution-identifiers)
 
-## Outline
+## 1. Outline
 
-### Purpose
+### 1.1 Purpose
 
 This document is for understanding technical requirements for integration development of the PG standard payment window provided by Hecto Financial and to define detailed specifications.
 
-### Target
+### 1.2 Target
 
 This document is for the clients’ developers to execute payment through Hecto Financial’s PG system.
 
-### Specification
+### 1.3 Specification
 
 The following is a general description of the integration referred to in this document.
 
@@ -270,17 +270,17 @@ The following is a general description of the integration referred to in this do
   - H: Korean characters
 - The standard request/response parameter’s length is the UTF-8 encoded value (Byte) of the plain text.
 
-### Others
+### 1.4 Others
 
 - The offline document can be downloaded here. (Online document is always updated.)
 - There is no need to read the entire document. It is divided into payment methods and services, so just refer to the parts needed.
 - Link for FAQ
 
-## Standard Payment Window (UI) Integration
+## 2. Standard Payment Window (UI) Integration
 
 The integration method of the PG standard payment window provided by Hecto Financial is defined.
 
-### Description
+### 2.1 Description
 
 - Check the request URI per payment method. (Refer to [2.3 API URI])
 - Check the request parameter per payment method, set the request parameter, and request in the POST method.
@@ -289,7 +289,7 @@ The integration method of the PG standard payment window provided by Hecto Finan
 - If you click the [Close] button on the payment completion window, the result (response parameter) is returned to the URL specified in the request parameter nextUrl.
 - If the user forcefully quits the payment window during the payment (Settle payment window ‘X’ button), the result (response parameter) is returned to the URL specified in the cancUrl parameter.
 
-### Cautions
+### 2.2 Cautions
 
 - The support for the IE browser ends starting June 15, 2022, please use the Edge browser.
 - Refrain from using the Opera browser. Some functions may not work.
@@ -311,7 +311,7 @@ The integration method of the PG standard payment window provided by Hecto Finan
   - When HTTP is used, the payment window may not work properly because of browser policy violations (such as cross-origin).
   - Therefore, the use of HTTPS is recommended.
 
-### API URI
+### 2.3 API URI
 
 Hecto Financial payment window (UI) server domain names are as follows.
 
@@ -340,14 +340,14 @@ Hecto Financial Payment (UI) API URI are as follows.
 |                                 | POINTDAMOA                            | `https://{domain}/point/main.do`            |             |
 |                                 | Easy Payment                          | `https://{domain}/corp/main.do`             |             |
 
-### Request and Response Headers
+### 2.4 Request and Response Headers
 
 | Type     | Content                                                |
 | -------- | ------------------------------------------------------ |
 | Request  | `Content-type=application/x-www-form-urlencoded; charset=UTF-8` |
 | Response | `Content-type=text/html; charset=UTF-8`                |
 
-### Request Parameter Verification
+### 2.5 Request Parameter Verification
 
 If there is an error after parameter verification, such as missing required values, inconsistency of hash data, and length check, the following response code is returned.
 
@@ -361,7 +361,7 @@ If there is an error after parameter verification, such as missing required valu
 }
 ```
 
-### Integration Script Provision
+### 2.6 Integration Script Provision
 
 For the convenience of the merchant when integrating, an integration script is provided.
 
@@ -420,7 +420,7 @@ parent.postMessage(JSON.stringify({action:"HECTO_IFRAME_RESIZE", params: {width:
 parent.postMessage(JSON.stringify({action:"HECTO_IFRAME_RETURNSIZE"}), "*");
 ```
 
-### Sample Source Provision
+### 2.7 Sample Source Provision
 
 - To make Hecto Financial payment window integration easy, a sample source is provided.
 - The sample source provided by Hecto Financial only includes the basics for integration, so please integrate it according to the Merchant’s environment when developing.
@@ -444,18 +444,18 @@ parent.postMessage(JSON.stringify({action:"HECTO_IFRAME_RETURNSIZE"}), "*");
         - For ASP Classic, there is a need to install a DLL file (encryption/decryption module) which was additionally distributed.
             - [ASP Classic DLL Guide, click!](https://example.com)
 
-## API Server Integration (Non-UI)
+## 3. API Server Integration (Non-UI)
 
 API service integration methods of cancellation per payment method, credit card billkey payment, mobile monthly recurring payment, virtual account issuance, etc. are defined.
 
-### Description
+### 3.1 Description
 
 - Check the API URI of the service that you want to use.
 - Check the request parameter of the service that you want to use, and set the appropriate request parameter.
 - Do HTTP Connection through Server to Server and request/respond with JSON Data.
 - Parameters related to personal/sensitive information should be encrypted. (Refer to [5. Crucial Information Security](#crucial-information-security))
 
-### API URI
+### 3.2 API URI
 
 Hecto Financial API server domain names are as follows.
 
@@ -490,14 +490,14 @@ The API server URI is as follows.
 | Other Service API (Non-UI) | Credit card billkey delete            | `https://{domain}/spay/APICardActionDelkey.do` | POST        |
 |                        | Real-time transaction inquiry             | `https://{domain}/spay/APITrdcheck.do`      |             |
 
-### Request and Response Headers
+### 3.3 Request and Response Headers
 
 | Type     | Description                                         |
 | -------- | --------------------------------------------------- |
 | Request  | `Content-type=application/json; charset=UTF-8`      |
 | Response | `Content-type=application/json; charset=UTF-8`      |
 
-### JSON Request Data Example
+### 3.4 JSON Request Data Example
 
 The following is the credit card cancellation request parameter JSON example.
 
