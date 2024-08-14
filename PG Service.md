@@ -559,11 +559,14 @@ All communications use HTTPS(TCP/443) protocol. We strongly recommend that you c
 
 #### Example of `/etc/hosts` or `C:\windows\system32\drivers\etc\hosts` File Content
 ```plaintext
-# Additional
-14.34.14.25 npg.settlebank.co.kr
-#61.252.169.58 npg.settlebank.co.kr
+#cat /etc/hosts
 
-14.34.14.21 gw.settlebank.co.kr
+	# Additional
+	14.34.14.25 npg.settlebank.co.kr
+	#61.252.169.58 npg.settlebank.co.kr
+
+
+	14.34.14.21 gw.settlebank.co.kr
 #61.252.169.53 gw.settlebank.co.kr
 ```
 
