@@ -527,3 +527,219 @@ The following is the credit card cancellation request parameter JSON example.
 	}
 }
 ```
+
+## 4. Integration Server
+
+### 4.1 Server IP Address
+Hecto Financial server’s IP addresses are as follows.
+
+| Type                           | Domain Name                     | IP Address                  |
+|--------------------------------|----------------------------------|-----------------------------|
+| Payment Window (UI)            | Testbed                          | tbnpg.settlebank.co.kr       |
+|                                |                                  | 61.252.169.51 (HTTPS/TCP/443)|
+|                                | Production                       | npg.settlebank.co.kr         |
+|                                |                                  | 14.34.14.25 (primary)        |
+|                                |                                  | 61.252.169.58 (secondary)    |
+| Cancellation and Other API     | Testbed                          | tbgw.settlebank.co.kr        |
+| Service (Non-UI)               |                                  | 61.252.169.42 (HTTPS/TCP/443)|
+|                                | Production                       | gw.settlebank.co.kr          |
+|                                |                                  | 14.34.14.21 (primary)        |
+|                                |                                  | 61.252.169.53 (secondary)    |
+| Settlement Collation API       | Testbed                          | tb-nspay.settlebank.co.kr    |
+|                                |                                  | 61.252.169.32 (HTTPS/TCP/443)|
+|                                | Production                       | nspay.settlebank.co.kr       |
+|                                |                                  | 61.252.169.29 (primary)      |
+|                                |                                  | 14.34.14.37 (secondary)      |
+
+Hecto Financial PG's next-generation system is configured with IDC center redundancy. Therefore, the main and secondary centers may be switched due to GLB system operation without notice, and access by DNS Lookup is recommended. We request that you allow access to the two public IP addresses (production) in the firewall and do not recommend configuring the hosts file.
+
+If your company's internal policy is to configure the domain address as static in the hosts file, when switching to Hecto Financial IDC center, you must manually change the hosts file of all servers to the commented IP addresses as shown below to use the payment service normally.
+
+All communications use HTTPS(TCP/443) protocol. We strongly recommend that you connect using TLS 1.2 or later. Support for TLS 1.1 or earlier may be discontinued without notice due to security advisories.
+
+#### Example of `/etc/hosts` or `C:\windows\system32\drivers\etc\hosts` File Content
+```plaintext
+# Additional
+14.34.14.25 npg.settlebank.co.kr
+#61.252.169.58 npg.settlebank.co.kr
+
+14.34.14.21 gw.settlebank.co.kr
+#61.252.169.53 gw.settlebank.co.kr
+```
+
+### 4.2 Notification Server
+After the transaction is completed, the firewall must be allowed for the server that notifies the transaction result from Hecto Financial to the client’s system (firewall inbound must be allowed). When invoking the payment window, the `notiUrl` is used to invoke the client’s page. The TCP port number is the port number specified in the `notiUrl`, and you need to allow the firewall.
+
+| Service    | Type             | IP Address                        |
+|------------|------------------|-----------------------------------|
+| Testbed    | Send Notification | 61.252.169.22                     |
+| Production | Send Notification | 14.34.14.23 (Primary center)      |
+|            |                  | 61.252.169.24 (Secondary center)  |
+
+Example: `notiUrl=https://abc.com:8443/abc.do`
+- Source IP: Hecto Financial notification server IP from the list above
+- Destination: Client’s server IP (e.g., abc.com) on TCP/8443
+
+The receipt order of notification and payment window `nextUrl` result delivery or notification and NON-UI approval response is not guaranteed. After payment through the payment window, sending of approval notification is required, but the sending of cancellation notification is optional. If you need the cancellation notification, please ask Hecto Financial’s manager to enable it before the service goes live.
+
+## 5. Crucial Information Security
+
+### 5.1 Encryption/Decryption of Personal Information and Crucial Information
+When sending and receiving data, the following encryption/decryption should be performed for the personal information/crucial information fields.
+
+| Type              | Entry       | Application                        | Encoding        |
+|-------------------|-------------|------------------------------------|-----------------|
+| Personal Information | Algorithm | AES-256/ECB/PKCS5Padding          | Base64 Encoding |
+|                   | Target Field| Transaction amount, customer name, |                 |
+|                   |             | mobile phone number, email, etc.   |                 |
+
+(The fields for encryption are specified in the remarks of the request field specification of each API)
+
+### 5.2 Personal Information Encryption Key
+For encryption/decryption of personal information and crucial information, key information differs depending on the operating environment as follows:
+
+| Type                           | Encryption/Decryption Key                  |
+|--------------------------------|---------------------------------------------|
+| Testbed Key (Common Key for Tests) | pgSettle30y739r82jtd709yOfZ2yK5K        |
+| Production Key (Merchant’s Unique Key) | Provided separately when the service goes live |
+
+### 5.3 Forgery Prevention Algorithm
+To verify whether the request data is forged or falsified, a hash key verification is done additionally. The hash key generation algorithm is as follows:
+
+| Section | Entry    | Application | Encoding    |
+|---------|----------|-------------|-------------|
+| Forgery | Algorithm | SHA-256     | Hex Encoding|
+
+### 5.4 Hash Generation Authentication Key
+For a simple integration test, use the first entry in the table. When the integration is successfully done, use the unique key issued by Hecto Financial.
+
+| Section       | Authentication Key            |
+|---------------|--------------------------------|
+| Testbed Key (Common Key for Tests) | ST1009281328226982205 |
+| Production Key (Merchant’s Unique Key) | Provided separately when the service goes live |
+
+## 6. Credit Card Payment (UI)
+
+### 6.1 Cautions
+- The screen diverges depending on the Merchant ID property.
+    - If the Merchant ID is set to general authentication payment, the card company’s authentication window appears.
+    - If the Merchant ID is set to non-authentication or old-authentication, the card information input window appears.
+- To download the credit card billkey, you have to apply for billkey service separately.
+    - If you’ve been issued a billkey, you can use the billkey to request the 2nd payment API. (Refer to [9. Credit Card Billkey Payment API])
+    - Please note that the issued amount of the sales slip is displayed based on the parameters sent by the Merchant.
+
+    **Example:** If a taxable Merchant sends a transaction amount of 1000 won as follows:
+    - Only the transaction amount is sent: Marked as Taxable 901 VAT 99
+    - Taxable amount 900 VAT amount 100 sent: Marked as Taxable 900 VAT 100
+
+### 6.2 Request Parameter (Merchant -> Hecto Financial)
+- [Content for this section continues from the document]
+
+### 6.3 Request Parameter Hash Code
+- [Content for this section continues from the document]
+
+### 6.4 Response Parameter (Hecto Financial -> Merchant)
+- [Content for this section continues from the document]
+
+### 6.5 Notification Parameter (Hecto Financial -> Merchant)
+- [Content for this section continues from the document]
+
+## 7. Credit Card WebView
+
+### 7.1 APP SCHEME Setting
+Merchant App Scheme setting for payment request 
+Scheme name specified in `appScheme` parameter (Merchant app scheme name://).
+When opening an external app, control goes to the App Scheme when the external app is closed. When opening a card company app and changing to another payment method app, add the App Scheme. 
+
+### 7.2 Android
+Redefinition of WebViewClient class’ `shouldOverrideUrlLoading` method
+When opening an external app like app card and vaccine app, this is the logic for going to the market for installation of the app if the app is not installed.
+
+```java
+private class TestWebViewClient extends WebViewClient {
+  @Override
+  public boolean shouldOverrideUrlLoading(WebView view, String url) {  
+    if(url == null)
+      return false;
+      
+    if((url.startsWith("http://") || url.startsWith("https://"))){
+      view.loadUrl(url);
+      return false;
+    } else {
+      Intent intent;
+      try {
+        intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
+        Uri uri = Uri.parse(intent.getDataString());
+        intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+        return true;  
+      } catch (URISyntaxException e1) {
+        e1.printStackTrace();
+        return false;
+      } catch (ActivityNotFoundException e2) {
+        if(url.startsWith("ispmobile://")){
+          Uri marketUri = Uri.parse("market://details?id=kvp.jjy.MispAndroid320");
+          Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
+          startActivity(marketIntent);
+          return true;
+        } else if(url.startsWith("kftc-bankpay://")){
+          Uri marketUri = Uri.parse("market://details?id=com.kftc.bankpay.android");
+          Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
+          startActivity
+
+(marketIntent);
+          return true;
+        } else {
+          try {
+            String packagename = intent.getPackage();
+            if (packagename != null) {
+              Uri marketUri = Uri.parse("market://details?id=" + packagename);
+              Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
+              startActivity(marketIntent);
+              return true;
+            }
+          } catch (URISyntaxException e3) {
+            e3.printStackTrace();
+            return false;
+          }
+        }
+      }
+    }
+    return false;
+  }
+}
+```
+- [Content continues as per the document]
+
+### 7.3 IOS
+- [Content continues as per the document]
+
+## 8. Credit Card Payment API (Non-UI)
+
+### 8.1 Payment API Request Parameter (Billkey Issuing Included)
+- [Content for this section continues from the document]
+
+### 8.2 Request Parameter Hash Code
+- [Content for this section continues from the document]
+
+### 8.3 Payment API Response Parameter (Billkey Issuing Included)
+- [Content for this section continues from the document]
+
+### 8.4 Response Parameter Hash Code
+- [Content for this section continues from the document]
+
+## 9. Credit Card Billkey Payment API (Non-UI)
+
+### 9.1 Request Parameter (Merchant -> Hecto Financial)
+- [Content for this section continues from the document]
+
+### 9.2 Request Parameter Hash Code
+- [Content for this section continues from the document]
+
+### 9.3 Response Parameter (Hecto Financial -> Merchant)
+- [Content for this section continues from the document]
+
+### 9.4 Response Parameter Hash Code
+- [Content for this section continues from the document]
+
+```
