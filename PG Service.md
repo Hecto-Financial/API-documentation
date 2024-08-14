@@ -472,12 +472,12 @@ The API server URI is as follows.
 |                        | Credit card billkey issuance              | `https://{domain}/spay/APICardAuth.do`      |             |
 |                        | Phone monthly recurring payment          | `https://{domain}/spay/APIService.do`       |             |
 |                        | PAYCO Easy Payment approval               | `https://{domain}/spay/APITrdPayco.do`      |             |
-| Cancellation API (Non-UI) | Credit card cancellation               | `https://{domain}/spay/APICancel.do`        | POST        |
+| Cancellation API (Non-UI) | Credit card cancellation               | 					           | POST        |
 |                        | Account transfer cancellation             |                                             |             |
 |                        | DCB cancellation                          |                                             |             |
 |                        | Teen Cash cancellation                    |                                             |             |
 |                        | Happy Money cancellation                  |                                             |             |
-|                        | Culture Land voucher (Culture Cash) cancellation |                                      |             |
+|                        | Culture Land voucher (Culture Cash) cancellation |   `https://{domain}/spay/APICancel.do`                                    |             |
 |                        | Smart Gift Voucher cancellation           |                                             |             |
 |                        | Book Voucher cancellation                 |                                             |             |
 |                        | Tmoney cancellation                       |                                             |             |
