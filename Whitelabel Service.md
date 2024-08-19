@@ -55,17 +55,17 @@
 
 ---
 
-## Outline
+## 1.Outline
 
-### Purpose
+### 1.1 Purpose
 
 This document is intended to provide technical understanding and define detailed specifications for White Label service integration development service provided by Hecto Financial.
 
-### Target
+### 1.2 Target
 
 The target for this document is the developer of the client that will execute payment through Hecto Financial’s White Label service.
 
-### Document Specification
+### 1.3 Document Specification
 
 The following is a general description of the integration referred to in this document.
 
@@ -76,11 +76,11 @@ The following is a general description of the integration referred to in this do
   - H: Korean letter type string
 - The length of the request / response parameters is based on the plain text UTF-8 encoded value (Byte).
 
-### Integration Process
+### 1.4 Integration Process
 
 Refer to "6. Invoke Payment Window (UI)" and do number 1 authentication request UI integration invoke. According to the responded result, refer to “7. Payment API (Non-UI)” and do number 2 payment request API (NON-UI) integration invoke to proceed with payment.
 
-## Standard Payment Window (UI) Integration
+## 2. Standard Payment Window (UI) Integration
 
 ### Summary
 
@@ -110,7 +110,7 @@ Refer to "6. Invoke Payment Window (UI)" and do number 1 authentication request 
 
 - If HTTP is used it may be against the browser policy (cross-origin etc.) so the payment window might not function normally. Thus, use of HTTPS is recommended.
 
-### Payment Window URI
+### 2.3 Payment Window URI
 
 Hecto Financial White Label payment window (UI) server domain names are as follows:
 
@@ -125,14 +125,14 @@ Hecto Financial White Label payment window (UI) API URI are as follows:
 |--------------------------|----------------|-----------------------------------------------|-------------|
 | Standard Payment Window (UI) | Invoke Payment Window | https://{domain}/whitelabel/main.do           | POST        |
 
-### Request and Response Headers
+### 2.4 Request and Response Headers
 
 | Classification | Content                                                         |
 |----------------|-----------------------------------------------------------------|
 | Request        | `Content-type=application/x-www-form-urlencoded; charset=UTF-8` |
 | Response       | `Content-type=text/html; charset=UTF-8`                         |
 
-### Request Parameter Verification
+### 2.5 Request Parameter Verification
 
 Upon parameter verification, if there is an error like missing required value, HASH data mismatch, and length check, the response code below is returned.
 
@@ -148,15 +148,15 @@ Upon parameter verification, if there is an error like missing required value, H
 ("결제 요청 정보 누락 (상품명)" = “Payment Request Information Missing (Product Name)”)
 ```
 
-## API Service Integration (Non-UI)
+## 3. API Service Integration (Non-UI)
 
-### Summary
+### 3.1 Summary
 
 - After checking the request parameter, set the applicable request parameter.
 - Do HTTP Connection through Server to Server and request/respond through JSON data.
 - Personal/sensitive information-related parameter should be encrypted. (Refer to [5. Crucial Information Security](#crucial-information-security)).
 
-### API URI
+### 3.2 API URI
 
 Hecto Financial White Label API server domain names are as follows:
 
@@ -172,14 +172,14 @@ API server URI are as follows:
 | Payment API (Non-UI)     | Payment Request  | https://{domain}/whitelabel/v1/pay_confirm.do | POST        |
 | Cancellation API (Non-UI)| Cancellation Request | https://{domain}/whitelabel/v1/pay_cancel.do | POST        |
 
-### Request and Response Headers
+### 3.3 Request and Response Headers
 
 | Classification | Content                                       |
 |----------------|-----------------------------------------------|
 | Request        | `Content-type=application/json; charset=UTF-8`|
 | Response       | `Content-type=application/json; charset=UTF-8`|
 
-### JSON Request Data Example
+### 3.4 JSON Request Data Example
 
 The following is the payment request parameter JSON example.
 
@@ -206,9 +206,9 @@ The following is the payment request parameter JSON example.
 }
 ```
 
-## Integration Server
+## 4. Integration Server
 
-### Server IP Address
+### 4.1 Server IP Address
 
 The following is the Hecto Financial server’s IP address.
 
@@ -235,9 +235,9 @@ If you configure the domain address as a fixed setting in the hosts file due to 
 
 All communication uses HTTPS (TCP/443) protocol, and it is strongly recommended to connect using TLS 1.2 or higher. TLS 1.1 or lower may be discontinued without notice due to security advisories.
 
-## Crucial Information Security
+## 5. Crucial Information Security
 
-### Personal Information and Crucial Information Encryption / Decryption
+### 5.1 Personal Information and Crucial Information Encryption / Decryption
 
 When sending or receiving data for personal information / crucial information fields, the following encryption/decryption should be done.
 
@@ -246,7 +246,7 @@ When sending or receiving data for personal information / crucial information fi
 | Personal Information | Algorithm                      | AES-256/ECB/PKCS5Padding           | Base64 Encoding  |
 |                      | Target Field                   | Transaction Amount, Customer Name, Mobile Number, Email, etc. (Fields that should be encrypted are specified in the remark section of individual API’s request field specifications.) |                  |
 
-### Personal Information Encryption Key
+### 5.2 Personal Information Encryption Key
 
 Personal information and crucial information encryption/decryption key information differ depending on the environment and are as follows. For a simple integration test, use the first entry in the table. Once the integration is done successfully, use the unique key issued by Hecto Financial.
 
@@ -255,7 +255,7 @@ Personal information and crucial information encryption/decryption key informati
 | Testbed Key (Common Key for Test) | `pgSettle30y739r82jtd709yOfZ2yK5K` |
 | Production Environment Key (Merchant Unique Key) | Separately notified when the service is implemented |
 
-### Forgery Prevention Algorithm
+### 5.3 Forgery Prevention Algorithm
 
 Hash key verification is additionally executed to verify that the request data has not been forged and the hash key generation algorithm is as follows.
 
@@ -263,7 +263,7 @@ Hash key verification is additionally executed to verify that the request data h
 |----------------|--------------------------------|------------------------|------------------|
 | Forgery        | Algorithm                      | SHA-256                | Hex Encoding     |
 
-### Hash Generation Authentication Key
+### 5.4 Hash Generation Authentication Key
 
 For a simple integration test, use the first entry in the table. Once the integration is done successfully, use the unique key issued by Hecto Financial.
 
@@ -272,16 +272,16 @@ For a simple integration test, use the first entry in the table. Once the integr
 | Testbed Key (Common Key for Test) | `ST1009281328226982205`           |
 | Production Environment Key (Merchant Unique Key) | Separately notified when the service is implemented |
 
-## Payment Window Invoke (UI)
+## 6. Payment Window Invoke (UI)
 
-### Caution
+### 6.1 Caution
 
 Please refer to the issuance amount parameter processing standard.
 - Ex) If the taxable merchant sends a transaction amount of 1000 won as follows:
   1. Only the transaction amount sent: Processed as taxable 901, VAT 99
   2. Taxable amount 900, VAT amount 100 sent: Processed as taxable 900, VAT 100
 
-### Request Parameter (Merchant -> Hecto Financial)
+### 6.2 Request Parameter (Merchant -> Hecto Financial)
 
 | Parameter      | Name                         | Description                                                             | Type (Length)  | Required | Remark                                          |
 |----------------|------------------------------|-------------------------------------------------------------------------|----------------|----------|-------------------------------------------------|
@@ -311,13 +311,13 @@ Please refer to the issuance amount parameter processing standard.
 | `ciChkYn`      | CI Verification Status       | Customer CI verification status. If used (Y), input CI in customer ID   | A(1)           | ○        | "N"                                             |
 | `pktHash`      | Hash Data                    | Hash value generated with SHA256 method. Refer to [Request Parameter Hash Code](#request-parameter-hash-code) | AN(200) | ● | "f395b6725a9a18f2563ce34f8bc76698051d27c05e5ba815f463f00429061c0c" |
 
-### Request Parameter Hash Code
+### 6.3 Request Parameter Hash Code
 
 | Entry    | Combination Field                                                                            |
 |----------|----------------------------------------------------------------------------------------------|
 | `pktHash` | Merchant ID + Payment Method + Merchant Order Number + Request Date + Request Time + Transaction Amount (Plain Text) + Hash Key |
 
-### Response Parameter (Hecto Financial -> Merchant)
+### 6.4 Response Parameter (Hecto Financial -> Merchant)
 
 Columns that respond to the merchant side from the White Label payment window are defined as follows.
 
@@ -333,9 +333,9 @@ Columns that respond to the merchant side from the White Label payment window ar
 | `trdAmt`       | Transaction Amount           | Transaction amount, AES encryption                                      | N(12)          | ●        | "1000"                                          |
 | `mchtParam`    | Merchant Reserved Field      | Field value received as request is Bypassed as response                 | AHN(4000)      | ○        | "name=HongGilDong&age=25"                       |
 
-## Payment API (Non-UI)
+## 7. Payment API (Non-UI)
 
-### Request Parameter (Merchant -> Hecto Financial)
+### 7.1 Request Parameter (Merchant -> Hecto Financial)
 
 API URI:
 - Test Environment: `https://tbapi.settlebank.co.kr/whitelabel/v1/pay_confirm.do`
@@ -360,13 +360,13 @@ API URI:
 | `authTrdNo`    | Authentication Transaction Number | Hecto Financial Transaction Number                                    | AN(40)         | ●        | "STFP_PGCApg_test0000231218090723M1717578"      |
 | `trdAmt`       | Transaction Amount           | Transaction amount, AES encryption                                      | N(12)          | ●        | "1000"                                          |
 
-### Request Parameter Hash Code
+### 7.2 Request Parameter Hash Code
 
 | Entry    | Combination Field                                                                            |
 |----------|----------------------------------------------------------------------------------------------|
 | `pktHash` | Request Date + Request Time + Merchant ID + Merchant Order Number + Transaction Amount (Plain Text) + Hash Key |
 
-### Response Parameter (Hecto Financial -> Merchant)
+### 7.3 Response Parameter (Hecto Financial -> Merchant)
 
 | Parameter      | Name                         | Description                                                             | Type (Length)  | Required | Remark                                          |
 |----------------|------------------------------|-------------------------------------------------------------------------|----------------|----------|-------------------------------------------------|
@@ -395,15 +395,15 @@ API URI:
 | `fnCd`         | Card Company Code            | Code of the card company used for payment                               | AN(4)          | ○        | (For Credit Card) "KBC"                         |
 | `svcDivCd`     | Easy Cash Integration Classification | 1: Firm Banking, 2: Open Banking                                   | N(1)           | ○        | (For Easy Cash) "1"                             |
 
-### Response Parameter Hash Code
+### 7.4 Response Parameter Hash Code
 
 | Entry    | Combination Field                                                                            |
 |----------|----------------------------------------------------------------------------------------------|
 | `pktHash` | Transaction Status Code + Request Date + Request Time + Merchant ID + Merchant Order Number + Transaction Amount + Hash Key |
 
-## Cancellation API (Non-UI)
+## 8. Cancellation API (Non-UI)
 
-### Request Parameter (Merchant -> Hecto Financial)
+### 8.1 Request Parameter (Merchant -> Hecto Financial)
 
 API URI:
 - Test Environment: `https://tbapi.settlebank.co.kr/whitelabel/v1/pay_cancel.do`
@@ -439,13 +439,13 @@ Columns requested from the merchant server to Hecto Financial are defined as fol
 | `crcCd`        | Currency Classification      | Currency classification value                                           | A(3)           | ○        | (Exclusive for credit card) Required - "KRW"    |
 | `cnclOrd`      | Number of Cancellation       | Start from 001. For second partial cancellation 002                     | N(3)           | ○        | (Exclusive for credit card) Required - "001"    |
 
-### Request Parameter Hash Code
+### 8.2 Request Parameter Hash Code
 
 | Entry    | Combination Field                                                                            |
 |----------|----------------------------------------------------------------------------------------------|
 | `pktHash` | Cancellation Request Date + Cancellation Request Time + Merchant ID + Merchant Order Number + Cancellation Amount (Plain Text) + Hash Key |
 
-### Response Parameter (Hecto Financial -> Merchant)
+### 8.3 Response Parameter (Hecto Financial -> Merchant)
 
 Columns that respond to the merchant from Hecto Financial are defined as follows.
 
@@ -483,15 +483,15 @@ Columns that respond to the merchant from Hecto Financial are defined as follows
 | `blcAmt`       | Cancellable Balance          | Cancellable balance, AES encryption                                     | N(12)          | ○        | "0"                                             |
 | `pktNo`        | Parameter Number             | Parameter number                                                        | AN(20)         | ○        | (Exclusive for Easy Cash Payment)               |
 
-### Request Parameter Hash Code
+### 8.4 Request Parameter Hash Code
 
 | Entry    | Combination Field                                                                            |
 |----------|----------------------------------------------------------------------------------------------|
 | `pktHash` | Transaction Status Code + Cancellation Response Date + Cancellation Response Time + Merchant ID + Merchant Order Number + Transaction Amount (Plain Text) + Hash Key |
 
-## Others
+## 9. Others
 
-### Table of Reject Codes
+### 8.1 Table of Reject Codes
 
 **White Label Exclusive Response Code**
 
