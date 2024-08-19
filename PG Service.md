@@ -106,9 +106,7 @@
     - [Request Parameter Hash Code](#request-parameter-hash-code-13)
     - [Response Parameter (Hecto Financial -> Merchant)](#response-parameter-hecto-financial---merchant-11)
     - [Test Environment Deposit Test API](#test-environment-deposit-test-api-2)
-    - [Notification Parameter (
-
-Hecto Financial -> Merchant)](#notification-parameter-hecto-financial---merchant-8)
+    - [Notification Parameter (Hecto Financial -> Merchant)](#notification-parameter-hecto-financial---merchant-8)
 20. [Direct Carrier Billing (DCB) (UI)](#direct-carrier-billing-dcb-ui)
     - [Request Parameter (Merchant -> Hecto Financial)](#request-parameter-merchant---hecto-financial-12)
     - [Request Parameter Hash Code](#request-parameter-hash-code-14)
