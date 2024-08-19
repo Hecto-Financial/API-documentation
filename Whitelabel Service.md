@@ -1,3 +1,152 @@
+# White Label Service WEB API
+
+## Contents
+
+1. [Outline](#outline)  
+   1.1 [Purpose](#purpose)  
+   1.2 [Target](#target)  
+   1.3 [Document Specification](#document-specification)  
+   1.4 [Integration Process](#integration-process)
+   
+2. [Standard Payment Window (UI) Integration](#standard-payment-window-ui-integration)  
+   2.1 [Summary](#summary)  
+   2.2 [Caution](#caution)  
+   2.3 [Payment Window URI](#payment-window-uri)  
+   2.4 [Request and Response Headers](#request-and-response-headers)  
+   2.5 [Request Parameter Verification](#request-parameter-verification)
+   
+3. [API Service Integration (Non-UI)](#api-service-integration-non-ui)  
+   3.1 [Summary](#summary-1)  
+   3.2 [API URI](#api-uri)  
+   3.3 [Request and Response Headers](#request-and-response-headers-1)  
+   3.4 [JSON Request Data Example](#json-request-data-example)
+   
+4. [Integration Server](#integration-server)  
+   4.1 [Server IP Address](#server-ip-address)
+   
+5. [Crucial Information Security](#crucial-information-security)  
+   5.1 [Personal Information and Crucial Information Encryption / Decryption](#personal-information-and-crucial-information-encryption--decryption)  
+   5.2 [Personal Information Encryption Key](#personal-information-encryption-key)  
+   5.3 [Forgery Prevention Algorithm](#forgery-prevention-algorithm)  
+   5.4 [Hash Generation Authentication Key](#hash-generation-authentication-key)
+   
+6. [Payment Window Invoke (UI)](#payment-window-invoke-ui)  
+   6.1 [Caution](#caution-1)  
+   6.2 [Request Parameter (Merchant -> Hecto Financial)](#request-parameter-merchant---hecto-financial)  
+   6.3 [Request Parameter Hash Code](#request-parameter-hash-code)  
+   6.4 [Response Parameter (Hecto Financial -> Merchant)](#response-parameter-hecto-financial---merchant)
+   
+7. [Payment API (Non-UI)](#payment-api-non-ui)  
+   7.1 [Request Parameter (Merchant -> Hecto Financial)](#request-parameter-merchant---hecto-financial-1)  
+   7.2 [Request Parameter Hash Code](#request-parameter-hash-code-1)  
+   7.3 [Response Parameter (Hecto Financial -> Merchant)](#response-parameter-hecto-financial---merchant-1)  
+   7.4 [Response Parameter Hash Code](#response-parameter-hash-code)
+   
+8. [Cancellation API (Non-UI)](#cancellation-api-non-ui)  
+   8.1 [Request Parameter (Merchant -> Hecto Financial)](#request-parameter-merchant---hecto-financial-2)  
+   8.2 [Request Parameter Hash Code](#request-parameter-hash-code-2)  
+   8.3 [Response Parameter (Hecto Financial -> Merchant)](#response-parameter-hecto-financial---merchant-2)  
+   8.4 [Request Parameter Hash Code](#request-parameter-hash-code-3)
+   
+9. [Others](#others)  
+   9.1 [Table of Reject Codes](#table-of-reject-codes)  
+   9.2 [Financial Institution Identifiers](#financial-institution-identifiers)  
+   9.3 [Bank Regular Maintenance Time](#bank-regular-maintenance-time)
+
+---
+
+## Outline
+
+### Purpose
+
+This document is intended to provide technical understanding and define detailed specifications for White Label service integration development service provided by Hecto Financial.
+
+### Target
+
+The target for this document is the developer of the client that will execute payment through Hecto Financial’s White Label service.
+
+### Document Specification
+
+The following is a general description of the integration referred to in this document.
+
+- Required fields in the request/response parameters use symbol '●' and selected fields use symbol '○'.
+- Request / response parameters’ data type are as follows:
+  - N: Number type string
+  - A: Alphabet type string
+  - H: Korean letter type string
+- The length of the request / response parameters is based on the plain text UTF-8 encoded value (Byte).
+
+### Integration Process
+
+Refer to "6. Invoke Payment Window (UI)" and do number 1 authentication request UI integration invoke. According to the responded result, refer to “7. Payment API (Non-UI)” and do number 2 payment request API (NON-UI) integration invoke to proceed with payment.
+
+## Standard Payment Window (UI) Integration
+
+### Summary
+
+- Check request URI per function. (Refer to [2.3 API URI](#payment-window-uri))
+- Check request parameter per function set the request parameter and request in POST method.
+- Personal/sensitive information-related parameter should be encrypted. (Refer to [5. Crucial Information Security](#crucial-information-security)).
+- Should open Hecto Financial White Label payment window and then proceed with the payment.
+- When the payment is completed, the result (response parameter) is returned to the URL set in the request parameter `nextUrl`.
+- If the user forcibly exits the payment window during payment (payment window ‘X’ button), the result (response parameter) is returned to the URL set in the `cancUrl` parameter.
+
+### Caution
+
+- It only supports browsers Chrome and Edge. It may not function properly on other browsers.
+- Merchants are responsible for any costs incurred when testing with merchant ID (`mchtId`) in production environment.
+- Only POST method is used for requests.
+- For request parameters, please use only those specified in the integration specification. Otherwise, an error might occur.
+- Please refrain from using special characters like `:`, `&`, `?`, `'`, new line `<`, `>` in the request parameter.
+- Please refrain from using emoji in the request parameter. If an emoji is included, it will be removed regardless of the intent of the user.
+- Request and response parameters may change without notice, this should be considered while developing.
+- There are cases in which it does not function normally on certain browsers or devices if Iframe is used for payment window integration, so please refrain from using Iframe.
+
+#### nextUrl parameter
+
+- It is the URL invoked when Hecto Financial payment is completed. The request parameter should be delivered in POST method. If the customer forcibly exits the payment window (browser ‘X’ button) it won’t be invoked. `nextUrl` delivers the authentication result and the service should be provided only when the payment request result is success.
+
+#### nextUrl cancUrl protocol
+
+- If HTTP is used it may be against the browser policy (cross-origin etc.) so the payment window might not function normally. Thus, use of HTTPS is recommended.
+
+### Payment Window URI
+
+Hecto Financial White Label payment window (UI) server domain names are as follows:
+
+| Classification          | Domain Name                 |
+|-------------------------|-----------------------------|
+| Testbed                 | tbwl.settlebank.co.kr        |
+| Production Environment   | wl.settlebank.co.kr         |
+
+Hecto Financial White Label payment window (UI) API URI are as follows:
+
+| Function Classification  | Payment Method | URI                                           | HTTP Method |
+|--------------------------|----------------|-----------------------------------------------|-------------|
+| Standard Payment Window (UI) | Invoke Payment Window | https://{domain}/whitelabel/main.do           | POST        |
+
+### Request and Response Headers
+
+| Classification | Content                                                         |
+|----------------|-----------------------------------------------------------------|
+| Request        | `Content-type=application/x-www-form-urlencoded; charset=UTF-8` |
+| Response       | `Content-type=text/html; charset=UTF-8`                         |
+
+### Request Parameter Verification
+
+Upon parameter verification, if there is an error like missing required value, HASH data mismatch, and length check, the response code below is returned.
+
+```json
+{
+   "outRsltMsg" : "결제 요청 정보 누락 (상품명)",
+   "mchtTrdNo" : "PG_whitelabel_20231218081443",
+   "outRsltCd" : "1011",
+   "outStatCd" : "0031",
+   "mchtId" : "pg_test"
+}
+```
+("결제 요청 정보 누락 (상품명)" = “Payment Request Information Missing (Product Name)”)
+```
 
 ## API Service Integration (Non-UI)
 
