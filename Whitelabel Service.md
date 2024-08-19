@@ -491,7 +491,7 @@ Columns that respond to the merchant from Hecto Financial are defined as follows
 
 ## 9. Others
 
-### 8.1 Table of Reject Codes
+### 9.1 Table of Reject Codes
 
 **White Label Exclusive Response Code**
 
@@ -572,19 +572,144 @@ Columns that respond to the merchant from Hecto Financial are defined as follows
 | SE01 | Authentication valid time has expired.                | SE02 | Authentication number mismatch                                  |
 | SE03 | Number of allowed attempts for authentication check has been exceeded |         |                                                                  |
 
+### PG Common Response Code
 
-### Financial Institution Identifiers
+| Code | Content                                                        | Code | Content                                                                  |
+|------|----------------------------------------------------------------|------|--------------------------------------------------------------------------|
+| ST01 | No customer information                                        | STR1~STR8 | Internal policy                                                      |
+| ST06 | No transaction information                                     | ST03 | Already paid transaction                                                  |
+| ST08 | Already registered account                                     | ST07 | Invalid parameter                                                         |
+| ST09 | Invalid request parameter                                      | ST10 | Internal system error                                                     |
+| ST11 | Provider maintenance time                                      | ST13 | No authentication detail                                                  |
+| ST19 | Transaction not allowed for other reasons                      | ST24 | Account holder mismatch                                                   |
+| ST25 | Duplicate cancellation request                                 | ST26 | Cancellation information error                                            |
+| ST30 | Authentication time expired                                    | ST32 | Account holder name error                                                 |
+| ST38 | Processing                                                     | ST39 | Refund duplicate request                                                  |
+| ST41 | Traffic overload                                               | ST44 | Provider information error                                                |
+| ST45 | Cancellation failure                                           | ST46 | Cancellation period elapsed                                               |
+| ST47 | Unregistered merchant                                          | ST48 | Unregistered merchant                                                     |
+| ST50 | Duplicate request                                              | ST54 | Partial cancellation not allowed                                          |
+| ST55 | Compound tax amount mismatch                                   | ST56 | Number of cancellation error                                              |
+| ST57 | Cancellation amount (refund amount) exceeds the original transaction amount | ST58 | Cancellation request amount and original transaction amount do not match. |
+| ST60 | Abnormal processing                                            | ST68 | Service suspension                                                        |
+| ST69 | Service not allowed                                            | ST70 | Policy block                                                              |
+| ST79 | System error                                                   | ST90~ST97 | Individual definition per payment method                                  |
+| ST99 | Error for other reasons                                        | VTIM | Provider timeout                                                          |
+| 3007 | Cancellation limit exceeded                                    |
 
-Refer to the Financial Institution Identifier Table provided by Hecto Financial.
+### Credit Card Response Code
 
-### Bank Regular Maintenance Time
+| Code | Content                                                        | Code | Content                                                                  |
+|------|----------------------------------------------------------------|------|--------------------------------------------------------------------------|
+| CA01 | Provider maintenance                                           | CA02 | Provider error                                                            |
+| CA03 | Parameter validity check                                       | CA04 | Payment relay institution error                                           |
+| CA10 | Transaction information does not exist                         | CA11 | Already acquired transaction                                              |
+| CA12 | Already canceled transaction                                   | CA13~CA19 | Request information error                                                |
+| CA20 | Card validity is not valid                                     | CA21~CA23 | Installment-related error                                                |
+| CA26 | Number of uses exceeded                                        | CA27~CA29 | Password-related error                                                   |
+| CA30 | Identification number error                                    | CA31~CA37 | Limit-related error                                                      |
+| CA38 | Transaction not allowed as point limit is not reached          | CA40~CA41 | Transaction amount error                                                 |
+| CA42 | Transaction not allowed for amounts below 1000 won or amounts over 99,999,999 won | CA50~CA57 | Card status error                                         |
+| CA58 | Unregistered card. Please contact the card company.            | CA60~CA64 | Merchant status error                                                    |
+| CA59 | Transaction with corporate card is not allowed.                | J999 | Please call the card company                                              |
+| CA65 | Authentication transaction non-committed merchant              | CA70 | Identification number (date of birth / business number) + password are not valid |
+| CA75 | Joint certification authentication information is not valid.   | CA80 | Service not allowed for the transaction                                  |
+| CA81 | Error occurred while processing transaction                    | 0905 | Requesting self-verification                                              |
+| CA82 | Please call the card company                                    | CA83 | This transaction cannot be canceled.                                      |
+| CA84 | Error for other reasons has occurred                           | CA85 | An error has occurred while processing cancellation transaction.          |
+| CA86 | Duplicate transaction                                           | CA87 | Merchant number is not valid                                              |
+| CA88 | Partial cancellation is not allowed for the pre-paid card (gift card). | 8373 | Please call the card company                                 |
+| 8375 | Other error processing                                          |
 
-| Classification       | Bank Name                 | Maintenance Time (KST) |
-|----------------------|---------------------------|------------------------|
-| Payment Request      | All                        | 23:30 ~ 00:30          |
-| Maintenance Inquiry  | All                        | 23:30 ~ 00:30          |
+### 9.2 Financial Institution Identifiers
 
----
+**Credit card unique identification codes are as follows:**
 
-# Document End
-```
+| Credit Card Company Code | Credit Card Company Name | Credit Card Company Code | Credit Card Company Name |
+|--------------------------|-------------------------|--------------------------|--------------------------|
+| BCC                      | BC                      | KBC                      | Kookmin                  |
+| HNC                      | Hana(Korea Exchange)    | SSC                      | Samsung                  |
+| SHN                      | Shinhan                 | WRI                      | Woori                    |
+| HDC                      | Hyundai                 | LTC                      | Lotte                    |
+| 007                      | Suhyup                  | NHC                      | NH Nonghyup              |
+| 035                      | Jeju                    | 034                      | Kwangju                  |
+| 037                      | Jeonbuk                 | 027                      | Citi                     |
+| 218                      | KB Securities           | 050                      | Savings Bank             |
+| 071                      | Korea Post              | 048                      | NACUFOK                  |
+| 002                      | KDB                     | 090                      | Kakao Bank               |
+| 089                      | Kbank                   | KBP                      | KBPay                    |
+| SSP                      | Samsung Pay             |                          |                          |
+
+**Financial institution unique identification codes are as follows:**
+
+| Financial Institution Code | Financial Institution Name                   | Financial Institution Code | Financial Institution Name                       |
+|----------------------------|----------------------------------------------|----------------------------|--------------------------------------------------|
+| 002                        | KDB                                           | 088                        | Shinhan Bank                                      |
+| 003                        | IBK                                           | 089                        | Kbank                                             |
+| 092                        | Toss Bank                                     | 271                        | Toss Securities                                   |
+| 004                        | Kookmin Bank                                  | 090                        | Kakao Bank                                        |
+| 005                        | Exchange Bank                                 | 209                        | Yuanta Securities                                 |
+| 007                        | Suhyup Bank                                   | 218                        | KB Securities                                     |
+| 011                        | NH Nonghyup                                   | 238                        | Mirae Asset Securities                            |
+| 012                        | NACF                                          | 240                        | Samsung Securities                                |
+| 020                        | Woori Bank                                    | 243                        | Korea Investment Securities                       |
+| 023                        | SC Bank                                       | 247                        | NH Investment Securities                          |
+| 027                        | Korea Citi Bank                               | 261                        | Kyobo Securities                                  |
+| 031                        | Daegu Bank                                    | 262                        | HI Investment Securities                          |
+| 032                        | Busan Bank                                    | 263                        | Hyundai Motor Investment Securities               |
+| 034                        | Kwangju Bank                                  | 264                        | Kiwoom Securities                                 |
+| 035                        | Jeju Bank                                     | 265                        | eBEST Investment & Securities                     |
+| 037                        | Jeonbuk Bank                                  | 266                        | SK Securities                                     |
+| 039                        | Kyongnam Bank                                 | 267                        | Daishin Securities                                |
+| 045                        | Korean Federation of Community Credit Cooperatives (KFCC) | 269 | Hanwha Investment Securities            |
+| 048                        | National Credit Union Federation of Korea (NACUFOK) | 270                | Hana Financial Investment                        |
+| 050                        | Mutual Savings Bank                           | 278                        | Shinhan Financial Investment                      |
+| 054                        | HSBC Bank                                     | 279                        | DB Securities                                     |
+| 055                        | Deutsche Bank                                 | 280                        | Eugene Investment Securities                      |
+| 057                        | JP Morgan Chase Bank                          | 287                        | Meritz Securities                                 |
+| 060                        | BOA Bank                                      | 290                        | Bookook Securities                                |
+| 062                        | Industrial and Commercial Bank of China       | 291                        | Shinyoung Securities                              |
+| 064                        | National Forestry Cooperative Federation (NFCF) | 292                      | Cape Investment Securities                        |
+| 071                        | Korea Post                                    | 103                        | SBI Savings Bank                                  |
+| 081                        | KEB Hana Bank                                 |                            |                                                  |
+
+### 9.3 Bank Regular Maintenance Time
+
+| Financial Institution Code | Financial Institution Name                                  | Bank Maintenance Time     | Hecto Financial Working Time | Regular Maintenance                                   |
+|----------------------------|-------------------------------------------------------------|---------------------------|-----------------------------|------------------------------------------------------|
+| 002                        | KDB                                                         | 23:30~00:30               | 23:50                       | 00:15 Every second Sunday of the month 00:00~04:00    |
+| 003                        | IBK                                                         | 24:00~00:30               | 23:50                       | 00:12 Every Sunday 00:00~00:30                       |
+| 004                        | Kookmin Bank                                                | 24:00~00:30               | 23:50                       | 00:12 Every third Sunday of the month 00:00~00:30, 05:00~05:30 |
+| 007                        | Suhyup Bank                                                 | 23:50~00:30               | 23:30                       | 00:30 None                                            |
+| 011                        | Nonghyup Bank                                               | 24:00~00:30               | 23:50                       | 00:12 Every third Monday of the month 00:00~04:00     |
+| 020                        | Woori Bank                                                  | 23:50~00:30               | 23:50                       | 00:10 Every second Sunday of the month 02:00~06:00    |
+| 023                        | SC Bank                                                     | 23:30~00:30
+
+               | 23:50                       | 00:12 None                                            |
+| 027                        | Korea Citi Bank                                             | 23:40~00:30               | 23:50                       | 00:30 Daily 00:30~04:30                               |
+| 031                        | Daegu Bank                                                  | 23:40~00:30               | 23:50                       | 00:05 None                                            |
+| 032                        | Busan Bank                                                  | 23:30~00:30               | 23:50                       | 00:05 None                                            |
+| 034                        | Kwangju Bank                                                | 23:40~00:30               | 23:50                       | 00:05 Every second Sunday of the month 02:00~06:00    |
+| 035                        | Jeju Bank                                                   | 23:40~00:30               | 23:50                       | 00:12 Every Sunday 04:30~05:00                        |
+| 037                        | Jeonbuk Bank                                                | 24:00~00:30               | 23:50                       | 00:05 Every second Saturday of the month 00:00~04:00  |
+| 039                        | Kyongnam Bank                                               | 23:40~00:30               | 23:50                       | 00:05 Every second Sunday of the month 00:00~07:00    |
+| 045                        | KFCC                                                        | 23:50~00:30               | 23:30                       | 00:30 None                                            |
+| 048                        | NACUFOK                                                     | 23:40~00:30               | 23:50                       | 00:05 None                                            |
+| 050                        | Mutual Savings Bank                                         | 23:50~00:10               | 23:50                       | 00:35 None                                            |
+| 064                        | NFCF                                                        | 23:30~00:30               | 23:30                       | 01:00 None                                            |
+| 071                        | Korea Post                                                  | 23:40~00:30               | 23:50                       | 00:05 None                                            |
+| 081                        | Hana Bank                                                   | 23:40~00:30               | 23:50                       | 00:15 Every second Sunday of the month 00:00~08:00    |
+| 088                        | Shinhan Bank                                                | 23:40~00:30               | 23:50                       | 00:05 None                                            |
+| 089                        | Kbank                                                       | 23:40~00:30               | 23:35                       | 00:35 None                                            |
+| 090                        | Kakao Bank                                                  | 23:50~00:10               | 23:50                       | 00:05 None                                            |
+| 092                        | Toss Bank                                                   | 23:55~00:05               | 23:55                       | 00:05 None                                            |
+| 103                        | SBI Savings Bank                                            | 23:55~00:10               | 23:50                       | 00:05 None                                            |
+| 209                        | Yuanta Securities                                           | 23:50~00:10               | 23:50                       | 00:10 None                                            |
+| 238                        | Mirae Asset Securities                                      | 23:30~00:20               | 23:30                       | 00:20 None                                            |
+| 240                        | Samsung Securities                                          | 23:30~00:20               | 23:50                       | 00:10 None                                            |
+| 243                        | Korea Investment & Securities                               | 23:40~00:10               | 23:40                       | 00:10 None                                            |
+| 247                        | NH Investment & Securities                                  | 23:50~00:15               | 23:50                       | 00:05 None                                            |
+| 266                        | SK Securities                                               | 23:50~00:30               | 23:30                       | 00:30 None                                            |
+| 267                        | Daishin Securities                                          | 23:55~00:25               | 23:55                       | 00:25 None                                            |
+| 278                        | Shinhan Financial Investment                                | 23:25~00:15               | 23:30                       | 00:15 Daily 23:30~00:10, 03:00~03:10                  |
+| 280                        | Eugene Investment & Securities                              | 23:30~00:30               | 23:50                       | 00:35 None                                            |
