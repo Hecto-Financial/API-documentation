@@ -195,9 +195,7 @@
     - [Request and Response Headers](#request-and-response-headers-7)
     - [Request Parameter (Merchant -> Hecto Financial)](#request-parameter-merchant---hecto-financial-25)
     - [Request Parameter Hash Code](#request-parameter-hash-code-28)
-    - [Response Parameter (
-
-Hecto Financial -> Merchant)](#response-parameter-hecto-financial---merchant-25)
+    - [Response Parameter (Hecto Financial -> Merchant)](#response-parameter-hecto-financial---merchant-25)
     - [Notification Parameter (Hecto Financial -> Merchant)](#notification-parameter-hecto-financial---merchant-22)
 35. [Naver Pay Easy Payment Cancellation API (Non-UI)](#naver-pay-easy-payment-cancellation-api-non-ui)
     - [Request Parameter (Merchant -> Hecto Financial)](#request-parameter-merchant---hecto-financial-26)
