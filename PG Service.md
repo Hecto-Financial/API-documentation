@@ -324,9 +324,7 @@ Hecto Financial Payment (UI) API URI are as follows.
 |                                 | Credit Card - Direct                  | `https://{domain}/card/cardDirect.do`       |             |
 |                                 | Account Transfer                      | `https://{domain}/bank/main.do`             |             |
 |                                 | Virtual Account                       | `https://{domain}/vbank/main.do`            |             |
-|                                 | DCB                                   | `https://{domain}/mobile
-
-/main.do`           |             |
+|                                 | DCB                                   | `https://{domain}/mobile/main.do`           |             |
 |                                 | Teen Cash Voucher                     | `https://{domain}/gift/teenCash/main.do`    |             |
 |                                 | Happy Money Voucher                   | `https://{domain}/gift/happyMoney/main.do`  |             |
 |                                 | Culture Land Voucher (Culture Cash)   | `https://{domain}/gift/cultureCash/main.do` |             |
