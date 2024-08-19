@@ -80,6 +80,9 @@ The following is a general description of the integration referred to in this do
 
 Refer to "6. Invoke Payment Window (UI)" and do number 1 authentication request UI integration invoke. According to the responded result, refer to “7. Payment API (Non-UI)” and do number 2 payment request API (NON-UI) integration invoke to proceed with payment.
 
+![image](https://github.com/user-attachments/assets/5bc8d430-d1af-4672-b77f-372e94ffbae5)
+
+
 ## 2. Standard Payment Window (UI) Integration
 
 ### Summary
