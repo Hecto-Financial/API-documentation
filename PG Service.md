@@ -1156,9 +1156,7 @@ Refer to [12.4 Notification Parameter].
 | `trdAmt`    | Transaction Amount       | Transaction amount (AES Encryption)                 | N(12)         | ●        | "1000"                     |
 | `mchtCustNm`| Customer Name            | Customer name (AES Encryption)                      | AHN(30)       | ○        | "MerchantName_HongGilDong" |
 | `custAcntSumry`| Bank Account Remark   | Remark marked on customer’s bank account. If blank, `mchtName` is used as the bank account remark. | AHN(50) | ○  | "MerchantName_HongGilDong" |
-| `expireDt`  | Deposit Expiry Date and Time | The deadline for the deposit after applying for virtual account (yyyyMMddHHmmss). Automatically set to 10 days after
-
- the transaction date if not set. | N(14) | ○ | "20211231235959" |
+| `expireDt`  | Deposit Expiry Date and Time | The deadline for the deposit after applying for virtual account (yyyyMMddHHmmss). Automatically set to 10 days after the transaction date if not set. | N(14) | ○ | "20211231235959" |
 
 #### 14.2 Request Parameter Hash Code
 
