@@ -571,9 +571,7 @@ Columns that respond to the merchant from Hecto Financial are defined as follows
 | VTIM | Relay institution TIMEOUT                             | ST99 | Easy payment system maintenance                                 |
 | SE01 | Authentication valid time has expired.                | SE02 | Authentication number mismatch                                  |
 | SE03 | Number of allowed attempts for authentication check has been exceeded |         |                                                                  |
-```
 
-You can now copy and paste this markdown content into your README.md file on GitHub. Let me know if you need further assistance!
 
 ### Financial Institution Identifiers
 
