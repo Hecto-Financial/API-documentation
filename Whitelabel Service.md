@@ -145,6 +145,7 @@ Upon parameter verification, if there is an error like missing required value, H
    "mchtId" : "pg_test"
 }
 ```
+```
 ("결제 요청 정보 누락 (상품명)" = “Payment Request Information Missing (Product Name)”)
 ```
 
