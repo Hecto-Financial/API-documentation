@@ -530,50 +530,50 @@ Columns that respond to the merchant from Hecto Financial are defined as follows
 | 9905  | Gateway system error                         | 9999  | Internal system error                        |
 | WL01  | There were 10 or more authentication attempts with the same IP within a certain period of them, so the authentication is restricted for 15 minutes. Please try again later. | WL02 | Customer information is not valid. Please check the self-authentication personal information. |
 
-**Easy Cash Payment Response Code**
+### Easy Cash Payment Response Code
 
 * Recent common reject codes can be downloaded from Common Reject Codes
 
-| Code  | Content                                      | Code  | Content                                      |
-|-------|----------------------------------------------|-------|----------------------------------------------|
-| 0021  | Success                                      | 0031  | Failure                                      |
-| ST01  | Nonexistent account                          | ST02  | Invalid request                              |
-| ST03  | Duplicate withdrawal                         | ST04  | System error occurred during VAN             |
-| ST05  | No VAN response information                  | ST06  | No transaction number information            |
-| ST07  | Communication Error                          | ST08  | Already registered account                   |
-| ST09  | Invalid request parameter                    | ST10  | Internal system error                        |
-| ST11  | Bank maintenance time                        | ST12  | Insufficient balance in the withdrawal account |
-| ST13  | ARS authentication result does not exist     | ST14  | ARS authentication result value differs      |
-| ST15  | Recurring transfer terminated account        | ST16  | Withdrawal account transaction restricted    |
-| ST17  | Resident number business number error        | ST18 
+| Code | Content                                               | Code | Content                                                         |
+|------|-------------------------------------------------------|------|-----------------------------------------------------------------|
+| 0021 | Success                                               | 0031 | Failure                                                         |
+| ST01 | Nonexistent account                                   | ST02 | Invalid request                                                 |
+| ST03 | Duplicate withdrawal                                  | ST04 | System error occurred during VAN                                |
+| ST05 | No VAN response information                           | ST06 | No transaction number information                               |
+| ST07 | Communication Error                                   | ST08 | Already registered account                                      |
+| ST09 | Invalid request parameter                             | ST10 | Internal system error                                           |
+| ST11 | Bank maintenance time                                 | ST12 | Insufficient balance in the withdrawal account                  |
+| ST13 | ARS authentication result does not exist              | ST14 | ARS authentication result value differs                         |
+| ST15 | Recurring transfer terminated account                 | ST16 | Withdrawal account transaction restricted                       |
+| ST17 | Resident number business number error                 | ST18 | Account error (easy account registration not allowed)           |
+| ST19 | Transaction not allowed for other reasons             | ST20 | Account error                                                   |
+| ST21 | No receiving account                                   | ST22 | Legally restricted account                                      |
+| ST23 | Non-real name account                                 | ST24 | Account holder mismatch                                         |
+| ST25 | Already canceled transaction                          | ST26 | Cancellation amount error                                       |
+| ST27 | ARS authentication failed                             | ST28 | ARS reception not allowed                                       |
+| ST29 | Account registration ongoing                          | ST30 | Refund in process                                               |
+| ST31 | Duplicate remittance occurred                         | ST32 | Payer name inquiry failure                                      |
+| ST33 | Limit per transaction is exceeded                     | ST34 | Daily limit exceeded                                            |
+| ST35 | Fraudulent account                                    | ST36 | Disconnection after a certain period of time                    |
+| ST37 | Easy payment cancellation                             | ST38 | Request in progress                                             |
+| ST39 | Refund duplicate request                              | ST40 | There is a request being processed                              |
+| ST41 | Service capacity exceeded                             | ST42 | System BUSY                                                     |
+| ST43 | Already registered account                            | ST44 | Transaction with the bank not allowed                           |
+| ST50 | Duplicate parameter request                           | ST51 | Already registered cash receipt user                            |
+| ST52 | Unregistered cash receipt user                        | ST53 | Already terminated account                                      |
+| ST60 | Transaction failure                                   | ST61 | Amount limit per transaction is exceeded                        |
+| ST62 | Daily limit amount exceeded                           | ST63 | Monthly limit amount exceeded                                   |
+| ST64 | Daily number of transaction limit exceeded            | ST65 | Monthly number of transaction limit exceeded                    |
+| ST66 | Password registration failure                         | ST67 | Password mismatch                                               |
+| ST68 | Service use suspension                                | ST69 | According to policy, the payment service cannot be used. Please try using another payment method. |
+| ST70 | According to the policy, this payment service cannot be used. Please contact Hecto Financial’s customer service. (1600-5220) | ST72 | ARS second authentication needed for payment |
+| ST86 | Authentication failure. (Mobile self-verification)    | ST87 | User is not registered to easy self-verification. (Mobile self-verification) |
+| VTIM | Relay institution TIMEOUT                             | ST99 | Easy payment system maintenance                                 |
+| SE01 | Authentication valid time has expired.                | SE02 | Authentication number mismatch                                  |
+| SE03 | Number of allowed attempts for authentication check has been exceeded |         |                                                                  |
+```
 
- | Unable to process at this time               |
-| ST19  | Duplicate approval                           | ST20  | Transaction restricted account               |
-| ST21  | Nonexistent resident number                  | ST22  | Nonexistent business number                  |
-| ST23  | Business terminated account                  | ST24  | Payment approval period expired              |
-| ST25  | Duplicate cancel                             | ST26  | System error occurred in the bank            |
-| ST27  | Duplicate withdrawal within 10 minutes       | ST28  | Duplicate registered cash-receipt            |
-| ST29  | OTP mismatch                                 | ST30  | Password mismatch                            |
-| ST31  | Self-authentication failed                   | ST32  | OTP mismatch                                 |
-| ST33  | System error during fingerprint verification | ST34  | Authentication mismatch                      |
-| ST35  | Bank inquired failed                         | ST36  | Bank account inquiring failed                |
-| ST37  | Corporate account error                      | ST38  | OTP device error                             |
-| ST39  | Password verification mismatch               | ST40  | System error                                 |
-| ST41  | System timeout error                         | ST42  | Bank service termination                     |
-| ST43  | Daily or monthly limit exceeded              | ST44  | OTP verification mismatch                    |
-| ST45  | Fingerprint mismatch                         | ST46  | Authentication entry mismatch                |
-| ST47  | Withdrawal amount exceeded                   | ST48  | System mismatch error                        |
-| ST49  | Exceeded the number of ARS authentication attempts | ST50 | No request from settlement bank              |
-| ST51  | Error occurred in settlement bank            | ST52  | Fingerprint not registered                   |
-| ST53  | Fingerprint verification failure             | ST54  | Internal system error                        |
-| ST55  | Internal server communication error          | ST56  | Unregistered bank code                       |
-| ST57  | No withdrawal account found                  | ST58  | Bank account verification error              |
-| ST59  | Bank inquiry failed                          | ST60  | Withdrawal account suspended                 |
-| ST61  | Fingerprint device error                     | ST62  | ARS authentication failure                   |
-| ST63  | ARS authentication process error             | ST64  | Bank transaction mismatch                    |
-| ST65  | Password lock                                | ST66  | Payment amount limit exceeded                |
-| ST67  | Account lock                                 | ST68  | System communication error                   |
-| ST69  | OTP mismatch error                           | ST70  | Nonexistent withdrawal account               |
+You can now copy and paste this markdown content into your README.md file on GitHub. Let me know if you need further assistance!
 
 ### Financial Institution Identifiers
 
