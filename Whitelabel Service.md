@@ -683,9 +683,7 @@ Columns that respond to the merchant from Hecto Financial are defined as follows
 | 007                        | Suhyup Bank                                                 | 23:50~00:30               | 23:30                       | 00:30 None                                            |
 | 011                        | Nonghyup Bank                                               | 24:00~00:30               | 23:50                       | 00:12 Every third Monday of the month 00:00~04:00     |
 | 020                        | Woori Bank                                                  | 23:50~00:30               | 23:50                       | 00:10 Every second Sunday of the month 02:00~06:00    |
-| 023                        | SC Bank                                                     | 23:30~00:30
-
-               | 23:50                       | 00:12 None                                            |
+| 023                        | SC Bank                                                     | 23:30~00:30               | 23:50                       | 00:12 None                                            |
 | 027                        | Korea Citi Bank                                             | 23:40~00:30               | 23:50                       | 00:30 Daily 00:30~04:30                               |
 | 031                        | Daegu Bank                                                  | 23:40~00:30               | 23:50                       | 00:05 None                                            |
 | 032                        | Busan Bank                                                  | 23:30~00:30               | 23:50                       | 00:05 None                                            |
