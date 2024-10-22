@@ -21,6 +21,9 @@
 |1.7.1	  |2024-03-28	            |Added information about required field           |
 |1.7.2    |2024-04.24	            |treadBankCd field added in Deposit Notification  |
 |1.7.3	  |2024-07-09             |Status code 19(Processing currency exchange) added|
+|1.8      |2024-08-29             |Added response parameters for KRW remittance over 1 Billion KRW and new status code(19) on Result Inquiry(V1). 
+|         |                       |Added New result code (ST13)                      |
+|         |                       |Added Bank Institution code                       |
 
 
 # Overview
