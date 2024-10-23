@@ -931,8 +931,6 @@ FAIL
 | 9743 | LIG Investment Securities                          | 엘아이지투자증권                |
 | 9744 | IBK Investment Securities                          | 아이비케이투자증권              |
 | 9745 | KTB Investment Securities                          | 케이티비투자증권                |
-| Code | Company Name                                                                  | Korean Name                           |
-|------|-------------------------------------------------------------------------------|---------------------------------------|
 | 8989 | Heungkuk Life Insurance                                                       | 흥국생명보험                           |
 | 8990 | Mirae Asset Life Insurance                                                    | 미래에셋생명보험                       |
 | 8991 | Dongbu Life Insurance                                                         | 동부생명보험                           |
