@@ -592,12 +592,11 @@ FAIL
 
 # Remittance Reason Code Table 
 
-### Remittance Reason Code Table After January 1, 2015 (Use remittance reason code when remitting foreign currency overseas)
+### Remittance Reason Code Table on or After January 1, 2015 (Use remittance reason code when remitting foreign currency overseas)
 
 #### Codename: New code values (for financial institution reporting)
 
-|    New code values (for financial institution reporting)      |                                                   |
-| **Code** | **Codename**                                                                                           |
+| Code values (for financial institution reporting)   | **Codename**                                               |
 |----------|-----------------------------------------------------------------------------------------------------------|
 | 10101    | Advance payment for customs clearance receipts                                                             |
 | 10103    | Post-Transfer Customs Payments                                                                             |
