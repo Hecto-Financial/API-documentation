@@ -594,8 +594,6 @@ FAIL
 
 ### Remittance Reason Code Table on or After January 1, 2015 (Use remittance reason code when remitting foreign currency overseas)
 
-#### Codename: New code values (for financial institution reporting)
-
 | Code values (for financial institution reporting)   | **Codename**                                               |
 |----------|-----------------------------------------------------------------------------------------------------------|
 | 10101    | Advance payment for customs clearance receipts                                                             |
@@ -643,3 +641,455 @@ FAIL
 | 31502    | Aircraft charter rates                                                                                      |
 | 31503    | Ship Rent                                                                                                   |
 | 31504    | Aircraft lease rates                                                                                        |
+
+# Receiver Bank Institution Code 
+
+| Code  | Name of Institution (English)                       | Name of Institution (Korean)       |
+|-------|-----------------------------------------------------|------------------------------------|
+| 1016  | Bank of Korea                                       | 한국은행                             |
+| 1017  | Kwollirak Securities                                | 권리락증권                           |
+| 1020  | KDB                                                 | 한국산업은행                         |
+| 1021  | Industrial Bank - ADB Loan                          | 산업은행-ADB전대차관                 |
+| 1033  | NongHyup Bank                                       | 농협은행                             |
+| 1047  | IBK                                                 | 중소기업은행                         |
+| 1051  | Kookmin Bank                                        | 국민은행                             |
+| 1064  | Hana Bank (KEB Hana Bank)                           | 한국외환은행                         |
+| 1081  | Suhyup Bank                                         | 수협중앙회                           |
+| 1095  | Export-Import Bank of Korea                         | 수출입은행                           |
+| 1171  | Woori Bank                                          | 우리은행                             |
+| 1184  | SC Bank                                             | SC제일은행                           |
+| 1211  | Shinhan Bank                                        | 신한은행                             |
+| 1225  | Citi Bank                                           | 한국씨티은행                         |
+| 1260  | Hana Bank                                           | 하나은행                             |
+| 1314  | Daegu Bank (IM Bank)                                | 대구은행                             |
+| 1328  | Busan Bank                                          | 부산은행                             |
+| 1345  | Kwangju Bank                                        | 광주은행                             |
+| 1359  | Jeju Bank                                           | 제주은행                             |
+| 1376  | Jeonbuk Bank                                        | 전북은행                             |
+| 1393  | Kyongnam Bank                                       | 경남은행                             |
+| 1510  | JP Morgan Bank                                      | JP모간은행                           |
+| 1517  | Goldman Sachs International Bank                    | 골드만삭스인터내셔널은행               |
+| 1537  | BOA (Bank of America)                               | BOA                                  |
+| 1541  | Mitsubishi Tokyo UFJ Bank                           | 미쓰비시도쿄유에프제이은행            |
+| 1554  | Tokyo Mitsubishi                                    | 도쿄미쓰비시                         |
+| 1571  | Mizuho Corporate Bank                               | 미즈호코퍼레이트                     |
+| 1585  | FUJI                                                | FUJI                                 |
+| 1599  | Sumitomo Mitsui Banking Corporation                 | 미쓰이스미토모                       |
+| 1612 | ＢＡＮＫＯＮ                                        | ＢＡＮＫＯＮ                              |
+| 1626 | Crédit Lyonnais                                    | 크레디리오네은행                          |
+| 1630 | ＡＲＡＢ                                           | ＡＲＡＢ                                  |
+| 1643 | ＮＡ－ＣＡＮＡＤＡ                                  | ＮＡ－ＣＡＮＡＤＡ                        |
+| 1657 | ＡＭＥＸ                                           | ＡＭＥＸ                                  |
+| 1674 | ＬＢＰ                                             | ＬＢＰ                                    |
+| 1688 | BNP Paribas                                       | 비엔피파리바                              |
+| 1691 | ＰＡＲＩＢＡＳ                                     | ＰＡＲＩＢＡＳ                            |
+| 1701 | ＢＢＰ                                             | ＢＢＰ                                    |
+| 1715 | ＢＣＣＩ                                           | ＢＣＣＩ                                  |
+| 1729 | ＩＯＢ                                             | ＩＯＢ                                    |
+| 1732 | ＮＡ－ＡＵＳＴ                                     | ＮＡ－ＡＵＳＴ                            |
+| 1746 | ＨＡＷＡＩＩ                                       | ＨＡＷＡＩＩ                              |
+| 1763 | ＩＮＧ                                             | ＩＮＧ                                    |
+| 1777 | Hualian Bank                                       | 화련                                      |
+| 1780 | ＮＯＶＡＳ                                         | ＮＯＶＡＳ                                |
+| 1794 | Bank of Montreal                                   | 몬트리올                                  |
+| 1835 | ＤＥＵＴＳＣＨＥ                                   | ＤＥＵＴＳＣＨＥ                          |
+| 1849 | ＣＨＥＭＩ－ＯＬＤ                                 | ＣＨＥＭＩ－ＯＬＤ                        |
+| 1852 | Crédit Agricole CIB                               | 크레디아그리콜ＣＩＢ                     |
+| 1866 | Chemical Bank                                      | 케미컬                                    |
+| 1870 | ＢＴＣ                                             | ＢＴＣ                                    |
+| 1883 | RBS Bank                                           | 알비에스은행                              |
+| 1897 | ＵＢＡＦ                                           | ＵＢＡＦ                                  |
+| 1907 | ＦＩＣＡＬ                                         | ＦＩＣＡＬ                                |
+| 1911 | ＭＴＢＣ                                           | ＭＴＢＣ                                  |
+| 1938 | DBS Bank                                           | 디비에스은행                              |
+| 1941 | ＵＦＪ                                             | ＵＦＪ                                    |
+| 1955 | ＳＥＰＡＣ                                         | ＳＥＰＡＣ                                |
+| 1969 | Fleet National Bank                                | 플릿내셔널                                |
+| 1986 | ＴＯＫＡＩ                                         | ＴＯＫＡＩ                                |
+| 1990 | ＳＧＢ                                             | ＳＧＢ                                    |
+| 2004 | ＷＦＢ－ＳＬ                                       | ＷＦＢ－ＳＬ                              |
+| 2018 | ＵＯＢ                                             | ＵＯＢ                                    |
+| 2052 | Westpac Bank                                       | 웨스트팩                                  |
+| 2066 | Yamaguchi Bank                                     | 야마구찌                                  |
+| 2070 | ＣＡＬＩＦＯＲＮＩＡ                              | ＣＡＬＩＦＯＲＮＩＡ                     |
+| 2083 | ＡＮＺ                                             | ＡＮＺ                                    |
+| 2097 | ＮＢＰ                                             | ＮＢＰ                                    |
+| 2107 | 뉴욕                                             | 뉴욕                                      |
+| 2124 | ＳＡＫＵＲＡ                                       | ＳＡＫＵＲＡ                              |
+| 2138 | ＡＳＡＨＩ                                         | ＡＳＡＨＩ                                |
+| 2155 | ＤＡＩＷＡ                                         | ＤＡＩＷＡ                                |
+| 2165 | Gyeonggi Commit Savings Bank Co., Ltd.           | 경기코미트신용금고（주）                 |
+| 2258 | ＯＣＢＣ                                           | ＯＣＢＣ                                  |
+| 2351 | ＵＢＳ                                             | ＵＢＳ                                    |
+| 2508 | ＨＳＢＣ                                           | ＨＳＢＣ                                  |
+| 2525 | National Westminster Bank                          | 내쇼날웨스터민스터                       |
+| 2539 | ＢＯＣ                                             | ＢＯＣ                                    |
+| 2556 | ＭＥＴＲＯ                                        | ＭＥＴＲＯ                                |
+| 2560 | Wachovia Bank                                      | 와코비아                                  |
+| 2573 | Credit Suisse Bank                                 | 크레디트스위스                            |
+| 2587 | Industrial and Commercial Bank of China (ICBC)   | 중국공상                                  |
+| 2590 | Industrial and Commercial Bank of China (ICBC)   | 모간                                      |
+| 2600 | Industrial and Commercial Bank of China (ICBC)   | 바클레이즈                                |
+| 2601 | Industrial and Commercial Bank of China (ICBC)   | 중국건설                                  |
+| 2602 | Bank of Communications                             | 교통은행                                  |
+| 2603 | Morgan Stanley Bank                                | 모간스탠리은행                            |
+| 2604 | Macquarie Bank                                     | 맥쿼리은행                                |
+| 2610 | Merrill Lynch International Bank                   | 메릴린치인터내셔널은행                   |
+| 2620 | Lehman Brothers Bank                               | 리먼브러더스뱅크하우스                   |
+| 2630 | State Bank of Baden-Württemberg (LBBW)            | 바덴뷔르템베르크주립은행                 |
+| 2640 | Banco Bilbao Vizcaya Argentaria (BBVA)            | 빌바오비스까야아르헨따리아은행          |
+| 2651 | Agricultural Bank of China                         | 중국농업은행                              |
+| 2663 | Royal Bank of Scotland PLC (RBS)                  | 알비에스피엘씨은행                        |
+| 5116 | ＮＥＧＡ－ＭＡＬ                                   | ＮＥＧＡ－ＭＡＬ                          |
+| 5337 | ＮＯＲＩＮ－ＳＰ                                   | ＮＯＲＩＮ－ＳＰ                          |
+| 5461 | ＳＡＮＰＡ－ＳＰ                                     | ＳＡＮＰＡ－ＳＰ                      |
+| 5462 | ＢＯＪ－ＴＫ                                       | ＢＯＪ－ＴＫ                        |
+| 7041 | ＡＤＢ－ＴＡＳＦ（기금）                            | ＡＤＢ－ＴＡＳＦ（기금）             |
+| 7051 | ＡＤＢ－Ｂ                                         | ＡＤＢ－Ｂ                          |
+| 7065 | ＡＤＢ－Ｃ                                         | ＡＤＢ－Ｃ                          |
+| 7066 | ＡＤＢ－ＴＡＳＦ                                    | ＡＤＢ－ＴＡＳＦ                     |
+| 7067 | ＡＤＢ－ＫＰＦ                                      | ＡＤＢ－ＫＰＦ                       |
+| 7068 | ＩＭＦ－ＰＦＴＡＣ                                  | ＩＭＦ－ＰＦＴＡＣ                   |
+| 7071 | ＩＢＲＤ－ＣＴＦ（기금）                            | ＩＢＲＤ－ＣＴＦ（기금）             |
+| 7096 | ＩＢＲＤ－Ｎ                                       | ＩＢＲＤ－Ｎ                        |
+| 7137 | ＩＦＣ                                             | ＩＦＣ                               |
+| 7168 | ＩＤＡ－Ｇ                                         | ＩＤＡ－Ｇ                          |
+| 7171 | ＡＦＤＢ                                           | ＡＦＤＢ                            |
+| 7172 | ＡＦＤＢ－ＫＣＴ（기금）                           | ＡＦＤＢ－ＫＣＴ（기금）             |
+| 7185 | ＭＩＧＡ－Ｇ                                       | ＭＩＧＡ－Ｇ                        |
+| 7211 | ＥＢＲＤ－ＴＣＦ（기금）                           | ＥＢＲＤ－ＴＣＦ（기금）             |
+| 7226 | ＡＤＢ－Ａ                                         | ＡＤＢ－Ａ                          |
+| 7274 | ＡＤＦ                                             | ＡＤＦ                               |
+| 7291 | ＢＯＪ　ＡＳ　ＡＧＥＮＴ                          | ＢＯＪ　ＡＳ　ＡＧＥＮＴ            |
+| 7301 | ＩＢＲＤ－Ｔ                                       | ＩＢＲＤ－Ｔ                        |
+| 7315 | ＩＤＢ                                             | ＩＤＢ                               |
+| 7316 | ＩＩＣ                                             | ＩＩＣ                               |
+| 7317 | ＭＩＦ                                             | ＭＩＦ                               |
+| 7318 | ＭＩＦ－ＩＩ                                      | ＭＩＦ－ＩＩ                       |
+| 7319 | ＩＤＢ－ＺＢＡ                                     | ＩＤＢ－ＺＢＡ                       |
+| 7320 | ＢＯＪＢＳＡ－１                                   | ＢＯＪＢＳＡ－１                     |
+| 7321 | ＢＯＪＢＳＡ－２                                   | ＢＯＪＢＳＡ－２                     |
+| 8019 | Hans Capital                                       | 한스종금                            |
+| 8022 | Korea Capital                                      | 한국종금                            |
+| 8036 | Hyundai Capital                                    | 현대종금                            |
+| 8040 | Saehan Capital                                     | 새한종금                            |
+| 8053 | Meritz Capital                                     | 메리츠종금                          |
+| 8067 | Samyang Capital                                    | 삼양종금                            |
+| 8070 | Korea Securities Finance                            | 한국증권금융                        |
+| 8084 | Cheongsol Capital                                  | 청솔종금                            |
+| 8098 | Hanareum Capital                                   | 한아름종금                          |
+| 8201 | Hi Investment & Securities                          | 하이투자증권                        |
+| 8214 | Samsung Investment Trust Securities                 | 삼성투자신탁증권                    |
+| 8228 | Hannam Investment & Securities                      | 한남투자증권                        |
+| 8231 | Joongang Investment Trust                           | 중앙투자신탁                        |
+| 8245 | Hana Daetoo Securities                             | 하나대투증권                        |
+| 8259 | Korea Investment & Securities                       | 한국투자증권                        |
+| 8262 | Kookmin Investment Trust                           | 국민투자신탁                        |
+| 8276 | Hanil Investment Trust                             | 한일투자신탁                        |
+| 8509 | Daewoo Securities                                   | 대우증권                            |
+| 8510 | Hanmac Investment & Securities                      | 한맥투자증권                        |
+| 8511 | Nomura Financial Investment                         | 노무라금융투자                      |
+| 8512 | Shinhan Financial Investment                        | 신한금융투자                       |
+| 8526 | Woori Investment & Securities                       | 우리투자증권                        |
+| 8543 | Hyundai Securities                                   | 현대증권                            |
+| 8557 | Daishin Securities                                  | 대신증권                            |
+| 8560 | Goryeo Securities                                   | 고려증권                            |
+| 8574 | SK Securities                                       | 에스케이증권                        |
+| 8588 | Yuanta Securities(Dongyang Securities)             | 동양증권                            |
+| 8591 | Hanwha Investment & Securities                      | 한화투자증권                        |
+| 8598 | Ahnkuk Fire Insurance                               | 안국화재보험                        |
+| 8601 | Dongwon Securities                                   | 동원증권                            |
+| 8615 | YAMA-TK                                           | ＹＡＭＡ－ＴＫ                       |
+| 8629 | DAIWA-TK                                          | ＤＡＩＷＡ－ＴＫ                     |
+| 8632 | NWJAP-TK                                          | ＮＷＪＡＰ－ＴＫ                     |
+| 8646 | NOMUR-TK                                          | ＮＯＭＵＲ－ＴＫ                     |
+| 8650 | DAIW-SP                                           | ＤＡＩＷ－ＳＰ                       |
+| 8663 | Hana IB Securities                                   | 하나ＩＢ증권                        |
+| 8677 | Shinyoung Securities                                | 신영증권                            |
+| 8680 | Yuhwa Securities                                    | 유화증권                            |
+| 8694 | Hanyang Securities                                  | 한양증권                            |
+| 8704 | Eugene Investment & Securities                      | 유진투자증권                        |
+| 8718 | Golden Bridge Investment & Securities               | 골든브릿지투자증권                  |
+| 8735 | Bookook Securities                                  | 부국증권                            |
+| 8749 | Meritz Capital Securities                           | 메리츠종금증권                      |
+| 8766 | Korea Industrial Securities                          | 한국산업증권                        |
+| 8770 | Korea Securities Depository                         | 한국예탁결제원                      |
+| 8783 | Kyobo Securities                                    | 교보증권                            |
+| 8797 | HMC Investment & Securities                         | ＨＭＣ투자증권                      |
+| 8807 | Jang Securities                                     | 장은증권                            |
+| 8808 | (Former) JP Morgan Securities                       | （구）제이피모간증권                 |
+| 8810 | Dongbang Peregrine Securities                      | 동방페레그린증권                    |
+| 8824 | BTI Securities                                      | ＢＴＩ증권                          |
+| 8838 | KB Investment & Securities                          | ＫＢ투자증권                        |
+| 8841 | Construction Securities                             | 건설증권                            |
+| 8855 | UBS                                               | 유비에스                            |
+| 8869 | Citi Global Markets Securities                      | 씨티글로벌마켓증권                  |
+| 8872 | Daiwa Securities                                    | 다이와증권                          |
+| 8880 | Korea Securities Depository (Government Bond)      | 한국예탁결제원（국채）               |
+| 8888 | Other Institutions                                  | 기타기관                            |
+| 8891 | Citi Securities                                     | 시티증권                            |
+| 8892 | UBS Securities                                      | 유비에스증권                        |
+| 8893 | Kiwoom Securities                                   | 키움증권                            |
+| 8894 | Nomura International Securities                     | 노무라인터내셔날증권                |
+| 8895 | UBS Securities Limited                              | 유비에스증권리미티드                |
+| 8900 | Kyobo Life Insurance                                | 교보생명보험                        |
+| 8913 | Dong-A Life Insurance                               | 동아생명보험                        |
+| 8927 | Jeil Life Insurance                                 | 제일생명보험                        |
+| 8930 | Daehan Fire Insurance                               | 대한화재보험                        |
+| 8944 | Reinsurance                                         | 재보험                              |
+| 8961 | Hanwha Life Insurance                               | 한화생명보험                        |
+| 8975 | Samsung Life Insurance                              | 삼성생명보험                        |
+| 8989 | Heungkuk Life Insurance                           | 흥국생명보험                        |
+| 8990 | Mirae Asset Life Insurance                        | 미래에셋생명보험                    |
+| 8991 | Dongbu Life Insurance                             | 동부생명보험                        |
+| 8992 | Dongyang Fire Insurance                           | 동양화재보험                       |
+| 8993 | International Fire Insurance                      | 국제화재보험                       |
+| 8995 | Jeil Fire Insurance                              | 제일화재보험                       |
+| 8996 | Hyundai Fire Insurance                            | 현대화재보험                       |
+| 9007 | Samsung Fire Insurance                            | 삼성화재보험                       |
+| 9008 | Ssangyong Fire Insurance                          | 쌍용화재보험                       |
+| 9009 | LIG Insurance                                    | 엘아이지손해보험                   |
+| 9011 | Dongbu Fire Insurance                             | 동부화재보험                       |
+| 9012 | Prudential Life Insurance                         | 푸르덴셜생명보험                   |
+| 9013 | KDB Life Insurance                               | 케이디비생명보험                   |
+| 9014 | NongHyup Life Insurance                           | 농협생명보험                       |
+| 9192 | Kyungnam Comprehensive Finance                    | 경남종합금융                       |
+| 9202 | Regent Capital                                   | 리젠트종금                         |
+| 9216 | LG Capital                                       | 엘지종금                           |
+| 9220 | Hansol Comprehensive Finance                      | 한솔종합금융                       |
+| 9233 | Daegu Comprehensive Finance                       | 대구종합금융                       |
+| 9247 | Hangil Comprehensive Finance                      | 한길종합금융                       |
+| 9250 | Hangdo Comprehensive Finance                      | 항도종합금융                       |
+| 9264 | Ssangyong Comprehensive Finance                  | 쌍용종합금융                       |
+| 9278 | Hyundai Ulsan Capital                            | 현대울산종금                       |
+| 9295 | Dongyang Hyundai Capital                          | 동양현대종금                       |
+| 9305 | Dongbu Securities                                 | 동부증권                           |
+| 9322 | Samsung Securities                                 | 삼성증권                           |
+| 9336 | Joongang Capital                                  | 중앙종금                           |
+| 9340 | SamSam Comprehensive Finance                      | 삼삼종합금융                       |
+| 9353 | Daehan Capital                                   | 대한종금                           |
+| 9367 | IlEun Securities                                 | 일은증권                           |
+| 9370 | Jeil Comprehensive Finance                        | 제일종합금융                       |
+| 9384 | Shinhan Comprehensive Finance                     | 신한종합금융                       |
+| 9408 | NH Investment & Securities                        | ＮＨ농협증권                      |
+| 9411 | Nara Capital                                     | 나라종금                           |
+| 9439 | IM Investment & Securities                        | 아이엠투자증권                     |
+| 9442 | Yeongnam Capital                                  | 영남종금                           |
+| 9456 | Kumho Capital                                     | 금호종금                           |
+| 9460 | Shinsegae Comprehensive Finance                   | 신세계종합금융                     |
+| 9473 | Goryeo Comprehensive Finance                      | 고려종합금융                       |
+| 9487 | Kyungil Comprehensive Finance                     | 경일종합금융                       |
+| 9500 | Korea Minting and Security Printing Corporation    | 한국조폐공사                       |
+| 9514 | MOD                                              | ＭＯＤ                             |
+| 9528 | ARRMNT                                           | ＡＲＲＭＮＴ                        |
+| 9531 | Foreign Exchange Equalization Fund                | 외국환평형기금                    |
+| 9532 | NDF                                              | ＮＤＦ                             |
+| 9545 | KKBC                                             | ＫＫＢＣ                            |
+| 9559 | SMBC                                             | ＳＭＢＣ                            |
+| 9562 | ABC                                              | ＡＢＣ                             |
+| 9576 | KMBC                                             | ＫＭＢＣ                            |
+| 9580 | KFBC                                             | ＫＦＢＣ                            |
+| 9593 | KIBC                                             | ＫＩＢＣ                            |
+| 9594 | Resolution and Finance Corporation                | 정리금융공사                      |
+| 9601 | CLS                                              | ＣＬＳ                             |
+| 9603 | Deposit Insurance Corporation                      | 예금보험공사                      |
+| 9604 | Korea Development Bank Financial Group            | 한국정책금융공사                  |
+| 9616 | National Forestry Cooperative Federation (NFCF)  | 산림조합중앙회                    |
+| 9617 | National Credit Union Federation of Korea (NACUFOK) | 신협중앙회                    |
+| 9620 | Korean Federation of Community Credit Cooperatives (KFCC) | 새마을금고연합회           |
+| 9621 | Korea Federation of Savings Bank( KFSB)          | 상호저축은행중앙회               |
+| 9622 | Korea Exchange                                   | 한국거래소                        |
+| 9623 | National Agricultural Cooperative Federation (NACF) | 농협중앙회                     |
+| 9666 | Credit Management Fund                            | 신용관리기금                      |
+| 9670 | National Pension Service                           | 국민연금                          |
+| 9706 | Foreign Exchange Equalization Fund (Regular)      | 외국환평형기금（정기）          |
+| 9710 | Newedge Financial Securities                       | 뉴엣지파이낸셜증권              |
+| 9711 | Barclays Securities                               | 바클레이즈증권                   |
+| 9712 | BS Investment Securities                           | ＢＳ투자증권                     |
+| 9721 | Seoul Foreign Exchange Brokerage                   | 서울외국환중개                   |
+| 9722 | JP Morgan Securities                              | ＪＰ모간증권                     |
+| 9723 | (Former) Deutsche Securities                      | （구）도이치증권                |
+| 9724 | Mirae Asset Securities                             | 미래에셋증권                     |
+| 9725 | Korea RB Securities Brokerage                      | 코리아ＲＢ증권중개               |
+| 9726 | E*TRADE Securities                               | 이트레이드증권                   |
+| 9727 | Leading Investment Securities                      | 리딩투자증권                     |
+| 9728 | ABN AMRO Securities                               | 에이비엔암로증권                 |
+| 9729 | MOA Securities Brokerage                           | 모아증권중개                     |
+| 9730 | Get More Securities Brokerage                      | 겟모어증권중개                   |
+| 9731 | Credit Lyonnais Securities                         | 크레디리요네증권                |
+| 9732 | BNG Securities                                     | 비엔지증권                       |
+| 9733 | KIDB Bond Brokerage                                | ＫＩＤＢ채권중개                 |
+| 9734 | Credit Suisse Securities                           | 크레디트스위스증권              |
+| 9735 | Shinhan Life Insurance                             | 신한생명보험                     |
+| 9736 | State Street Bank                                 | 스테이트스트리트은행            |
+| 9737 | Merrill Lynch Securities                           | 메릴린치증권                     |
+| 9738 | Mellat Bank                                       | 멜라트은행                       |
+| 9739 | Dongyang Orion Investment Securities               | 동양오리온투자증권              |
+| 9740 | Lehman Brothers Securities                         | 리먼브러더스증권                |
+| 9741 | Nomura Securities                                  | 노무라증권                       |
+| 9742 | SG Securities                                      | 에스지증권                       |
+| 9743 | LIG Investment Securities                          | 엘아이지투자증권                |
+| 9744 | IBK Investment Securities                          | 아이비케이투자증권              |
+| 9745 | KTB Investment Securities                          | 케이티비투자증권                |
+| Code | Company Name                                                                  | Korean Name                           |
+|------|-------------------------------------------------------------------------------|---------------------------------------|
+| 8989 | Heungkuk Life Insurance                                                       | 흥국생명보험                           |
+| 8990 | Mirae Asset Life Insurance                                                    | 미래에셋생명보험                       |
+| 8991 | Dongbu Life Insurance                                                         | 동부생명보험                           |
+| 8992 | Dongyang Fire Insurance                                                       | 동양화재보험                           |
+| 8993 | International Fire Insurance                                                  | 국제화재보험                           |
+| 8995 | Jeil Fire Insurance                                                           | 제일화재보험                           |
+| 8996 | Hyundai Fire Insurance                                                         | 현대화재보험                           |
+| 9007 | Samsung Fire Insurance                                                         | 삼성화재보험                           |
+| 9008 | Ssangyong Fire Insurance                                                      | 쌍용화재보험                           |
+| 9009 | LIG Insurance                                                                 | 엘아이지손해보험                       |
+| 9011 | Dongbu Fire Insurance                                                         | 동부화재보험                           |
+| 9012 | Prudential Life Insurance                                                      | 푸르덴셜생명보험                       |
+| 9013 | KDB Life Insurance                                                             | 케이디비생명보험                       |
+| 9014 | NongHyup Life Insurance                                                       | 농협생명보험                           |
+| 9192 | Kyungnam Comprehensive Finance                                                | 경남종합금융                           |
+| 9202 | Regent Capital                                                                | 리젠트종금                             |
+| 9216 | LG Capital                                                                    | 엘지종금                               |
+| 9220 | Hansol Comprehensive Finance                                                  | 한솔종합금융                           |
+| 9233 | Daegu Comprehensive Finance                                                   | 대구종합금융                           |
+| 9247 | Hangil Comprehensive Finance                                                  | 한길종합금융                           |
+| 9250 | Hangdo Comprehensive Finance                                                  | 항도종합금융                           |
+| 9264 | Ssangyong Comprehensive Finance                                               | 쌍용종합금융                           |
+| 9278 | Hyundai Ulsan Capital                                                         | 현대울산종금                           |
+| 9295 | Dongyang Hyundai Capital                                                      | 동양현대종금                           |
+| 9305 | Dongbu Securities                                                              | 동부증권                               |
+| 9322 | Samsung Securities                                                             | 삼성증권                               |
+| 9336 | Joongang Capital                                                              | 중앙종금                               |
+| 9340 | SamSam Comprehensive Finance                                                   | 삼삼종합금융                           |
+| 9353 | Daehan Capital                                                                | 대한종금                               |
+| 9367 | IlEun Securities                                                              | 일은증권                               |
+| 9370 | Jeil Comprehensive Finance                                                    | 제일종합금융                           |
+| 9384 | Shinhan Comprehensive Finance                                                 | 신한종합금융                           |
+| 9408 | NH Investment & Securities                                                    | ＮＨ농협증권                           |
+| 9411 | Nara Capital                                                                  | 나라종금                               |
+| 9439 | IM Investment & Securities                                                    | 아이엠투자증권                         |
+| 9442 | Yeongnam Capital                                                              | 영남종금                               |
+| 9456 | Kumho Capital                                                                 | 금호종금                               |
+| 9460 | Shinsegae Comprehensive Finance                                               | 신세계종합금융                         |
+| 9473 | Goryeo Comprehensive Finance                                                  | 고려종합금융                           |
+| 9487 | Kyungil Comprehensive Finance                                                 | 경일종합금융                           |
+| 9500 | Korea Minting and Security Printing Corporation                                | 한국조폐공사                           |
+| 9514 | MOD                                                                           | ＭＯＤ                                 |
+| 9528 | ARRMNT                                                                       | ＡＲＲＭＮＴ                            |
+| 9531 | Foreign Exchange Equalization Fund                                            | 외국환평형기금                         |
+| 9532 | NDF                                                                           | ＮＤＦ                                 |
+| 9545 | KKBC                                                                          | ＫＫＢＣ                                 |
+| 9559 | SMBC                                                                          | ＳＭＢＣ                                 |
+| 9562 | ABC                                                                           | ＡＢＣ                                 |
+| 9576 | KMBC                                                                          | ＫＭＢＣ                                 |
+| 9580 | KFBC                                                                          | ＫＦＢＣ                                 |
+| 9593 | KIBC                                                                          | ＫＩＢＣ                                 |
+| 9594 | Resolution and Finance Corporation                                            | 정리금융공사                           |
+| 9601 | CLS                                                                           | ＣＬＳ                                 |
+| 9603 | Deposit Insurance Corporation                                                  | 예금보험공사                           |
+| 9604 | Korea Development Bank Financial Group                                         | 한국정책금융공사                       |
+| 9616 | National Forestry Cooperative Federation (NFCF)                               | 산림조합중앙회                         |
+| 9617 | National Credit Union Federation of Korea (NACUFOK)                          | 신협중앙회                             |
+| 9620 | Korean Federation of Community Credit Cooperatives (KFCC)                    | 새마을금고연합회                       |
+| 9621 | Korea Federation of Savings Bank( KFSB)                                      | 상호저축은행중앙회                     |
+| 9622 | Korea Exchange                                                                | 한국거래소                             |
+| 9623 | National Agricultural Cooperative Federation (NACF)                          | 농협중앙회                             |
+| 9666 | Credit Management Fund                                                         | 신용관리기금                           |
+| 9670 | National Pension Service                                                       | 국민연금                               |
+| 9706 | Foreign Exchange Equalization Fund (Regular)                                  | 외국환평형기금（정기）                 |
+| 9710 | Newedge Financial Securities                                                   | 뉴엣지파이낸셜증권                     |
+| 9711 | Barclays Securities                                                            | 바클레이즈증권                         |
+| 9712 | BS Investment Securities                                                       | ＢＳ투자증권                          |
+| 9721 | Seoul Foreign Exchange Brokerage                                               | 서울외국환중개                         |
+| 9722 | JP Morgan Securities                                                           | ＪＰ모간증권                           |
+| 9723 | (Former) Deutsche Securities                                                  | （구）도이치증권                       |
+| 9724 | Mirae Asset Securities                                                         | 미래에셋증권                           |
+| 9725 | Korea RB Securities Brokerage                                                  | 코리아ＲＢ증권중개                     |
+| 9726 | E*TRADE Securities                                                             | 이트레이드증권                         |
+| 9727 | Leading Investment Securities                                                  | 리딩투자증권                           |
+| 9728 | ABN AMRO Securities                                                           | 에이비엔암로증권                       |
+| 9729 | MOA Securities Brokerage                                                       | 모아증권중개                           |
+| 9730 | Get More Securities Brokerage                                                  | 겟모어증권중개                         |
+| 9731 | Credit Lyonnais Securities                                                    | 크레디리요네증권                       |
+| 9732 | BNG Securities                                                                 | 비엔지증권                             |
+| 9733 | KIDB Bond Brokerage                                                            | ＫＩＤＢ채권중개                       |
+| 9734 | Credit Suisse Securities                                                       | 크레디트스위스증권                     |
+| 9735 | Shinhan Life Insurance                                                         | 신한생명보험                           |
+| 9736 | State Street Bank                                                             | 스테이트스트리트은행                   |
+| 9737 | Merrill Lynch Securities                                                       | 메릴린치증권                           |
+| 9738 | Mellat Bank                                                                   | 멜라트은행                             |
+| 9739 | Dongyang Orion Investment Securities                                           | 동양오리온투자증권                     |
+| 9740 | Lehman Brothers Securities                                                     | 리먼브러더스증권                       |
+| 9741 | Nomura Securities                                                              | 노무라증권                             |
+| 9742 | SG Securities                                                                  | 에스지증권                             |
+| 9743 | LIG Investment Securities                                                      | 엘아이지투자증권                       |
+| 9744 | IBK Investment Securities                                                      | 아이비케이투자증권                     |
+| 9745 | KTB Investment Securities                                                      | 케이티비투자증권                       |
+| 9746 | Taurus Investment Securities                                                    | 토러스투자증권                         |
+| 9747 | Korea Standard Chartered Securities                                            | 한국스탠다드차타드증권                 |
+| 9748 | Apple Investment Securities Brokerage                                           | 애플투자증권중개                       |
+| 9749 | Baro Investment Securities                                                     | 바로투자증권                           |
+| 9758 | Daiwa Securities Korea                                                         | 다이와증권코리아                       |
+| 9801 | Heungkuk Securities Brokerage Co.                                             | 흥국증권중개（주）                     |
+| 9809 | Korea Money Brokerage                                                          | 한국자금중개                           |
+| 9811 | BGC Capital Markets Foreign Exchange Brokerage (BGC Capital Markets)          | 비지시캐피탈마켓외국환중개(비지시캐피탈마켓) |
+| 9906 | Samsung Life Asset Management                                                  | 삼성생명투신운용                       |
+| 9907 | Kyobo Asset Management                                                         | 교보투신운용                           |
+| 9908 | Daishin Asset Management                                                       | 대신투신운용                           |
+| 9909 | Dongbu Asset Management                                                        | 동부투신운용                           |
+| 9910 | Dongwon Asset Management                                                       | 동원투신운용                           |
+| 9911 | Samsung Asset Management                                                        | 삼성투신운용                           |
+| 9912 | Woori Asset Management                                                         | 우리투신운용                           |
+| 9913 | KDB Asset Management                                                           | 산은자산운용                           |
+| 9914 | Shinyoung Asset Management                                                     | 신영투신운용                           |
+| 9915 | Korea Post                                                                     | 우체국                                 |
+| 9916 | Shinhan BNP Paribas Asset Management                                          | 신한ＢＮＰ파리바투신운용                |
+| 9917 | Franklin Templeton Asset Management                                            | 프랭클린템플턴투신운용                  |
+| 9918 | Foreign Exchange Commerz Asset Management                                      | 외환코메르쯔투신운용                   |
+| 9919 | Choheung Asset Management                                                      | 조흥투신운용                           |
+| 9920 | Chohung Asset Management                                                       | 주은투신운용                           |
+| 9921 | Hanil Asset Management                                                          | 한일투신운용                           |
+| 9922 | Hanwha Asset Management                                                        | 한화투신운용                           |
+| 9923 | LG Asset Management                                                             | ＬＧ투신운용                           |
+| 9924 | SK Asset Management                                                             | ＳＫ투신운용                           |
+| 9925 | NongHyup CA Asset Management                                                   | 농협ＣＡ투신운용                       |
+| 9926 | Hana UBS Asset Management                                                       | 하나ＵＢＳ자산운용                     |
+| 9927 | Deutsche Asset Management                                                       | 도이치투신운용                         |
+| 9928 | Dongyang Asset Management                                                      | 동양투신운용                           |
+| 9929 | Landmark Asset Management                                                       | 랜드마크투신운용                       |
+| 9930 | Mirae Asset Asset Management                                                   | 미래에셋투신운용                       |
+| 9931 | Sejong Asset Management                                                         | 세종투신운용                           |
+| 9932 | Schroders Asset Management                                                      | 슈로더투신운용                         |
+| 9933 | Ai Asset Management                                                             | 아이투신운용                           |
+| 9934 | Jeil Asset Management                                                           | 제일투신운용                           |
+| 9936 | Taekwang Asset Management                                                      | 태광투신운용                           |
+| 9937 | Hana Allianz Asset Management                                                   | 하나알리안츠투신운용                   |
+| 9938 | Korea Investment Asset Management                                               | 한국투신운용                           |
+| 9939 | Hyundai Asset Management                                                        | 현대투신운용                           |
+| 9940 | PCA Asset Management                                                            | ＰＣＡ투신운용                         |
+| 9941 | Kansas Asset Management                                                         | 칸서스자산운용                         |
+| 9942 | Macquarie IMM Asset Management                                                  | 맥쿼리ＩＭＭ자산운용（주）               |
+| 9943 | IBK SG Asset Management                                                         | 기은에스지자산운용（주）                |
+| 9944 | Plus Asset Management                                                           | 플러스자산운용（주）                   |
+| 9945 | Wise Asset Management                                                           | 와이즈에셋자산운용（주）                |
+| 9946 | Phoenix Asset Management                                                        | 피닉스자산운용                         |
+| 9947 | Alpha Asset Management                                                          | 알파에셋자산운용（주）                  |
+| 9948 | Midas Asset Management                                                          | 마이다스에셋자산운용（주）              |
+| 9949 | Golden Bridge Asset Management                                                  | 골든브릿지자산운용（주）                |
+| 9950 | Sey Asset Management                                                            | 세이에셋코리아자산운용（주）            |
+| 9951 | Korea Value Asset Management                                                    | 한국밸류자산운용（주）                  |
+| 9952 | Daol Real Estate Asset Management                                              | 다올부동산자산운용（주）                |
+| 9953 | Good & Rich Asset Management                                                   | 굿앤리치자산운용（주）                  |
+| 9954 | KTB Asset Management                                                            | ＫＴＢ자산운용（주）                    |
+| 9955 | Yurie Asset Management                                                          | 유리자산운용（주）                      |
+| 9956 | KB Asset Management                                                             | 케이비자산운용（주）                    |
+| 9957 | ING Asset Management                                                            | ＩＮＧ자산운용（주）                    |
+| 9958 | Kyobo AXA Asset Management                                                     | 교보악사자산운용                        |
+| 9959 | GS Asset Management                                                             | ＧＳ자산운용                            |
+| 9969 | Kookmin Asset Management                                                       | 국민투신운용                            |
+| 9970 | Korea Housing Finance Corporation                                               | 한국주택금융공사                       |
+| 9971 | Hyundai Investment & Securities                                                 | 현대인베스트먼트자산운용                |
+| 9972 | Asset Plus Asset Management                                                    | 에셋플러스자산운용                      |
+| 9973 | Meritz Asset Management                                                         | 메리츠자산운용                         |
+| A001 | Korea Financial Telecommunications & Clearings Institute (KFTC)                | 금융결제원                            |
+
