@@ -359,20 +359,19 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 ```
 ## Status Description
 
-| ** Status Description**                                                                                                 |
-| 00: (Request Data Error) Exchange and remittance cannot be processed                                                    |
-| 99: (Undefined) Internal error                                                                                          |
-| 10: (Exchange Pending) Merchant has made the exchange request normally, before processing the exchange                  |
-| 19: (Processing Currency Exchange) Bank is processing currency exchange. Exchanged funds are not transmitted to bank    |
-| 11: (Exchange Success) Exchange process success                                                                         |
-| 12: (Exchange Failure) Exchange process failure, can retry automatically to change to Exchange Success                  |
-| 13: (Exchange Cancellation) Merchant cancelled the exchange                                                             |
-| 20: (Pending Remittance) Pending remittance status. If requested with exchange, after exchange success, pending remittance status    |
-| 29: (Processing Remittance) Hecto Financial -> Domestic Bank remittance request completed. Before processing Domestic Bank -> Overseas Bank. |
-| 21: (Remittance Success) Domestic Bank -> Overseas Bank remittance request completed,  in the status in which remittance failure can occur later on in the Overseas Bank.|
-| 22:  (Remittance Failure) Hecto Financial → Domestic Bank failure                                                               |
-| 24: (Remittance Failure) After Hecto Financial → Domestic Bank succcess, Domestic Bank→Overseas Bank failure				              |
-| 23: (Remittance Cancellation) Remittance cancelled due to merchant or Hecto's internal policy                           |
+- **00: (Request Data Error)** Exchange and remittance cannot be processed
+- **99: (Undefined)** Internal error
+- **10: (Exchange Pending)** Merchant has made the exchange request normally, it is in the status of before processing the exchange
+- **19: (Processing Currency Exchange)** Bank is processing currency exchange. Exchanged funds are not transmitted to bank account yet.
+- **11: (Exchange Success)** Exchange process success.
+- **12: (Exchange Failure)** Exchange process failure, can retry automatically to change to Exchange Success
+- **13: (Exchange Cancellation)** Merchant cancelled the exchange
+- **20: (Pending Remittance)** Pending remittance status. If requested with exchange, after exchange success, pending remittance status
+- **29: (Processing Remittance)** Hecto Financial → Domestic Bank remittance request completed. Before processing Domestic Bank → Overseas Bank.
+- **21: (Remittance Success)** Domestic Bank → Overseas Bank remittance request completed, in the status in which remittance failure can occur later on in the Overseas Bank.
+- **22: (Remittance Failure)** Hecto Financial → Domestic Bank failure
+- **24: (Remittance Failure)** After Hecto Financial → Domestic Bank success, Domestic Bank→Overseas Bank failure
+- **23: (Remittance Cancellation)** Remittance cancelled due to merchant or Hecto's internal policy
 ```
 
 
@@ -423,21 +422,6 @@ PostData: mchtId=mid_test&trdNo=1234567890&trdDt=20230920
 }
 ```
 
-## Status Description
-
-- **00: (Request Data Error)** Exchange and remittance cannot be processed
-- **99: (Undefined)** Internal error
-- **10: (Exchange Pending)** Merchant has made the exchange request normally, it is in the status of before processing the exchange
-- **19: (Processing Currency Exchange)** Bank is processing currency exchange. Exchanged funds are not transmitted to bank account yet.
-- **11: (Exchange Success)** Exchange process success.
-- **12: (Exchange Failure)** Exchange process failure, can retry automatically to change to Exchange Success
-- **13: (Exchange Cancellation)** Merchant cancelled the exchange
-- **20: (Pending Remittance)** Pending remittance status. If requested with exchange, after exchange success, pending remittance status
-- **29: (Processing Remittance)** Hecto Financial → Domestic Bank remittance request completed. Before processing Domestic Bank → Overseas Bank.
-- **21: (Remittance Success)** Domestic Bank → Overseas Bank remittance request completed, in the status in which remittance failure can occur later on in the Overseas Bank.
-- **22: (Remittance Failure)** Hecto Financial → Domestic Bank failure
-- **24: (Remittance Failure)** After Hecto Financial → Domestic Bank success, Domestic Bank→Overseas Bank failure
-- **23: (Remittance Cancellation)** Remittance cancelled due to merchant or Hecto's internal policy
 
 ### Cancellation (C1)
 
