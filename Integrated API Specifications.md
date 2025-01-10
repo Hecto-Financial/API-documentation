@@ -109,7 +109,6 @@ Test encryption key sent by Hecto Financial should be used for test.
 |--------------------|-------------------------|----------------------------|-----------------------------------|
 | Notification       | Deposit Notification     | -                          | Merchant's designated URL         |
 
-<font color="red">This text is red!</font>
 
 ## Exchange Rate Inquiry (A1)
 
@@ -180,7 +179,9 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&rateCategoryId=25H&sellCrcCd=KRW&
 ## Virtual Account Issuance ((A2)
 
 ### Address
- /pyag/v1/fxVaccount		
+```
+/pyag/v1/fxVaccount		
+```
 
 ### Request (Merchant -> Hecto Financial)
 
@@ -365,7 +366,7 @@ mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCr
 ```
 /pyag/v1/fxTransOnlyKrw
 ```
-※ If you are transferring more than 1 Billion KRW to a domestic bank account, it will not be processed in real time. You must wait 10 minutes after the request to check the final result. Transfers of 1 Billion KRW or less are processed in real-time. 
+**※ If you are transferring more than 1 Billion KRW to a domestic bank account, it will not be processed in real time. You must wait 10 minutes after the request to check the final result. Transfers of 1 Billion KRW or less are processed in real-time.**
 
 ### Request (Merchant → Hecto Financial)
 
@@ -767,16 +768,18 @@ FAIL
 
 # Receiver Bank Institution Code 
 
-| Code  | Name of Institution (English)                       | Name of Institution (Korean)       |
-|-------|-----------------------------------------------------|------------------------------------|
-| 1016  | Bank of Korea                                       | 한국은행                             |
+| Code  | Name of Institution (English)                       | Name of Institution (Korean)       | Remark|
+|-------|-----------------------------------------------------|------------------------------------|        |
+| 1016  | Bank of Korea                                       | 한국은행                             | 
 | 1017  | Kwollirak Securities                                | 권리락증권                           |
 | 1020  | KDB                                                 | 한국산업은행                         |
 | 1021  | Industrial Bank - ADB Loan                          | 산업은행-ADB전대차관                 |
 | 1033  | NongHyup Bank                                       | 농협은행                             |
 | 1047  | IBK                                                 | 중소기업은행                         |
 | 1051  | Kookmin Bank                                        | 국민은행                             |
-| 1064  | Hana Bank (KEB Hana Bank)                           | 한국외환은행                         |
+| 1064  | Hana Bank (KEB Hana Bank)                           | 한국외환은행                         | Only use in case for old Hana Bank accounts named KEB-Hana and use 1261 for Hana Bank accounts|
+![image](https://github.com/user-attachments/assets/09b18a7f-b1a8-4483-9cff-d753d39aa92d)
+
 | 1081  | Suhyup Bank                                         | 수협중앙회                           |
 | 1095  | Export-Import Bank of Korea                         | 수출입은행                           |
 | 1171  | Woori Bank                                          | 우리은행                             |
