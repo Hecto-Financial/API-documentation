@@ -368,7 +368,8 @@ mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCr
 ```
 ※ If you are transferring more than 1 Billion KRW to a domestic bank account, it will not be processed in real time. You must wait 10 minutes after the request to check the final result. Transfers of 1 Billion KRW or less are processed in real-time. 
 
-[Institution code table](#Remittance Reason Code Table)  
+[Institution code table](#Remittance-Reason-Code-Table)  
+# Remittance Reason Code Table
 
 ### Request (Merchant → Hecto Financial)
 
