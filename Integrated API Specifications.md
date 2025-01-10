@@ -99,7 +99,8 @@ Test encryption key sent by Hecto Financial should be used for test.
 | **Classification** | **Name**                           | **Transaction Type Code** | **URL**                        |
 |--------------------|------------------------------------|----------------------------|--------------------------------|
 | API                | Exchange Rate Inquiry              | PYA1                       | /pyag/v1/fxRate                |
-|                    | Refund, Remittance (Merchant)      | PYB1                       | /pyag/v1/fxTrans               |
+|                    | Exchange, Remittance (Merchant)    | PYB1                       | /pyag/v1/fxTrans               |
+|                    | KRW Remittance(Over 10B KRW)       | PYB4                       | /pyag/v1/fxTransOnlyKrw        |
 |                    | Result Inquiry                     | PYV1                       | /pyag/v1/fxResult              |
 |                    | Balance Inquiry                    | PYV2                       | /pyag/v1/fxBalance             |
 |                    | Cancellation Request               | PYC1                       | /pyag/v1/fxCancel              |
@@ -240,12 +241,10 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 }"				
 ```
 
-
-
 # Exchange, Remittance (B1)
 
-### **Endpoint Address**
-## /pyag/v1/fxTrans
+### Address
+/pyag/v1/fxTrans
 
 ### Request (Merchant -> Hecto Financial)
 
@@ -282,7 +281,7 @@ The columns that respond from Hecto Financial server to the Merchant are as foll
 * Excluding 'Receiver's Korean Name' and 'Receiving Account Remark', only English capital letters are allowed.
 Here's the process to convert the Excel content from the image to a README file in Markdown format. I'll draft it based on what I can infer from the text:
 
-### **Request Sample**
+### Request Sample
 ```plaintext
 POST https://[Address]/pyag/v1/fxTrans
 PostData:
@@ -291,7 +290,7 @@ mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCr
 &rcvrLiveNtnCd=US&rcvrNtnCd=US&rcvrBankCd=CITIUS33&rcvrBankAddr=24STREET NEWYORK CITY US&rcvrAcntNo=Gzv1ziVXlhyFS0EYMbHvqA==
 &remitRsnCd=10101&invFileNm=INVOID_2023.JPG
 ```
-# Response (Hecto Financial → Merchant)
+### Response (Hecto Financial → Merchant)
 
 | Parameter Name      | Description                        | Max Length | Mandatory FX | Mandatory RMT (USD) | Mandatory RMT (KRW) | Mandatory FXRMT | Desc                                                                                     |
 |----------------------|------------------------------------|------------|--------------|----------------------|---------------------|-----------------|-------------------------------------------------------------------------------------------|
@@ -329,7 +328,7 @@ mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCr
 | `balance`           | Balance                           | 32         | ◐            | ◐                    | ◐                   | ◐               | Balance after remittance. KRW                                                            |
 
 
-### **Response Sample**
+### Response Sample
 ```json
 {
   "mchtId": "mid_test",
