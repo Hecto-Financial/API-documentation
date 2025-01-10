@@ -368,9 +368,6 @@ mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCr
 ```
 ※ If you are transferring more than 1 Billion KRW to a domestic bank account, it will not be processed in real time. You must wait 10 minutes after the request to check the final result. Transfers of 1 Billion KRW or less are processed in real-time. 
 
-[Institution code table](#Remittance-Reason-Code-Table)  
-# Remittance Reason Code Table
-
 ### Request (Merchant → Hecto Financial)
 
 | Parameter Name       | Description                          | Max Length | Mandatory (≤1B KRW) | Mandatory (>1B KRW) | Desc.                                                                                     |
@@ -383,7 +380,8 @@ mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCr
 | remitAmt             | Remittance Amount                   | 32         | ●                    | ●                   | **URL encoding after encryption is required**                                             |
 | rcvrBankCd           | Receiver Bank Code                  | 3          | ●                    | ●                   | 3-digit domestic bank code for KRW remittance                                             |
 | rcvrAcntNo           | Receiver Bank Account Number        | 64         | ●                    | ●                   | **URL encoding after encryption is required**                                             |
-| rcvrBankOrgCd        | Receiver Bank Institution Code      | 4          | ○                    | ●                   | Refer to the provided institution code table|
+| rcvrBankOrgCd        | Receiver Bank Institution Code      | 4          | ○                    | ●                   | Refer to the provided [Institution code table](#Remittance-Reason-Code-Table)  
+# Remittance Reason Code Table
 | rcvrBankBranchNm     | Receiver Bank Branch Name           | 35         | ○                    | ●                   | Max 9 Korean characters, **URL encoding required**                                       |
 | rcvrNmKr             | Receiver's Korean Name              | 35         | ○                    | ●                   | Max 10 Korean or English characters, **URL encoding required**                            |
 | rcvrNtnCd            | Receiver's Nationality              | 2          | ●                    | ●                   | 2-digit ISO country code (Korea = KR)                                                    |
