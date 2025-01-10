@@ -768,7 +768,7 @@ FAIL
 
 # Receiver Bank Institution Code 
 
-| Code  | Name of Institution (English)                       | Name of Institution (Korean)       | Remark
+| Code  | Name of Institution (English)                       | Name of Institution (Korean)       | 
 |-------|-----------------------------------------------------|------------------------------------|        
 | 1016  | Bank of Korea                                       | 한국은행                             | 
 | 1017  | Kwollirak Securities                                | 권리락증권                           |
@@ -777,7 +777,7 @@ FAIL
 | 1033  | NongHyup Bank                                       | 농협은행                             |
 | 1047  | IBK                                                 | 중소기업은행                         |
 | 1051  | Kookmin Bank                                        | 국민은행                             |
-| 1064  | Hana Bank (KEB Hana Bank)                           | 한국외환은행                         | * Only use in case for old Hana Bank accounts named KEB-Hana and use 1261 for Hana Bank accounts
+| 1064  | Hana Bank (KEB Hana Bank)                           | 한국외환은행 <br>* Only use in case for old Hana Bank accounts named KEB-Hana and use 1261 for Hana Bank accounts | 
 | 1081  | Suhyup Bank                                         | 수협중앙회                           |
 | 1095  | Export-Import Bank of Korea                         | 수출입은행                           |
 | 1171  | Woori Bank                                          | 우리은행                             |
