@@ -360,8 +360,6 @@ mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCr
   "balance": "120000"
 }
 ```
-[Go to Request Parameters](#request-parameters)
-
 # Domestic KRW Remittance (B4)
 
 ### Address
@@ -382,7 +380,7 @@ mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCr
 | remitAmt             | Remittance Amount                   | 32         | ●                    | ●                   | **URL encoding after encryption is required**                                             |
 | rcvrBankCd           | Receiver Bank Code                  | 3          | ●                    | ●                   | 3-digit domestic bank code for KRW remittance                                             |
 | rcvrAcntNo           | Receiver Bank Account Number        | 64         | ●                    | ●                   | **URL encoding after encryption is required**                                             |
-| rcvrBankOrgCd        | Receiver Bank Institution Code      | 4          | ○                    | ●                   | Refer to the provided institution code table                                              |
+| rcvrBankOrgCd        | Receiver Bank Institution Code      | 4          | ○                    | ●                   | Refer to the provided institution code table   [Institution code table](#Remittance Reason Code Table)  |
 | rcvrBankBranchNm     | Receiver Bank Branch Name           | 35         | ○                    | ●                   | Max 9 Korean characters, **URL encoding required**                                       |
 | rcvrNmKr             | Receiver's Korean Name              | 35         | ○                    | ●                   | Max 10 Korean or English characters, **URL encoding required**                            |
 | rcvrNtnCd            | Receiver's Nationality              | 2          | ●                    | ●                   | 2-digit ISO country code (Korea = KR)                                                    |
