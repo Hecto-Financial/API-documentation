@@ -778,8 +778,6 @@ FAIL
 | 1047  | IBK                                                 | 중소기업은행                         |
 | 1051  | Kookmin Bank                                        | 국민은행                             |
 | 1064  | Hana Bank (KEB Hana Bank)                           | 한국외환은행                         | Only use in case for old Hana Bank accounts named KEB-Hana and use 1261 for Hana Bank accounts|
-![image](https://github.com/user-attachments/assets/09b18a7f-b1a8-4483-9cff-d753d39aa92d)
-
 | 1081  | Suhyup Bank                                         | 수협중앙회                           |
 | 1095  | Export-Import Bank of Korea                         | 수출입은행                           |
 | 1171  | Woori Bank                                          | 우리은행                             |
