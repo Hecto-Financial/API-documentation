@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/9d3a8184-6055-4794-b55b-82356a04f249)# Integrated API
+
 
 ![image](https://github.com/Hecto-Financial/API-documentation/assets/73467915/939d9b90-6f12-4f0c-96dd-93bfba443ca2)
 
