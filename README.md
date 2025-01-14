@@ -5,7 +5,7 @@ Below is the link to our API assistant. Please use this chatbot for inquiries ab
 https://chatgpt.com/g/g-bR0jrEklh-hecto-financial-api-assistant
 
 * Since this API assistant is a comprehensive API assistant for all of Hecto Financial`s services, please specify the type of API before the question.
-   e.g) On the **Insert API Name from below list**, what are the required parameters for overseas FXRMT?
+   e.g) On the **[Insert API Name from below list]**, what are the required parameters for overseas FXRMT?
 
 # API-documentation
 This repository contains all API documents for Hecto Financial`s banking and payment services.
