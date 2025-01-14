@@ -21,7 +21,7 @@ Following are the explanations for each document
 4. **Easy Cash Payment**
    This document is written to provide a technical understanding and define the detailed specifications required for the development of the Easy Cash Payment Non-UI API integration provided by Hecto Financial.
 
-4.**Integrated API Specifications_20241211**
+4. **Integrated API Specifications_20241211**
    This document is written to provide technical understanding and define the detailed specifications required for Hecto Financial`s Foreign Exchange API.
    
 5. **Open Banking API** 
