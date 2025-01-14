@@ -370,17 +370,16 @@ mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&svcDivCd=FXRMT&sellCrcCd=KRW&buyCr
 **※ If you are transferring more than 1 Billion KRW to a domestic bank account, it will not be processed in real time. You must wait 10 minutes after the request to check the final result. Transfers of 1 Billion KRW or less are processed in real-time.**
 
 ### Request (Merchant → Hecto Financial)
-
-| Parameter Name       | Description                          | Max Length | Mandatory (≤1B KRW) | Mandatory (>1B KRW) | Desc.                                                                                     |
+| **PRMTR_NM**          | **PRMTR_EXPL**                       | **Max. Len** | **Mandatory (≤1B KRW)** | **Mandatory (>1B KRW)** | **Desc.**                                                                                     |
 |-----------------------|--------------------------------------|------------|----------------------|---------------------|-------------------------------------------------------------------------------------------|
 | mchtId               | Merchant ID                         | 12         | ●                    | ●                   |                                                                                           |
 | mchtTrdNo            | Merchant Order Number               | 100        | ●                    | ●                   | *At least unique per month                                                                  |
-| encCd                | Encryption Code                     | 2          | ●                    | ●                   | Encryption Code and meaning:<br>**23 (Fixed Value)**: AES256ECB + BASE64                                           
+| **encCd**            | **Encryption Code**                 | **2**          | ●                    | ●               | **Encryption Code and meaning:** <br> **- 23 (Fixed Value): AES256ECB + BASE64**       |                     
 | trdDt                | Transaction Date                    | 8          | ○                    | ○                   | For response, changed to Hecto Financial processed date                                |
 | trdTm                | Transaction Time                    | 6          | ○                    | ○                   |For response, changed to Hecto Financial processed date                                |
-| remitAmt             | Remittance Amount                   | 32         | ●                    | ●                   | **URL encoding after encryption is required**                                             |
+| **remitAmt**         | **Remittance Amount**               | **32**     | ●                    | ●                   | **URL encoding after encryption is required**                                             |
 | rcvrBankCd           | Receiver Bank Code                  | 3          | ●                    | ●                   | 3-digit domestic bank code for KRW remittance                                             |
-| rcvrAcntNo           | Receiver Bank Account Number        | 64         | ●                    | ●                   | **URL encoding after encryption is required**                                             |
+| **rcvrAcntNo**       | **Receiver Bank Account Number**    | **64**     | ●                    | ●                   | **URL encoding after encryption is required**                                             |
 | rcvrBankOrgCd        | Receiver Bank Institution Code      | 4          | ○                    | ●                   | Refer to the provided [Institution code table](#Receiver-Bank-Institution-Code)  
 | rcvrBankBranchNm     | Receiver Bank Branch Name           | 35         | ○                    | ●                   | Max 9 Korean characters, **URL encoding required**                                       |
 | rcvrNmKr             | Receiver's Korean Name              | 35         | ○                    | ●                   | Max 10 Korean or English characters, **URL encoding required**                            |
@@ -404,7 +403,7 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&remitAmt=Gzv1ziVXlhyFS0E
 
 ## Response Parameters (Merchant ← Hecto Financial)
 
-| Parameter Name       | Description                          | Max Length | Mandatory (≤1B KRW) | Mandatory (>1B KRW) | Notes                                                                                     |
+| **PRMTR_NM**      | **PRMTR_EXPL**                          | **Max. Len** | Mandatory (≤1B KRW) | Mandatory (>1B KRW) | Notes                                                                                     |
 |-----------------------|--------------------------------------|------------|----------------------|---------------------|-------------------------------------------------------------------------------------------|
 | mchtId               | Merchant ID                         | 12         | ●                    | ●                   |                                                                                           |
 | mchtTrdNo            | Merchant Order Number               | 100        | ●                    | ●                   | Must be unique per month                                                                  |
