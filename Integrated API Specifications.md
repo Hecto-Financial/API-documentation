@@ -406,7 +406,7 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&remitAmt=Gzv1ziVXlhyFS0E
 | **PRMTR_NM**      | **PRMTR_EXPL**                          | **Max. Len** | Mandatory (≤1B KRW) | Mandatory (>1B KRW) | Notes                                                                                     |
 |-----------------------|--------------------------------------|------------|----------------------|---------------------|-------------------------------------------------------------------------------------------|
 | mchtId               | Merchant ID                         | 12         | ●                    | ●                   |                                                                                           |
-| mchtTrdNo            | Merchant Order Number               | 100        | ●                    | ●                   | Must be unique per month                                                                  |
+| mchtTrdNo            | Merchant Order Number               | 100        | ●                    | ●                   | * At least unique per month                                                                  |
 | encCd                | Encryption Code                     | 2          | ●                    | ●                   | Value: 23                                                                                 |
 | trdNo                | Transaction Number                  | 40         | ●                    | ●                   | Hecto Financial generated transaction number, valid for response only                     |
 | trdDt                | Transaction Date                    | 8          | ●                    | ●                   |                                                                                           |
@@ -429,45 +429,30 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&remitAmt=Gzv1ziVXlhyFS0E
 ### Response Sample
 ```json
 {
-  "mchtId": "mid_test",
-  "mchtTrdNo": "1234567890",
-  "encCd": "23",
-  "trdNo": "20240820HF1234",
-  "trdDt": "20240820",
-  "trdTm": "1200000000",
-  "outStatCd": "0021",
-  "outRsltCd": "0000",
-  "outRsltMsg": "정상처리",
-  "svcDivCd": "FXRMT",
-  "remitAmt": "Gzv1ziVXlhyFS0EYMbHvqA==",
-  "rcvrBankCd": "011",
-  "rcvrAcntNo": "Gzv1ziVXlhyFS0EYMbHvqA==",
-  "rcvrBankOrgCd": "1033",
-  "rcvrBankBranchNm": "%ec%97%ad%ec%82%bc%ec%84%bc%ed%84%b0%ec%a0%90",
-  "rcvrNmKr": "%ed%99%8d%ea%b8%b8%eb%8f%99",
-  "rcvrNtnCd": "KR",
-  "rcvrAcntSumry": "%ec%a0%95%ec%82%b0%eb%8c%80%ea%b8%88",
-  "balance": "23000000000"
+  "mchtId": "mid_test", "mchtTrdNo": "1234567890", "encCd": "23",
+  "trdNo": "20240820HF1234", "trdDt": "20240820", "trdTm": "1200000000",
+  "outStatCd": "0021", "outRsltCd": "0000", "outRsltMsg": "정상처리",
+  "remitAmt": "Gzv1ziVXlhyFS0EYMbHvqA==", "rcvrBankCd": "011","rcvrAcntNo": "Gzv1ziVXlhyFS0EYMbHvqA==",
+  "rcvrBankOrgCd": "1033", "rcvrBankBranchNm": "%ec%97%ad%ec%82%bc%ec%84%bc%ed%84%b0%ec%a0%90",
+  "rcvrNmKr": "%ed%99%8d%ea%b8%b8%eb%8f%99", "rcvrNtnCd": "KR",
+  "rcvrAcntSumry": "%ec%a0%95%ec%82%b0%eb%8c%80%ea%b8%88", "balance": "23000000000"
 }
 ```
 
 # Result Inquiry (V1)
 
 ### Address
-**/pyag/v1/fxResult**
+```
+/pyag/v1/fxResult
 
-### Request (Merchant -> Hecto Financial)
-
-# API Documentation: /pyag/v1/fxResult
+```
 
 ## Request (Merchant -> Hecto Financial)
-
-| PRMTR_NM     | PRMTR_EXPL                                   | Max. Len      | Mandatory     | Desc.                                            |
+| **PRMTR_NM**     | **PRMTR_EXPL**                                   | **Max. Len**      | **Mandatory**     | **Desc.**                                            |
 |--------------|----------------------------------------------|--------------|---------------|---------------------------------------------------|
 | mchtId       | Merchant ID                                  | 12           | ●             |                                                  |
 | mchtTrdNo    | Merchant Order Number                        | 100          | ◑             |Original Transaction Merchant Transaction Number |
-| trdNo        | Transaction Number                           | 40           | ◑             |Original Transaction Hecto Financial Generated Transaction Number|
-|              |                                              |              |                |*One between mchtTrdNo or trdNo is required        | 
+| trdNo        | Transaction Number                           | 40           | ◑             |Original Transaction Hecto Financial Generated Transaction Number <br> *One between mchtTrdNo or trdNo is required   |
 | orgTrdDt     | Original Transaction Date                    | 8            | ◯             |                                                   |
 
 ### Request Sample
@@ -477,35 +462,26 @@ PostData: mchtId=mid_test&mchtTrdNo=1234567890&encCd=23&remitAmt=Gzv1ziVXlhyFS0E
 ```
 
 ### Response (Hecto Financial -> Merchant)
-
-| PRMTR_NM     | PRMTR_EXPL                                   | Max. Len     |   Mandatory   | Desc.                                             |
+| **PRMTR_NM**     | **PRMTR_EXPL**                                   | **Max. Len**     |   **Mandatory**   | **Desc.**                                             |
 |--------------|----------------------------------------------|--------------|---------------|---------------------------------------------------|
 | mchtId       | Merchant ID                                  | 12           | ●             |                                                   |
 | mchtTrdNo    | Merchant Order Number                        | 100          | ●             | Original Transaction Merchant Transaction Number  |
-| trdNo        | Transaction Number                           | 40           | ◑             | Original Transaction Transaction Number          |
+| trdNo        | Transaction Number                           | 40           | ●             | Original Transaction Transaction Number          |
 | trdDt        | Transaction Date                             | 8            | ●             | Inquiry Date                                      |
 | trdTm        | Transaction Time                             | 6            | ●             | Inquiry Time                                      |
-| outStatCd    | Transaction Status                           | 4            | ●             | 0021: Success, 0031: Failure *                     |
-| outRsltCd    | Response Result                              | 8            | ●             | 0000: Success, Others: Refer to Result code sheet |
+| outStatCd    | Transaction Status                           | 4            | ●             | 0021: Success, 0031: Failure <br> * Status of tansaction request                     |
+| outRsltCd    | Response Result                              | 8            | ●             | 0000: Success, Others: Refer to Result code sheet <br> *Status of actual transaction |
 | outRsltMsg   | Response Message                             | 200          | ●              |                                                   |
-| status       | Status                                       | 12           | ●             |  00:Request Data Error,   99: Undefined Status,    |
-|              |                                              |              |               | 10:Exchange Pending, 11:Exchange Success, 12:Exchange Failure,|
-|              |                                              |              |               |13:Exchange Cancellation,20:Pending Remittance, 21:Remittance Success,| 
-|              |                                              |              |               |22:Remittance Failure,23:Remittance Cancellation 29: Processing Remittance|                                                 
+| status       | Status                                       | 12           | ●             |  00:Request Data Error,   99: Undefined Status, <br> 10:Exchange Pending, 11:Exchange Success, 12:Exchange Failure, <br> 13:Exchange Cancellation,20:Pending Remittance, 21:Remittance Success, <br> 22:Remittance Failure,23:Remittance Cancellation 29: Processing Remittance    |
 
 ### Response Sample (Success)
 
 ```json
 {
-  "mchtId": "mid_test",
-  "mchtTrdNo": "1234567890",
-  "trdNo": "20230920HF1234",
-  "trdDt": "20230920",
-  "trdTm": "120000",
-  "outStatCd": "0021",
-  "outRsltCd": "0000",
-  "outRsltMsg": "Normal Processing",
-  "status": "11"
+  "mchtId": "mid_test","mchtTrdNo": "1234567890",
+  "trdNo": "20230920HF1234", "trdDt": "20230920",
+  "trdTm": "120000", "outStatCd": "0021", "outRsltCd": "0000",
+  "outRsltMsg": "Normal Processing", "status": "11"
 }
 ```
 ## Status Description
