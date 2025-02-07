@@ -50,7 +50,7 @@
 1.1 Purpose ...... 12  
 1.2 Target ...... 12  
 1.3 API URI ...... 12  
-1.4 Caution ...... 오류! 책갈피가 정의되어 있지 않습니다.
+1.4 Caution ...... 13
 
 ### 2. Easy Cash Payment API General
 2.1 Easy Cash Payment Process ...... 14  
