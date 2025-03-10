@@ -27,6 +27,7 @@
 |1.9        |2024-10-31                  |rcvrNmKr on B1,B4 changed to required to required depending on situation (rcvrNmKr for more than 1B Krw remains as required)|
 |1.9.1        |2024-12-11                |Changed the description for encCd to no encryption. |
 |           |                            |Added remark for Receiver bank institution code for KEB-Hana Bank (1064)|
+|
 
 # Overview
 
